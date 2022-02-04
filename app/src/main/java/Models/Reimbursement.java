@@ -1,5 +1,10 @@
 package Models;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Reimbursement {
     private int reimb_id;
     private double amount;
@@ -9,13 +14,13 @@ public class Reimbursement {
     //private Receipt
     private int author;
     private int resolver;
-    private ReimbursementxStatus status_ID;
-    private ReimbursementxType type_ID;
+    private int status_ID;
+    private int type_ID;
 
     public Reimbursement() {
     }
 
-    public Reimbursement(int reimb_id, double amount, String submitted, String resolved, String description, int author, int resolver, ReimbursementxStatus status_ID, ReimbursementxType type_ID) {
+    public Reimbursement(int reimb_id, double amount, String submitted, String resolved, String description, int author, int resolver, int status_ID, int type_ID) {
         this.reimb_id = reimb_id;
         this.amount = amount;
         this.submitted = submitted;
@@ -55,11 +60,11 @@ public class Reimbursement {
         return resolver;
     }
 
-    public ReimbursementxStatus getStatus_ID() {
+    public int getStatus_ID() {
         return status_ID;
     }
 
-    public ReimbursementxType getType_ID() {
+    public int getType_ID() {
         return type_ID;
     }
 
@@ -91,11 +96,31 @@ public class Reimbursement {
         this.resolver = resolver;
     }
 
-    public void setStatus_ID(ReimbursementxStatus status_ID) {
+    public void setStatus_ID(int status_ID) {
         this.status_ID = status_ID;
     }
 
-    public void setType_ID(ReimbursementxType type_ID) {
+    public void setType_ID(int type_ID) {
         this.type_ID = type_ID;
+    }
+
+    public List<Reimbursement> fillReimbursments(Map<String, String> map){
+        List<Reimbursement> reimbursements = new ArrayList<>();
+
+        Reimbursement reimbursement = new Reimbursement();
+
+        for(int i = 0; i < map.size(); i++){
+            reimbursement.setAmount(Double.parseDouble(map.get("amount")));
+            reimbursement.setAuthor(Integer.parseInt(map.get("author")));
+            reimbursement.setDescription(map.get("description"));
+            reimbursement.setResolver(Integer.parseInt(map.get("resolver")));
+            reimbursement.setResolved(map.get("resolved"));
+            reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid")));
+            reimbursement.setStatus_ID(Integer.parseInt(map.get("typeid")));
+
+            reimbursements.add(reimbursement);
+        }
+
+        return reimbursements;
     }
 }
