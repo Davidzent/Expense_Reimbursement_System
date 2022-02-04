@@ -109,17 +109,29 @@ public class Reimbursement {
         List<Reimbursement> reimbursements = new ArrayList<>();
 
         Reimbursement reimbursement = new Reimbursement();
+        int temp=0;
+        int temp2=0;
+        try{
+            temp=map.get("reimb_id").size();
+            temp2=map.get("amount").size();
+        }catch(NullPointerException e){}
 
-        for(int i = 0; i < map.get("reimb_id").size(); i++){
-            reimbursement.setAmount(Double.parseDouble(map.get("reimb_id").get(i)));
-            reimbursement.setAmount(Double.parseDouble(map.get("amount").get(i)));
-            //reimbursement.setResolved(map.get("submitted").get(i));
-            //reimbursement.setResolved(map.get("resolved").get(i));
-            reimbursement.setDescription(map.get("description").get(i));
-            reimbursement.setAuthor(Integer.parseInt(map.get("author").get(i)));
-            reimbursement.setResolver(Integer.parseInt(map.get("resolver").get(i)));
-            reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid").get(i)));
-            reimbursement.setStatus_ID(Integer.parseInt(map.get("typeid").get(i)));
+        int size=temp>temp2?temp:temp2;
+
+
+        for(int i = 0; i < size; i++){
+            try{reimbursement.setAmount(Double.parseDouble(map.get("reimb_id").get(i)));}catch(NullPointerException e){}
+            
+            try{
+                reimbursement.setAmount(Double.parseDouble(map.get("amount").get(i)));
+                //reimbursement.setResolved(map.get("submitted").get(i));
+                //reimbursement.setResolved(map.get("resolved").get(i));
+                reimbursement.setDescription(map.get("description").get(i));
+                reimbursement.setAuthor(Integer.parseInt(map.get("author").get(i)));
+                reimbursement.setResolver(Integer.parseInt(map.get("resolver").get(i)));
+                reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid").get(i)));
+                reimbursement.setStatus_ID(Integer.parseInt(map.get("typeid").get(i)));
+            }catch(NullPointerException e){}
 
             reimbursements.add(reimbursement);
         }
