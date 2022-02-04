@@ -2,6 +2,11 @@ package revature.Models;
 
 import java.sql.Date;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Reimbursement {
     private int reimb_id;
     private double amount;
@@ -99,5 +104,25 @@ public class Reimbursement {
 
     public void setType_ID(int type_ID) {
         this.type_ID = type_ID;
+    }
+
+    public List<Reimbursement> fillReimbursments(Map<String, String> map){
+        List<Reimbursement> reimbursements = new ArrayList<>();
+
+        Reimbursement reimbursement = new Reimbursement();
+
+        for(int i = 0; i < map.size(); i++){
+            reimbursement.setAmount(Double.parseDouble(map.get("amount")));
+            reimbursement.setAuthor(Integer.parseInt(map.get("author")));
+            reimbursement.setDescription(map.get("description"));
+            reimbursement.setResolver(Integer.parseInt(map.get("resolver")));
+            reimbursement.setResolved(map.get("resolved"));
+            reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid")));
+            reimbursement.setStatus_ID(Integer.parseInt(map.get("typeid")));
+
+            reimbursements.add(reimbursement);
+        }
+
+        return reimbursements;
     }
 }

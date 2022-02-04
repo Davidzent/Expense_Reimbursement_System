@@ -1,5 +1,9 @@
 package revature.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class Users {
     private int users_ID;
     private String userName;
@@ -76,5 +80,23 @@ public class Users {
 
     public void setRole_ID(int role_ID) {
         this.role_ID = role_ID;
+    }
+
+    public List<Users> fillUsers(Map<String, String> map){
+        List<Users> users = new ArrayList<>();
+
+        Users user = new Users();
+
+        for(int i = 0; i < map.size(); i++){
+            user.setEmail(map.get("email"));
+            user.setUserName("username");
+            user.setfName("fname");
+            user.setlName("lname");
+            user.setRole_ID(Integer.parseInt(map.get("roleid")));
+
+            users.add(user);
+        }
+
+        return users;
     }
 }
