@@ -106,19 +106,21 @@ public class Reimbursement {
         this.type_ID = type_ID;
     }
 
-    public List<Reimbursement> fillReimbursments(Map<String, String> map){
+    public static List<Reimbursement> fillReimbursments(Map<String, List<String>> map){
         List<Reimbursement> reimbursements = new ArrayList<>();
 
         Reimbursement reimbursement = new Reimbursement();
 
         for(int i = 0; i < map.size(); i++){
-            reimbursement.setAmount(Double.parseDouble(map.get("amount")));
-            reimbursement.setAuthor(Integer.parseInt(map.get("author")));
-            reimbursement.setDescription(map.get("description"));
-            reimbursement.setResolver(Integer.parseInt(map.get("resolver")));
-            reimbursement.setResolved(map.get("resolved"));
-            reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid")));
-            reimbursement.setStatus_ID(Integer.parseInt(map.get("typeid")));
+            reimbursement.setAmount(Double.parseDouble(map.get("reimb_id").get(i)));
+            reimbursement.setAmount(Double.parseDouble(map.get("amount").get(i)));
+            //reimbursement.setResolved(map.get("submitted").get(i));
+            //reimbursement.setResolved(map.get("resolved").get(i));
+            reimbursement.setDescription(map.get("description").get(i));
+            reimbursement.setAuthor(Integer.parseInt(map.get("author").get(i)));
+            reimbursement.setResolver(Integer.parseInt(map.get("resolver").get(i)));
+            reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid").get(i)));
+            reimbursement.setStatus_ID(Integer.parseInt(map.get("typeid").get(i)));
 
             reimbursements.add(reimbursement);
         }

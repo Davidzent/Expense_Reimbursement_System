@@ -82,17 +82,19 @@ public class Users {
         this.role_ID = role_ID;
     }
 
-    public List<Users> fillUsers(Map<String, String> map){
+    public static List<Users> fillUsers(Map<String, List<String>> map){
         List<Users> users = new ArrayList<>();
 
         Users user = new Users();
 
         for(int i = 0; i < map.size(); i++){
-            user.setEmail(map.get("email"));
-            user.setUserName("username");
-            user.setfName("fname");
-            user.setlName("lname");
-            user.setRole_ID(Integer.parseInt(map.get("roleid")));
+            user.setUsers_ID(Integer.parseInt(map.get("userid").get(i)));
+            user.setUserName(map.get("username").get(i));
+            user.setPassword(map.get("password").get(i));
+            user.setfName(map.get("fname").get(i));
+            user.setlName(map.get("lname").get(i));
+            user.setEmail(map.get("email").get(i));
+            user.setRole_ID(Integer.parseInt(map.get("roleid").get(i)));
 
             users.add(user);
         }
