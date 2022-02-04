@@ -54,7 +54,7 @@ public class reimDaoImpl implements reimDao {
         ps.setInt(5, reim.getResolver());
         ps.setInt(6, reim.getStatus_ID());
         ps.setInt(7, reim.getType_ID());
-
+        
         int rowsAffected = ps.executeUpdate();
         if(rowsAffected==1){
             return true;
