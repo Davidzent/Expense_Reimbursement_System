@@ -1,4 +1,4 @@
-package Models;
+package revature.Models;
 
 public class Users {
     private int users_ID;
@@ -7,12 +7,12 @@ public class Users {
     private String fName;
     private String lName;
     private String email;
-    private UsersxRoles role_ID;
+    private int role_ID;
 
     public Users() {
     }
 
-    public Users(int users_ID, String userName, String password, String fName, String lName, String email, UsersxRoles role_ID) {
+    public Users(int users_ID, String userName, String password, String fName, String lName, String email, int role_ID) {
         this.users_ID = users_ID;
         this.userName = userName;
         this.password = password;
@@ -46,7 +46,7 @@ public class Users {
         return email;
     }
 
-    public UsersxRoles getRole_ID() {
+    public int getRole_ID() {
         return role_ID;
     }
 
@@ -74,7 +74,7 @@ public class Users {
         this.email = email;
     }
 
-    public void setRole_ID(UsersxRoles role_ID) {
+    public void setRole_ID(int role_ID) {
         this.role_ID = role_ID;
     }
 }
