@@ -41,7 +41,7 @@ public class  userDaoImpl implements userDao{
 
     @Override
     public boolean createUser(Users user) throws SQLException {
-        String sql = "insert into project01.users (username, password, fnane, lname, email,roleid) values (?, ?, ?, ?, ?,?)";
+        String sql = "insert into project01.users (username, password, fname, lname, email,roleid) values (?, ?, ?, ?, ?,?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, user.getUserName());
@@ -84,20 +84,18 @@ public class  userDaoImpl implements userDao{
             lname="";
             email="";
             roleid=0;
-            
-            try{id = rs.getInt(USERID.toString());}catch(SQLException e){logger.trace(e);}
-            try{username=rs.getString(USER.toString());}catch(SQLException e){logger.trace(e);}
-            try{password=rs.getString(PSWRD.toString());}catch(SQLException e){logger.trace(e);}
-            try{fnane=rs.getString(FNAME.toString());}catch(SQLException e){logger.trace(e);}
-            try{lname=rs.getString(LNAME.toString());}catch(SQLException e){logger.trace(e);}
-            try{email=rs.getString(EMAIL.toString());}catch(SQLException e){logger.trace(e);}
-            try{roleid=rs.getInt(ROLEID.toString());}catch(SQLException e){logger.trace(e);}
-
+            try{
+                id = rs.getInt(USERID.toString());
+                username=rs.getString(USER.toString());
+                password=rs.getString(PSWRD.toString());
+                fnane=rs.getString(FNAME.toString());
+                lname=rs.getString(LNAME.toString());
+                email=rs.getString(EMAIL.toString());
+                roleid=rs.getInt(ROLEID.toString());
+            }catch(SQLException e){
+                logger.trace(e);
+            }
             Users User = new Users(id,username,password,fnane,lname,email,roleid);
-
-            
-
-
             Users.add(User);
         }
 
@@ -111,7 +109,7 @@ public class  userDaoImpl implements userDao{
         PreparedStatement s = con.prepareStatement(sql);
         s.setInt(1, id);
         
-        ResultSet rs = s.executeQuery(sql);
+        ResultSet rs = s.executeQuery();
 
         String username="";
         String password="";
@@ -119,49 +117,54 @@ public class  userDaoImpl implements userDao{
         String lname="";
         String email="";
         int roleid=-1;
-        
-        try{id = rs.getInt(USERID.toString());}catch(SQLException e){logger.trace(e);}
-        try{username=rs.getString(USER.toString());}catch(SQLException e){logger.trace(e);}
-        try{password=rs.getString(PSWRD.toString());}catch(SQLException e){logger.trace(e);}
-        try{fnane=rs.getString(FNAME.toString());}catch(SQLException e){logger.trace(e);}
-        try{lname=rs.getString(LNAME.toString());}catch(SQLException e){logger.trace(e);}
-        try{email=rs.getString(EMAIL.toString());}catch(SQLException e){logger.trace(e);}
-        try{roleid=rs.getInt(ROLEID.toString());}catch(SQLException e){logger.trace(e);}
+        rs.next();
 
-        Users User = new Users(id,username,password,fnane,lname,email,roleid);
+        try{
+            id = rs.getInt(USERID.toString());
+            username=rs.getString(USER.toString());
+            password=rs.getString(PSWRD.toString());
+            fnane=rs.getString(FNAME.toString());
+            lname=rs.getString(LNAME.toString());
+            email=rs.getString(EMAIL.toString());
+            roleid=rs.getInt(ROLEID.toString());
+        }catch(SQLException e){
+            logger.trace(e);
+            throw new SQLException("No found account matching those parameters.");
+        }
 
-            
-
-        return User;
+        return new Users(id,username,password,fnane,lname,email,roleid);
     }
 
     @Override
-    public Users login(String username, String password) throws SQLException {
-        String sql = "select * from project01.users WHERE username = ? AND password = ? LIMIT 1";
+    public Users login(String username, String password, int type) throws SQLException {
+        String sql = "select * from project01.users WHERE username = ? AND password = ? AND roleid = ? LIMIT 1";
         
         PreparedStatement s = con.prepareStatement(sql);
         s.setString(1, username);
         s.setString(2, encrypt(password));
+        s.setInt(3, type);
         
-        ResultSet rs = s.executeQuery(sql);
+        ResultSet rs = s.executeQuery();
 
         int id=-1;
         String fnane="";
         String lname="";
         String email="";
         int roleid=-1;
-        
-        try{id = rs.getInt(USERID.toString());}catch(SQLException e){logger.trace(e);}
-        try{username=rs.getString(USER.toString());}catch(SQLException e){logger.trace(e);}
-        try{password=rs.getString(PSWRD.toString());}catch(SQLException e){logger.trace(e);}
-        try{fnane=rs.getString(FNAME.toString());}catch(SQLException e){logger.trace(e);}
-        try{lname=rs.getString(LNAME.toString());}catch(SQLException e){logger.trace(e);}
-        try{email=rs.getString(EMAIL.toString());}catch(SQLException e){logger.trace(e);}
-        try{roleid=rs.getInt(ROLEID.toString());}catch(SQLException e){logger.trace(e);}
 
-        Users User = new Users(id,username,password,fnane,lname,email,roleid);
+        rs.next();
+        try{
+            id = rs.getInt(USERID.toString());
+            fnane=rs.getString(FNAME.toString());
+            lname=rs.getString(LNAME.toString());
+            email=rs.getString(EMAIL.toString());
+            roleid=rs.getInt(ROLEID.toString());
+        }catch(SQLException e){
+            logger.trace(e);
+            throw new SQLException("No found account matching those parameters.");
+        }
 
-        return User;
+        return new Users(id,username,password,fnane,lname,email,roleid);
     }
 
     @Override

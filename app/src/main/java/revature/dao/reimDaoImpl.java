@@ -91,16 +91,21 @@ public class reimDaoImpl implements reimDao {
             status=-1;
             descr="";
 
-            try{id = rs.getInt(RID.toString());}catch(SQLException e){logger.trace(e);}
-            try{amount=rs.getDouble(AMOUNT.toString());}catch(SQLException e){logger.trace(e);}
-            try{subm=rs.getDate(SUBM.toString());}catch(SQLException e){logger.trace(e);}
-            try{resolved=rs.getDate(RESOLV.toString());}catch(SQLException e){logger.trace(e);}
-            try{descr=rs.getString(DESCR.toString());}catch(SQLException e){logger.trace(e);}
-            //try{receipt=rs.getString(RECEIPT.toString());}catch(SQLException e){logger.trace(e);}
-            try{author=rs.getInt(AUTHOR.toString());}catch(SQLException e){logger.trace(e);}
-            try{resolver=rs.getInt(RESOLVER.toString());}catch(SQLException e){logger.trace(e);}
-            try{status=rs.getInt(STATUS.toString());}catch(SQLException e){logger.trace(e);}
-            try{type=rs.getInt(TYPE.toString());}catch(SQLException e){logger.trace(e);}
+            try{
+                id = rs.getInt(RID.toString());
+                amount=rs.getDouble(AMOUNT.toString());
+                subm=rs.getDate(SUBM.toString());
+                resolved=rs.getDate(RESOLV.toString());
+                descr=rs.getString(DESCR.toString());
+                //receipt=rs.getString(RECEIPT.toString());
+                author=rs.getInt(AUTHOR.toString());
+                resolver=rs.getInt(RESOLVER.toString());
+                status=rs.getInt(STATUS.toString());
+                type=rs.getInt(TYPE.toString());
+            }catch(SQLException e){
+                logger.trace(e);
+                throw new SQLException("No found reimbursement matching those parameters.");
+            }
 
             reims.add(new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type));
 
@@ -117,7 +122,7 @@ public class reimDaoImpl implements reimDao {
         PreparedStatement s = con.prepareStatement(sql);
         s.setInt(1, id);
         
-        ResultSet rs = s.executeQuery(sql);
+        ResultSet rs = s.executeQuery();
         
         double amount=-1;
         Date subm=new Date(0);
@@ -128,17 +133,23 @@ public class reimDaoImpl implements reimDao {
         int status=-1;
         String descr="";
         //String receipt="";
-        
-        try{id = rs.getInt(RID.toString());}catch(SQLException e){logger.trace(e);}
-        try{amount=rs.getDouble(AMOUNT.toString());}catch(SQLException e){logger.trace(e);}
-        try{subm=rs.getDate(SUBM.toString());}catch(SQLException e){logger.trace(e);}
-        try{resolved=rs.getDate(RESOLV.toString());}catch(SQLException e){logger.trace(e);}
-        try{descr=rs.getString(DESCR.toString());}catch(SQLException e){logger.trace(e);}
-        //try{receipt=rs.getString(RECEIPT.toString());}catch(SQLException e){logger.trace(e);}
-        try{author=rs.getInt(AUTHOR.toString());}catch(SQLException e){logger.trace(e);}
-        try{resolver=rs.getInt(RESOLVER.toString());}catch(SQLException e){logger.trace(e);}
-        try{status=rs.getInt(STATUS.toString());}catch(SQLException e){logger.trace(e);}
-        try{type=rs.getInt(TYPE.toString());}catch(SQLException e){logger.trace(e);}
+        rs.next();
+
+        try{
+            // id = rs.getInt(RID.toString());
+            amount=rs.getDouble(AMOUNT.toString());
+            subm=rs.getDate(SUBM.toString());
+            resolved=rs.getDate(RESOLV.toString());
+            descr=rs.getString(DESCR.toString());
+            //receipt=rs.getString(RECEIPT.toString());
+            author=rs.getInt(AUTHOR.toString());
+            resolver=rs.getInt(RESOLVER.toString());
+            status=rs.getInt(STATUS.toString());
+            type=rs.getInt(TYPE.toString());
+        }catch(SQLException e){
+            logger.trace(e);
+            throw new SQLException("No found reimbursement matching those parameters.");
+        }
 
         Reimbursement reim = new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type);
 

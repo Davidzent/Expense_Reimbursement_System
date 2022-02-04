@@ -21,3 +21,79 @@ org.postgresql.util.PSQLException: ERROR: relation "reimbursement" does not exis
 Form data: {}
 org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
   Position: 15
+2022-02-03 21:38:24 WARN  Log:69 - Link data: {}
+Form data: {username=[Zent], password=[12345]}
+io.javalin.http.Context@32d6a636
+2022-02-03 21:57:02 WARN  Log:27 - Link data: {}
+Form data: {username=[Zent], password=[12345]}
+org.postgresql.util.PSQLException: Can't use query methods that take a query string on a PreparedStatement.
+2022-02-03 21:57:27 WARN  Log:27 - Link data: {}
+Form data: {username=[Zent], password=[12345]}
+org.postgresql.util.PSQLException: Can't use query methods that take a query string on a PreparedStatement.
+2022-02-03 21:57:55 WARN  Log:27 - Link data: {}
+Form data: {username=[Zent], password=[12345]}
+org.postgresql.util.PSQLException: Can't use query methods that take a query string on a PreparedStatement.
+2022-02-03 22:09:21 WARN  Log:68 - Link data: {}
+Form data: {username=[Zent], password=[12345]}
+io.javalin.http.Context@45b8e676
+2022-02-03 22:09:38 WARN  Log:68 - Link data: {}
+Form data: {username=[Zent], password=[12345]}
+io.javalin.http.Context@68f5d157
+2022-02-03 22:13:32 WARN  Log:27 - Link data: {}
+Form data: {username=[Zent], password=[12345]}
+java.sql.SQLException: No found account matching those parameters.
+2022-02-03 22:14:46 WARN  Log:27 - Link data: {}
+Form data: {username=[Zent], password=[12345]}
+java.sql.SQLException: No found account matching those parameters.
+2022-02-03 22:15:03 WARN  Log:27 - Link data: {}
+Form data: {password=[12345], username=[ZentAdmin]}
+java.sql.SQLException: No found account matching those parameters.
+2022-02-03 22:15:16 WARN  Log:27 - Link data: {}
+Form data: {username=[Zent], password=[45678]}
+java.sql.SQLException: No found account matching those parameters.
+2022-02-03 22:19:20 WARN  Log:27 - Link data: {}
+Form data: {username=[Zent], password=[45678]}
+java.sql.SQLException: No found account matching those parameters.
+2022-02-03 22:23:07 WARN  Log:27 - Link data: {}
+Form data: {username=[Zent], password=[45678]}
+java.sql.SQLException: No found account matching those parameters.
+2022-02-03 22:26:43 WARN  Log:70 - Link data: {}
+Form data: {username=[Zent], password=[45678]}
+io.javalin.http.Context@7c97f810
+2022-02-03 22:54:51 WARN  Log:70 - Link data: {}
+Form data: {username=[Zent], password=[45678]}
+io.javalin.http.Context@4db10772
+2022-02-03 22:55:05 WARN  Log:27 - Link data: {}
+Form data: {password=[45678]}
+java.sql.SQLException: No found account matching those parameters.
+2022-02-03 22:55:23 WARN  Log:27 - Link data: {}
+Form data: {password=[45678]}
+java.sql.SQLException: No found account matching those parameters.
+2022-02-04 13:24:48 WARN  Log:59 - username=Zent&password=12345{}
+2022-02-04 13:32:16 WARN  Log:90 - java.lang.NumberFormatException: For input string: "manager"
+2022-02-04 13:32:16 WARN  Log:91 - 
+2022-02-04 13:32:16 WARN  Log:92 - {id=manager}
+2022-02-04 13:45:53 WARN  Log:90 - org.postgresql.util.PSQLException: ERROR: column "fnane" of relation "users" does not exist
+  Position: 50
+2022-02-04 13:45:53 WARN  Log:91 - username=Ben&password=12345&fname=Parser&lname=Ben&email=Ben%40email.com&roleid=1
+2022-02-04 13:45:53 WARN  Log:92 - {}
+2022-02-04 13:46:41 WARN  Log:90 - org.postgresql.util.PSQLException: ERROR: column "fnane" of relation "users" does not exist
+  Position: 50
+2022-02-04 13:46:41 WARN  Log:91 - username=Ben&password=12345&fname=Parser&lname=Ben&email=Ben%40email.com&roleid=1
+2022-02-04 13:46:41 WARN  Log:92 - {}
+2022-02-04 13:47:28 WARN  Log:90 - org.postgresql.util.PSQLException: ERROR: column "fnane" of relation "users" does not exist
+  Position: 50
+2022-02-04 13:47:28 WARN  Log:91 - username=Ben&password=12345&fname=Parser&lname=Ben&email=Ben%40email.com&roleid=1
+2022-02-04 13:47:28 WARN  Log:92 - {}
+2022-02-04 13:48:06 WARN  Log:90 - org.postgresql.util.PSQLException: ERROR: column "fnane" of relation "users" does not exist
+  Position: 50
+2022-02-04 13:48:06 WARN  Log:91 - username=Ben&password=12345&fname=Ben&lname=Parser&email=Ben%40email.com&roleid=1
+2022-02-04 13:48:06 WARN  Log:92 - {}
+2022-02-04 14:17:05 WARN  Log:91 - org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "users_username_key"
+  Detail: Key (username)=(Ben) already exists.
+2022-02-04 14:17:05 WARN  Log:92 - username=Ben&password=12345&fname=BenAdmin&lname=Parser&email=Ben%40email.com&roleid=2
+2022-02-04 14:17:05 WARN  Log:93 - {}
+2022-02-04 14:17:26 WARN  Log:91 - org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "users_email_key"
+  Detail: Key (email)=(Ben@email.com) already exists.
+2022-02-04 14:17:26 WARN  Log:92 - username=BenAdmin&password=12345&fname=Ben&lname=Parser&email=Ben%40email.com&roleid=2
+2022-02-04 14:17:26 WARN  Log:93 - {}
