@@ -3,7 +3,6 @@ package revature.Models;
 import java.sql.Date;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,12 +105,12 @@ public class Reimbursement {
         this.type_ID = type_ID;
     }
 
-    public static List<Reimbursement> fillReimbursments(Map<String, List<String>> map){
+    public static List<Reimbursement> fillReimbursments(Map<String, List<String>> map)throws IndexOutOfBoundsException,NullPointerException{
         List<Reimbursement> reimbursements = new ArrayList<>();
 
         Reimbursement reimbursement = new Reimbursement();
 
-        for(int i = 0; i < map.size(); i++){
+        for(int i = 0; i < map.get("reimb_id").size(); i++){
             reimbursement.setAmount(Double.parseDouble(map.get("reimb_id").get(i)));
             reimbursement.setAmount(Double.parseDouble(map.get("amount").get(i)));
             //reimbursement.setResolved(map.get("submitted").get(i));

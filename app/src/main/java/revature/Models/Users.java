@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 public class Users {
     private int users_ID;
     private String userName;
@@ -82,19 +83,33 @@ public class Users {
         this.role_ID = role_ID;
     }
 
-    public static List<Users> fillUsers(Map<String, List<String>> map){
+    public static List<Users> fillUsers(Map<String, List<String>> map) throws IndexOutOfBoundsException,NullPointerException{
         List<Users> users = new ArrayList<>();
 
         Users user = new Users();
+        int temp=0;
+        int temp2=0;
+        
+        //creating user we do not have userid.
+        //fetching multiple people by id we do not have username
+        try{
+            temp=map.get("username").size();
+            temp2=map.get("userid").size();
+        }catch(NullPointerException e){}
 
-        for(int i = 0; i < map.size(); i++){
-            user.setUsers_ID(Integer.parseInt(map.get("userid").get(i)));
-            user.setUserName(map.get("username").get(i));
-            user.setPassword(map.get("password").get(i));
-            user.setfName(map.get("fname").get(i));
-            user.setlName(map.get("lname").get(i));
-            user.setEmail(map.get("email").get(i));
-            user.setRole_ID(Integer.parseInt(map.get("roleid").get(i)));
+        int size=temp>temp2?temp:temp2;
+
+        for(int i = 0; i < size; i++){
+            try{user.setUsers_ID(Integer.parseInt(map.get("userid").get(i)));}catch(NullPointerException e){}
+            
+            try{
+                user.setUserName(map.get("username").get(i));
+                user.setPassword(map.get("password").get(i));
+                user.setfName(map.get("fname").get(i));
+                user.setlName(map.get("lname").get(i));
+                user.setEmail(map.get("email").get(i));
+                user.setRole_ID(Integer.parseInt(map.get("roleid").get(i)));
+            }catch(NullPointerException e){}
 
             users.add(user);
         }

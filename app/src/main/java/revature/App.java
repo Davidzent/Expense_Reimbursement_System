@@ -3,8 +3,14 @@
  */
 package revature;
 
+import java.util.Scanner;
+
+import revature.Controller.Controller;
+
 public class App {
+
+    static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        
+        Controller con = new Controller();
     }
 }
