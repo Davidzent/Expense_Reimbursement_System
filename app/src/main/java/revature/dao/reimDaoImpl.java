@@ -4,11 +4,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import revature.Models.Reimbursement;
 
+import static revature.util.Log.logger;
 import static revature.util.ConnectionUtil.con;
 import static revature.dao.reimDaoImpl.PARAMS.*;
 
@@ -41,7 +43,7 @@ public class reimDaoImpl implements reimDao {
 
     @Override
     public boolean createReim(Reimbursement reim) throws SQLException {
-        String sql = "insert into reimbursement (amount, submitted, description, author, statusid, typeid,resolved) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into project01.reimbursement (amount, submitted, description, author, statusid, typeid,resolved) values (?,?,?,?,?,?,?,?,?)";
         
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setDouble(1, reim.getAmount());
@@ -63,9 +65,9 @@ public class reimDaoImpl implements reimDao {
 
     @Override
     public List<Reimbursement> getAllReim() throws SQLException {
-        String sql = "select * from reimbursement";
+        String sql = "select * from project01.reimbursement";
         List<Reimbursement> reims = new ArrayList<>();
-        PreparedStatement s = con.prepareStatement(sql);
+        Statement  s = con.createStatement();
         ResultSet rs = s.executeQuery(sql);
         
         int id=-1;
@@ -89,16 +91,16 @@ public class reimDaoImpl implements reimDao {
             status=-1;
             descr="";
 
-            try{id = rs.getInt(RID.toString());}catch(SQLException e){}
-            try{amount=rs.getDouble(AMOUNT.toString());}catch(SQLException e){}
-            try{subm=rs.getDate(SUBM.toString());}catch(SQLException e){}
-            try{resolved=rs.getDate(RESOLV.toString());}catch(SQLException e){}
-            try{descr=rs.getString(DESCR.toString());}catch(SQLException e){}
-            //try{receipt=rs.getString(RECEIPT.toString());}catch(SQLException e){}
-            try{author=rs.getInt(AUTHOR.toString());}catch(SQLException e){}
-            try{resolver=rs.getInt(RESOLVER.toString());}catch(SQLException e){}
-            try{status=rs.getInt(STATUS.toString());}catch(SQLException e){}
-            try{type=rs.getInt(TYPE.toString());}catch(SQLException e){}
+            try{id = rs.getInt(RID.toString());}catch(SQLException e){logger.trace(e);}
+            try{amount=rs.getDouble(AMOUNT.toString());}catch(SQLException e){logger.trace(e);}
+            try{subm=rs.getDate(SUBM.toString());}catch(SQLException e){logger.trace(e);}
+            try{resolved=rs.getDate(RESOLV.toString());}catch(SQLException e){logger.trace(e);}
+            try{descr=rs.getString(DESCR.toString());}catch(SQLException e){logger.trace(e);}
+            //try{receipt=rs.getString(RECEIPT.toString());}catch(SQLException e){logger.trace(e);}
+            try{author=rs.getInt(AUTHOR.toString());}catch(SQLException e){logger.trace(e);}
+            try{resolver=rs.getInt(RESOLVER.toString());}catch(SQLException e){logger.trace(e);}
+            try{status=rs.getInt(STATUS.toString());}catch(SQLException e){logger.trace(e);}
+            try{type=rs.getInt(TYPE.toString());}catch(SQLException e){logger.trace(e);}
 
             reims.add(new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type));
 
@@ -110,7 +112,7 @@ public class reimDaoImpl implements reimDao {
 
     @Override
     public Reimbursement getReimById(int id) throws SQLException {
-        String sql = "select * from reimbursement WHERE reimb_id = ? LIMIT 1";
+        String sql = "select * from project01.reimbursement WHERE reimb_id = ? LIMIT 1";
         
         PreparedStatement s = con.prepareStatement(sql);
         s.setInt(1, id);
@@ -127,16 +129,16 @@ public class reimDaoImpl implements reimDao {
         String descr="";
         //String receipt="";
         
-        try{id = rs.getInt(RID.toString());}catch(SQLException e){}
-        try{amount=rs.getDouble(AMOUNT.toString());}catch(SQLException e){}
-        try{subm=rs.getDate(SUBM.toString());}catch(SQLException e){}
-        try{resolved=rs.getDate(RESOLV.toString());}catch(SQLException e){}
-        try{descr=rs.getString(DESCR.toString());}catch(SQLException e){}
-        //try{receipt=rs.getString(RECEIPT.toString());}catch(SQLException e){}
-        try{author=rs.getInt(AUTHOR.toString());}catch(SQLException e){}
-        try{resolver=rs.getInt(RESOLVER.toString());}catch(SQLException e){}
-        try{status=rs.getInt(STATUS.toString());}catch(SQLException e){}
-        try{type=rs.getInt(TYPE.toString());}catch(SQLException e){}
+        try{id = rs.getInt(RID.toString());}catch(SQLException e){logger.trace(e);}
+        try{amount=rs.getDouble(AMOUNT.toString());}catch(SQLException e){logger.trace(e);}
+        try{subm=rs.getDate(SUBM.toString());}catch(SQLException e){logger.trace(e);}
+        try{resolved=rs.getDate(RESOLV.toString());}catch(SQLException e){logger.trace(e);}
+        try{descr=rs.getString(DESCR.toString());}catch(SQLException e){logger.trace(e);}
+        //try{receipt=rs.getString(RECEIPT.toString());}catch(SQLException e){logger.trace(e);}
+        try{author=rs.getInt(AUTHOR.toString());}catch(SQLException e){logger.trace(e);}
+        try{resolver=rs.getInt(RESOLVER.toString());}catch(SQLException e){logger.trace(e);}
+        try{status=rs.getInt(STATUS.toString());}catch(SQLException e){logger.trace(e);}
+        try{type=rs.getInt(TYPE.toString());}catch(SQLException e){logger.trace(e);}
 
         Reimbursement reim = new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type);
 
@@ -145,7 +147,7 @@ public class reimDaoImpl implements reimDao {
 
     @Override
     public boolean updateReim(Reimbursement reim) throws SQLException {
-        String sql = "UPDATE reimbursement SET amount=?,submitted=?,resolved = ?,description=?,author = ?,resolver=?,statusid=?,typeid=? WHERE reimb_id = ?";
+        String sql = "UPDATE project01.reimbursement SET amount=?,submitted=?,resolved = ?,description=?,author = ?,resolver=?,statusid=?,typeid=? WHERE reimb_id = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 

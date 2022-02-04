@@ -1,0 +1,23 @@
+2022-02-03 19:06:08 WARN  Log:25 - Link data: {}
+Form data: {}
+2022-02-03 19:06:52 WARN  Log:25 - Link data: {}
+Form data: {}
+2022-02-03 19:07:47 WARN  Log:25 - Link data: {}
+Form data: {}
+2022-02-03 19:08:02 WARN  Log:25 - Link data: {}
+Form data: {}
+2022-02-03 19:11:54 WARN  Log:25 - Link data: {}
+Form data: {}
+org.postgresql.util.PSQLException: Can't use query methods that take a query string on a PreparedStatement.
+2022-02-03 19:15:11 WARN  Log:25 - Link data: {}
+Form data: {}
+org.postgresql.util.PSQLException: ERROR: relation "reimbursement" does not exist
+  Position: 15
+2022-02-03 19:16:22 WARN  Log:25 - Link data: {}
+Form data: {}
+org.postgresql.util.PSQLException: ERROR: relation "reimbursement" does not exist
+  Position: 15
+2022-02-03 19:17:22 WARN  Log:25 - Link data: {}
+Form data: {}
+org.postgresql.util.PSQLException: ERROR: relation "users" does not exist
+  Position: 15
