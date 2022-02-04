@@ -2,7 +2,7 @@
 .gradle
 .idea
 .vscode
-
+app/bin
 
 # Ignore Gradle build output directory
 build
