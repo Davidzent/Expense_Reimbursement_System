@@ -1,4 +1,4 @@
-package Models;
+package revature.Models;
 
 public enum ReimbursementxType {LODGING, TRAVEL, FOOD, OTHER
 }
