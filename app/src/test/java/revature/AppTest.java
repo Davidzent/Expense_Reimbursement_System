@@ -43,7 +43,7 @@ public class AppTest {
             System.out.println(reimbursement2.getSubmitted());
             Assert.assertEquals(reimbursement2.getAmount(), reimbursement.getAmount(), 2.0D);
             Assert.assertEquals((long)reimbursement2.getAuthor(), (long)reimbursement.getAuthor());
-            Assert.assertEquals((long)reimbursement2.getReimb_id(), (long)reimbursement.getReimb_id());
+            Assert.assertEquals((long)reimbursement2.getreimid(), (long)reimbursement.getreimid());
             Assert.assertEquals(reimbursement2.getDescription(), reimbursement.getDescription());
             Assert.assertEquals(reimbursement2.getResolved(), reimbursement.getResolved());
             Assert.assertEquals((long)reimbursement2.getResolver(), (long)reimbursement.getResolver());

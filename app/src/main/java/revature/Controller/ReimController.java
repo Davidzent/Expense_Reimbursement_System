@@ -9,7 +9,6 @@ import revature.services.ReimService;
 import static revature.util.Log.logger;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,7 +46,7 @@ public class ReimController {
             ReimService.create(u);
         }catch(SQLException e){
             log(e,ctx);
-            ctx.result("Error Creating the new user");
+            ctx.result("Error Creating the new reimbursments");
         }
     };
 
@@ -57,19 +56,19 @@ public class ReimController {
             ReimService.update(r);
         }catch(SQLException e){
             log(e,ctx);
-            ctx.result("Error Creating the new user");
+            ctx.result("Error updating reimbursments");
         }
     };
 
     public Handler validate = (ctx) ->{
         List<String> rid = ctx.formParamMap().get("reimid");
-        List<String> status = ctx.formParamMap().get("status");
+        List<String> status = ctx.formParamMap().get("statusid");
+        List<String> resolver = ctx.formParamMap().get("resolver");
         try{
-            ctx.result(ReimService.validate(rid,status));
-            
+            ctx.result(ReimService.validate(rid,status,resolver));
         }catch(SQLException e){
             log(e,ctx);
-            ctx.result("Error Creating the new user");
+            ctx.result("Error validating reimbursments");
         }
     };
 

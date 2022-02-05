@@ -2,7 +2,6 @@ package revature.routes;
 
 import io.javalin.Javalin;
 import revature.Controller.ReimController;
-import revature.Controller.UserController;
 
 public class ReimRoute extends Route{
 
@@ -21,6 +20,7 @@ public class ReimRoute extends Route{
 
         app.post("/employee/reim/request", rc.create);
         app.post("/manager/reim/update", rc.update);
+        app.post("/manager/reim/validate", rc.validate);
         
     }
     
