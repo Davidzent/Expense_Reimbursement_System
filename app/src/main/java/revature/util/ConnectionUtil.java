@@ -29,26 +29,3 @@ public class ConnectionUtil {
 
 
 }
-
-
-// //Database Info
-// protected static final String DBHOSTNAME="35.238.7.184:5432";
-// protected static final String DBNAME="postgres";
-// protected static final String DBUSERNAME="postgres";
-// protected static final String DBPASSWORD="123456789!";
-// protected static final String DMS="postgresql";              //database management system mysql or postgresql
-
-// //Connected variables
-// protected static Connection con = null;
-// protected static java.sql.Statement stmt = null;
-// protected static PreparedStatement pstmt = null;
-
-// static{
-//     try {
-//         con = DriverManager.getConnection("jdbc:"+DMS+"://"+ DBHOSTNAME +"/"+DBNAME,DBUSERNAME,DBPASSWORD);
-
-//     } catch (SQLException e) {
-//         // creating link with database
-//         log.fatal(e);
-//     }
-// }
