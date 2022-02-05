@@ -97,3 +97,12 @@ java.sql.SQLException: No found account matching those parameters.
   Detail: Key (email)=(Ben@email.com) already exists.
 2022-02-04 14:17:26 WARN  Log:92 - username=BenAdmin&password=12345&fname=Ben&lname=Parser&email=Ben%40email.com&roleid=2
 2022-02-04 14:17:26 WARN  Log:93 - {}
+2022-02-04 20:06:53 WARN  Log:79 - org.postgresql.util.PSQLException: ERROR: column "submitted" is of type timestamp without time zone but expression is of type bigint
+  Hint: You will need to rewrite or cast the expression.
+  Position: 107
+2022-02-04 20:06:53 WARN  Log:80 - amount=420.69&description=Testing%20the%20creation&author=2&typeid=1
+2022-02-04 20:06:53 WARN  Log:81 - {}
+2022-02-04 20:27:26 WARN  Log:79 - org.postgresql.util.PSQLException: ERROR: syntax error at or near "="
+  Position: 40
+2022-02-04 20:27:26 WARN  Log:80 - reimid=1&reimid=2&statusid=2&statusid=3&resolver=1&resolver=4
+2022-02-04 20:27:26 WARN  Log:81 - {}

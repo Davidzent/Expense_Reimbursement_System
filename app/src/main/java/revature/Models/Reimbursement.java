@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Reimbursement {
-    private int reimb_id;
+    private int reimid;
     private double amount;
     private Date submitted;
     private Date resolved;
@@ -21,8 +21,8 @@ public class Reimbursement {
     public Reimbursement() {
     }
 
-    public Reimbursement(int reimb_id, double amount, Date submitted, Date resolved, String description, int author, int resolver, int status_ID, int type_ID) {
-        this.reimb_id = reimb_id;
+    public Reimbursement(int reimid, double amount, Date submitted, Date resolved, String description, int author, int resolver, int status_ID, int type_ID) {
+        this.reimid = reimid;
         this.amount = amount;
         this.submitted = submitted;
         this.resolved = resolved;
@@ -33,8 +33,8 @@ public class Reimbursement {
         this.type_ID = type_ID;
     }
 
-    public int getReimb_id() {
-        return reimb_id;
+    public int getreimid() {
+        return reimid;
     }
 
     public double getAmount() {
@@ -69,8 +69,8 @@ public class Reimbursement {
         return type_ID;
     }
 
-    public void setReimb_id(int reimb_id) {
-        this.reimb_id = reimb_id;
+    public void setreimid(int reimid) {
+        this.reimid = reimid;
     }
 
     public void setAmount(double amount) {
@@ -111,27 +111,31 @@ public class Reimbursement {
         Reimbursement reimbursement = new Reimbursement();
         int temp=0;
         int temp2=0;
-        try{
-            temp=map.get("reimb_id").size();
-            temp2=map.get("amount").size();
-        }catch(NullPointerException e){}
+        
+        try{temp=map.get("reimid").size();}catch(NullPointerException e){}
+        try{temp2=map.get("amount").size();}catch(NullPointerException e){}
+        
 
         int size=temp>temp2?temp:temp2;
 
 
         for(int i = 0; i < size; i++){
-            try{reimbursement.setAmount(Double.parseDouble(map.get("reimb_id").get(i)));}catch(NullPointerException e){}
+            try{reimbursement.setAmount(Double.parseDouble(map.get("reimid").get(i)));}catch(NullPointerException e){}
             
             try{
                 reimbursement.setAmount(Double.parseDouble(map.get("amount").get(i)));
-                //reimbursement.setResolved(map.get("submitted").get(i));
-                //reimbursement.setResolved(map.get("resolved").get(i));
                 reimbursement.setDescription(map.get("description").get(i));
                 reimbursement.setAuthor(Integer.parseInt(map.get("author").get(i)));
-                reimbursement.setResolver(Integer.parseInt(map.get("resolver").get(i)));
-                reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid").get(i)));
-                reimbursement.setStatus_ID(Integer.parseInt(map.get("typeid").get(i)));
+                reimbursement.setType_ID(Integer.parseInt(map.get("typeid").get(i)));
             }catch(NullPointerException e){}
+
+            try{
+                reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid").get(i)));
+                reimbursement.setResolver(Integer.parseInt(map.get("resolver").get(i)));
+                //reimbursement.setResolved(map.get("submitted").get(i));
+                //reimbursement.setResolved(map.get("resolved").get(i));
+            }catch(NullPointerException e){}
+
 
             reimbursements.add(reimbursement);
         }

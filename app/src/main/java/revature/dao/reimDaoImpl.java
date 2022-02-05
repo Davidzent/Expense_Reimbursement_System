@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import static revature.dao.reimDaoImpl.PARAMS.*;
 public class reimDaoImpl implements reimDao {
 
     public enum PARAMS{  
-        RID("reimb_id"),      
+        RID("reimid"),      
         AMOUNT("amount"),
         SUBM("submitted"),
         RESOLV("resolved"),
@@ -43,17 +44,17 @@ public class reimDaoImpl implements reimDao {
 
     @Override
     public boolean createReim(Reimbursement reim) throws SQLException {
-        String sql = "insert into project01.reimbursement (amount, submitted, description, author, statusid, typeid,resolved) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into project01.reimbursement (amount, submitted, description, author, statusid, typeid) values (?,?,?,?,?,?)";
         
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setDouble(1, reim.getAmount());
-        ps.setDate(2, new Date (System.currentTimeMillis()));
+        ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
         ps.setString(3, reim.getDescription());
-        ps.setDate(8, reim.getResolved());
+        // ps.setDate(8, reim.getResolved());
         ps.setInt(4, reim.getAuthor());
-        ps.setInt(5, reim.getResolver());
-        ps.setInt(6, reim.getStatus_ID());
-        ps.setInt(7, reim.getType_ID());
+        // ps.setInt(5, reim.getResolver());
+        ps.setInt(5, 1);
+        ps.setInt(6, reim.getType_ID());
         
         int rowsAffected = ps.executeUpdate();
         if(rowsAffected==1){
@@ -117,7 +118,7 @@ public class reimDaoImpl implements reimDao {
 
     @Override
     public Reimbursement getReimById(int id) throws SQLException {
-        String sql = "select * from project01.reimbursement WHERE reimb_id = ? LIMIT 1";
+        String sql = "select * from project01.reimbursement WHERE reimid = ? LIMIT 1";
         
         PreparedStatement s = con.prepareStatement(sql);
         s.setInt(1, id);
@@ -158,7 +159,7 @@ public class reimDaoImpl implements reimDao {
 
     @Override
     public boolean updateReim(Reimbursement reim) throws SQLException {
-        String sql = "UPDATE project01.reimbursement SET amount=?,submitted=?,resolved = ?,description=?,author = ?,resolver=?,statusid=?,typeid=? WHERE reimb_id = ?";
+        String sql = "UPDATE project01.reimbursement SET amount=?,submitted=?,resolved = ?,description=?,author = ?,resolver=?,statusid=?,typeid=? WHERE reimid = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
@@ -180,5 +181,29 @@ public class reimDaoImpl implements reimDao {
 
         return false;
     }
+
+    @Override
+    public boolean validate(int id, int status,int resolver) throws SQLException {
+        String sql = "UPDATE project01.reimbursement SET statusid = ? ,resolved = ? , resolver = ? WHERE reimid = ?";
+
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1,status);
+        ps.setTimestamp(2,new Timestamp(System.currentTimeMillis()));
+        ps.setInt(3, resolver);
+        ps.setInt(4,id);
+
+
+        int rowsAffected = ps.executeUpdate();
+        if(rowsAffected==1){
+            return true;
+        }
+
+        return false;
+    }
+
+    
+    
     
 }
