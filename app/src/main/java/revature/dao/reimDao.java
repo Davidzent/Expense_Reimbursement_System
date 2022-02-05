@@ -10,5 +10,6 @@ public interface reimDao {
     public List<Reimbursement> getAllReim() throws SQLException;
     public Reimbursement getReimById(int id) throws SQLException;
     public boolean updateReim(Reimbursement user) throws SQLException;
+    public boolean validate(int id, int status) throws SQLException;
 
 }

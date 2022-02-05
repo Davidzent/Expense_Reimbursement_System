@@ -180,5 +180,27 @@ public class reimDaoImpl implements reimDao {
 
         return false;
     }
+
+    @Override
+    public boolean validate(int id, int status) throws SQLException {
+        String sql = "UPDATE project01.reimbursement statusid=? SET WHERE reimb_id=?";
+
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(0,status);
+        ps.setInt(1,id);
+
+
+        int rowsAffected = ps.executeUpdate();
+        if(rowsAffected==1){
+            return true;
+        }
+
+        return false;
+    }
+
+    
+    
     
 }
