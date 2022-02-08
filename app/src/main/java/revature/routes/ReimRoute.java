@@ -17,10 +17,14 @@ public class ReimRoute extends Route{
         // app.get("/list/manager", uc.getAll);
         app.get("/reim", rc.getAll);
         app.get("/reim/{id}", rc.getById);
+        app.get("/employee/reim/list", rc.list);
+        app.get("/manager/reim/list", rc.list);
 
         app.post("/employee/reim/request", rc.create);
         app.post("/manager/reim/update", rc.update);
         app.post("/manager/reim/validate", rc.validate);
+        
+        
         
     }
     

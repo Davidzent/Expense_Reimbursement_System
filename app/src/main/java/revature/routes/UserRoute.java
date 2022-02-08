@@ -19,8 +19,8 @@ public class UserRoute extends Route{
         app.get("/user/{id}", uc.getById);
 
         app.post("/login/*", uc.login);
+        app.post("/register/*", uc.create);
         app.post("/logout", uc.logout);
-        app.post("/register", uc.create);
         
     }
     

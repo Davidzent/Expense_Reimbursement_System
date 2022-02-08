@@ -106,3 +106,27 @@ java.sql.SQLException: No found account matching those parameters.
   Position: 40
 2022-02-04 20:27:26 WARN  Log:80 - reimid=1&reimid=2&statusid=2&statusid=3&resolver=1&resolver=4
 2022-02-04 20:27:26 WARN  Log:81 - {}
+2022-02-08 10:01:49 WARN  Log:101 - java.lang.NumberFormatException: null
+2022-02-08 10:01:49 WARN  Log:102 - 
+2022-02-08 10:01:49 WARN  Log:103 - {}
+2022-02-08 10:02:22 WARN  Log:101 - java.lang.NumberFormatException: null
+2022-02-08 10:02:22 WARN  Log:102 - 
+2022-02-08 10:02:22 WARN  Log:103 - {}
+2022-02-08 10:02:35 WARN  Log:101 - java.lang.NumberFormatException: null
+2022-02-08 10:02:35 WARN  Log:102 - 
+2022-02-08 10:02:35 WARN  Log:103 - {}
+2022-02-08 10:08:37 WARN  Log:91 - java.sql.SQLException: No found account matching those parameters.
+2022-02-08 10:08:37 WARN  Log:92 - username=Zent&username=ZentAdmin
+2022-02-08 10:08:37 WARN  Log:93 - {}
+2022-02-08 10:08:43 WARN  Log:91 - java.sql.SQLException: No found account matching those parameters.
+2022-02-08 10:08:43 WARN  Log:92 - password=12345&username=ZentAdmin
+2022-02-08 10:08:43 WARN  Log:93 - {}
+2022-02-08 10:08:47 WARN  Log:91 - java.sql.SQLException: No found account matching those parameters.
+2022-02-08 10:08:47 WARN  Log:92 - username=ZentAdmin&password=45678
+2022-02-08 10:08:47 WARN  Log:93 - {}
+2022-02-08 10:08:51 WARN  Log:91 - java.sql.SQLException: No found account matching those parameters.
+2022-02-08 10:08:51 WARN  Log:92 - password=12345&username=ZentAdmin
+2022-02-08 10:08:51 WARN  Log:93 - {}
+2022-02-08 11:12:50 WARN  Log:107 - java.lang.NumberFormatException: null
+2022-02-08 11:12:50 WARN  Log:108 - 
+2022-02-08 11:12:50 WARN  Log:109 - {}

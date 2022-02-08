@@ -3,9 +3,13 @@
  */
 package revature;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import revature.Controller.Controller;
+import revature.Controller.ReimController;
+import revature.dao.reimDaoImpl;
+import revature.services.ReimService;
 
 public class App {
 

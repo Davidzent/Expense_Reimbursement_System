@@ -39,13 +39,26 @@ public class UserController {
     };
 
     public Handler create = (ctx) ->{
-        Users u = Users.fillUsers(ctx.formParamMap()).get(0);
-        try{
-            UserService.create(u);
-        }catch(SQLException e){
-            log(e,ctx);
-            ctx.result("Error Creating the new user");
+        String option= ctx.attribute("jetty-target");
+        int type=-1;
+        switch (option) {
+            case "/register/employee":type=1;break;
+            case "/register/manager":type=2;break;
         }
+        if(type!=-1){
+            Users u = Users.fillUsers(ctx.formParamMap()).get(0);
+            u.setRole_ID(type);
+            
+            try{
+                UserService.create(u);
+            }catch(SQLException e){
+                log(e,ctx);
+                ctx.result("Error Creating the new user");
+            }
+        }else{
+            ctx.status(403);
+        }
+        
     };
     
     public Handler login = (ctx) ->{
@@ -86,7 +99,7 @@ public class UserController {
         ctx.status(200);
         ctx.result("User logged out");
     };
-
+    
     private static void log(Exception e,Context ctx){
         logger.warn(e);
         logger.warn(ctx.body());

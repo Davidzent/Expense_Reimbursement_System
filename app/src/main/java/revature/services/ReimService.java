@@ -17,6 +17,10 @@ public class ReimService {
         return reim.getReimById(id);
     }
 
+    public static List<Reimbursement> getByStatus(int status,int author) throws SQLException{
+        return reim.getReimByStatus(status,author);
+    }
+
     public static boolean create(Reimbursement r) throws SQLException{
         return reim.createReim(r);
     }
