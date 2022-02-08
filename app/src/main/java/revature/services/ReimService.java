@@ -34,7 +34,7 @@ public class ReimService {
         return i;
     }
 
-    public static String validate(List<String> id, List<String> status,List<String> resolver) throws SQLException{
+    public static String validate(List<String> id, List<String> status,int resolver) throws SQLException{
         StringBuilder errors = new StringBuilder("");
         int x;
         int y;
@@ -42,8 +42,7 @@ public class ReimService {
         for(int i=0;i<id.size();i++){
             x=Integer.parseInt(id.get(i));
             y=Integer.parseInt(status.get(i));
-            z=Integer.parseInt(resolver.get(i));
-            if(!reim.validate(x,y,z)){
+            if(!reim.validate(x,y,resolver)){
                 errors.append("Error on reimbursement with id: "+x);
             }
         }

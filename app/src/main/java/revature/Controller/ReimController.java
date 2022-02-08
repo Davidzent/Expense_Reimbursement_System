@@ -7,6 +7,9 @@ import revature.Models.Reimbursement;
 import revature.services.ReimService;
 
 import static revature.util.Log.logger;
+// import static revature.Models.ReimbursementxType.*;
+// import static revature.Models.ReimbursementxStatus.*;
+import static revature.Models.UsersxRoles.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -39,13 +42,18 @@ public class ReimController {
     };
 
     public Handler create = (ctx) ->{
-        Reimbursement u = Reimbursement.fillReimbursments(ctx.formParamMap()).get(0);
-        try{
-            ReimService.create(u);
-        }catch(SQLException e){
-            log(e,ctx);
-            ctx.result("Error Creating the new reimbursments");
+        int[] user = isLoggedin(ctx);
+        if(user==null){}
+        if(user[0]==Employee.type()){
+            Reimbursement u = Reimbursement.fillReimbursments(ctx.formParamMap()).get(0);
+            try{
+                ReimService.create(u);
+            }catch(SQLException e){
+                log(e,ctx);
+                ctx.result("Error Creating the new reimbursments");
+            }
         }
+        
     };
 
     public Handler update = (ctx) ->{
@@ -59,15 +67,19 @@ public class ReimController {
     };
 
     public Handler validate = (ctx) ->{
-        List<String> rid = ctx.formParamMap().get("reimid");
-        List<String> status = ctx.formParamMap().get("statusid");
-        List<String> resolver = ctx.formParamMap().get("resolver");
-        try{
-            ctx.result(ReimService.validate(rid,status,resolver));
-        }catch(SQLException e){
-            log(e,ctx);
-            ctx.result("Error validating reimbursments");
+        int[] user = isLoggedin(ctx);
+        if(user==null){}
+        else if(user[0]==Manager.type()){
+            List<String> rid = ctx.formParamMap().get("reimid");
+            List<String> status = ctx.formParamMap().get("statusid");
+            try{
+                ctx.result(ReimService.validate(rid,status,user[1]));
+            }catch(SQLException e){
+                log(e,ctx);
+                ctx.result("Error validating reimbursments");
+            }
         }
+        
     };
 
     public Handler list = (ctx) ->{
@@ -78,10 +90,10 @@ public class ReimController {
         
         
         if(user==null){}
-        else if(user[0]==1){
+        else if(user[0]==Employee.type()){
             ctx.json(ReimService.getByStatus(status,user[1]));
         }
-        else if(user[0]==2){
+        else if(user[0]==Manager.type()){
             try{author = Integer.parseInt(ctx.queryParam("author"));}catch(NumberFormatException e){}
 
             ctx.json(ReimService.getByStatus(status,author));
@@ -93,8 +105,8 @@ public class ReimController {
     private int[] isLoggedin (Context ctx){
         ctx.header("Access-Control-Expose-Headers","*");
         String type=(String) ctx.req.getSession().getAttribute("loggedIn");
-        if(type=="EMPLOYEE")return new int[]{1,(int) ctx.req.getSession().getAttribute("id")};
-        if(type=="MANAGER")return new int[]{2,(int) ctx.req.getSession().getAttribute("id")};
+        if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
+        if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
         ctx.status(403);
         ctx.result("Please log in");
         return null;

@@ -13,8 +13,6 @@ public class ReimRoute extends Route{
 
     @Override
     public void registerLocalRoutes(Javalin app) {
-        // app.get("/list/employee", uc.getAll);
-        // app.get("/list/manager", uc.getAll);
         app.get("/reim", rc.getAll);
         app.get("/reim/{id}", rc.getById);
         app.get("/employee/reim/list", rc.list);

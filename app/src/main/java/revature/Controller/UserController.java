@@ -5,11 +5,10 @@ import io.javalin.http.Handler;
 import revature.Models.Users;
 import revature.services.UserService;
 
-import static revature.util.Log.logger;
-
 import java.sql.SQLException;
 
-
+import static revature.Models.UsersxRoles.*;
+import static revature.util.Log.logger;
 
 public class UserController {
     
@@ -42,8 +41,8 @@ public class UserController {
         String option= ctx.attribute("jetty-target");
         int type=-1;
         switch (option) {
-            case "/register/employee":type=1;break;
-            case "/register/manager":type=2;break;
+            case "/register/employee":type=Employee.type();break;
+            case "/register/manager":type=Manager.type();break;
         }
         if(type!=-1){
             Users u = Users.fillUsers(ctx.formParamMap()).get(0);
@@ -57,6 +56,8 @@ public class UserController {
             }
         }else{
             ctx.status(403);
+            ctx.result("This is not allowed");
+            logger.warn(ctx.body()+ctx.pathParamMap());
         }
         
     };
@@ -65,13 +66,13 @@ public class UserController {
         String option= ctx.attribute("jetty-target");
         int type=-1;
         switch (option) {
-            case "/login/employee":type=1;break;
-            case "/login/manager":type=2;break;
+            case "/register/employee":type=Employee.type();break;
+            case "/register/manager":type=Manager.type();break;
         }
         if(type==-1){
             ctx.result("This is not allowed");
             logger.warn(ctx.body()+ctx.pathParamMap());
-            ctx.status(400);
+            ctx.status(403);
         }else{
             try{
                 String username=ctx.formParam("username");
