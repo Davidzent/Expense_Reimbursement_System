@@ -14,13 +14,21 @@ public class UserController {
     
     public UserController(){}
 
-    public Handler getAll = (ctx) ->{
-        try{
-            ctx.json(UserService.get());
-        }catch(SQLException e){
-            log(e,ctx);
-            ctx.result("Incorrect credentials");
-        }   
+    public Handler getAllEmployees = (ctx) ->{
+        int[] user=isLoggedIn(ctx);
+
+        if(user[0]==Manager.type()){
+            try{
+                ctx.json(UserService.getAllByRole(Employee.type()));
+            }catch(SQLException e){
+                log(e,ctx);
+                ctx.result("Incorrect credentials");
+            } 
+        }else{
+            ctx.result("Please log in as admin");
+            ctx.status(403);
+        }
+          
     };
 
     public Handler getById = (ctx) ->{
@@ -99,6 +107,16 @@ public class UserController {
         ctx.req.getSession().invalidate();
         ctx.status(200);
         ctx.result("User logged out");
+    };
+
+    private int[] isLoggedIn (Context ctx){
+        ctx.header("Access-Control-Expose-Headers","*");
+        String type=(String) ctx.req.getSession().getAttribute("loggedIn");
+        if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
+        if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
+        ctx.status(403);
+        ctx.result("Please log in");
+        return null;
     };
     
     private static void log(Exception e,Context ctx){

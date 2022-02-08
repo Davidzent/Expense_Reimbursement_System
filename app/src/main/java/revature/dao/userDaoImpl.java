@@ -101,6 +101,50 @@ public class  userDaoImpl implements userDao{
 
         return Users;
     }
+
+    @Override
+    public List<Users> getAllByRole(int roleid) throws SQLException {
+        String sql = "select * from project01.users WHERE roleid=?";
+        List<Users> Users = new ArrayList<>();
+        
+        PreparedStatement  s = con.prepareStatement(sql);
+        s.setInt(1, roleid);
+        ResultSet rs = s.executeQuery();
+       
+
+        int id;
+        String username;
+        String password;
+        String fnane;
+        String lname;
+        String email;
+
+
+        while(rs.next()) {
+            id=-1;
+            username="";
+            password="";
+            fnane="";
+            lname="";
+            email="";
+
+            try{
+                id = rs.getInt(USERID.toString());
+                username=rs.getString(USER.toString());
+                password=rs.getString(PSWRD.toString());
+                fnane=rs.getString(FNAME.toString());
+                lname=rs.getString(LNAME.toString());
+                email=rs.getString(EMAIL.toString());
+                roleid=rs.getInt(ROLEID.toString());
+            }catch(SQLException e){
+                logger.trace(e);
+            }
+            Users User = new Users(id,username,password,fnane,lname,email,roleid);
+            Users.add(User);
+        }
+
+        return Users;
+    }
     
     @Override
     public Users getUserById(int id) throws SQLException {

@@ -42,7 +42,7 @@ public class ReimController {
     };
 
     public Handler create = (ctx) ->{
-        int[] user = isLoggedin(ctx);
+        int[] user = isLoggedIn(ctx);
         if(user==null){}
         if(user[0]==Employee.type()){
             Reimbursement u = Reimbursement.fillReimbursments(ctx.formParamMap()).get(0);
@@ -67,7 +67,7 @@ public class ReimController {
     };
 
     public Handler validate = (ctx) ->{
-        int[] user = isLoggedin(ctx);
+        int[] user = isLoggedIn(ctx);
         if(user==null){}
         else if(user[0]==Manager.type()){
             List<String> rid = ctx.formParamMap().get("reimid");
@@ -83,7 +83,7 @@ public class ReimController {
     };
 
     public Handler list = (ctx) ->{
-        int[] user = isLoggedin(ctx);
+        int[] user = isLoggedIn(ctx);
         int status=-1;
         int author=-1;
         try{status = Integer.parseInt(ctx.queryParam("statusid"));}catch(NumberFormatException e){}
@@ -102,7 +102,7 @@ public class ReimController {
 
     };
 
-    private int[] isLoggedin (Context ctx){
+    private int[] isLoggedIn (Context ctx){
         ctx.header("Access-Control-Expose-Headers","*");
         String type=(String) ctx.req.getSession().getAttribute("loggedIn");
         if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
