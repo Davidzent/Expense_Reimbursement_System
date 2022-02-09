@@ -20,8 +20,8 @@ public class UserService {
         
     }
 
-    public static List<Users> get() throws SQLException{
-        return user.getAllUsers();
+    public static List<Users> getAllByRole(int role) throws SQLException{
+        return user.getAllByRole(role);
     }
 
     public static Users getById(int id) throws SQLException{

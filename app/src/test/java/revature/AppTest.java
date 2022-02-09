@@ -38,8 +38,8 @@ public class AppTest {
             reimDaoImpl reimD = new reimDaoImpl();
             Reimbursement reimbursement = reimD.getReimById(2);
             Date date = new Date(1643889600000L);
-            Date date2 = null;
-            Reimbursement reimbursement2 = new Reimbursement(2, 99.99D, date, (Date)date2, "Testing Daos", 1, 0, 1, 1);
+            Date date2 = new Date(1643961600000L);
+            Reimbursement reimbursement2 = new Reimbursement(2, 99.99D, date, (Date)date2, "Testing Daos", 1, 4, 3, 1);
             System.out.println(reimbursement2.getSubmitted());
             Assert.assertEquals(reimbursement2.getAmount(), reimbursement.getAmount(), 2.0D);
             Assert.assertEquals((long)reimbursement2.getAuthor(), (long)reimbursement.getAuthor());

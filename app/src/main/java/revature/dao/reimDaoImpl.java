@@ -67,10 +67,11 @@ public class reimDaoImpl implements reimDao {
     @Override
     public List<Reimbursement> getAllReim() throws SQLException {
         String sql = "select * from project01.reimbursement";
-        List<Reimbursement> reims = new ArrayList<>();
+        
         Statement  s = con.createStatement();
         ResultSet rs = s.executeQuery(sql);
         
+        List<Reimbursement> reims = new ArrayList<>();
         int id=-1;
         double amount=-1;
         Date subm=new Date(0);
@@ -105,7 +106,7 @@ public class reimDaoImpl implements reimDao {
                 type=rs.getInt(TYPE.toString());
             }catch(SQLException e){
                 logger.trace(e);
-                throw new SQLException("No found reimbursement matching those parameters.");
+                // throw new SQLException("No found reimbursement matching those parameters.");
             }
 
             reims.add(new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type));
@@ -155,6 +156,75 @@ public class reimDaoImpl implements reimDao {
         Reimbursement reim = new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type);
 
         return reim;
+    }
+
+    @Override
+    public List<Reimbursement> getReimByStatus(int status,int author) throws SQLException {
+        String sql;
+        PreparedStatement s;
+        if(author!=-1&&status==-1){
+            sql = "select * from project01.reimbursement WHERE author = ?";
+            s = con.prepareStatement(sql);
+            s.setInt(1, author);
+        }
+        else if (author==-1&&status!=-1){
+            sql = "select * from project01.reimbursement WHERE statusid = ?";
+            s = con.prepareStatement(sql);
+            s.setInt(1, status);
+        }
+        else {
+            sql = "select * from project01.reimbursement WHERE statusid = ? AND  author = ?";
+            s = con.prepareStatement(sql);
+            s.setInt(1, status);
+            s.setInt(2, author);
+        }
+        
+        ResultSet rs = s.executeQuery();
+
+        List<Reimbursement> reims = new ArrayList<>();
+
+        int id=-1;
+        double amount=-1;
+        Date subm=new Date(0);
+        Date resolved=new Date(0);
+        int resolver=-1;
+        int type=-1;
+        String descr="";
+        //String receipt="";
+        while(rs.next()) {
+            id=-1;
+            amount=-1;
+            subm=new Date(0);
+            resolved=new Date(0);
+            resolver=-1;
+            author=-1;
+            type=-1;
+            status=-1;
+            descr="";
+
+            try{
+                id = rs.getInt(RID.toString());
+                amount=rs.getDouble(AMOUNT.toString());
+                subm=rs.getDate(SUBM.toString());
+                resolved=rs.getDate(RESOLV.toString());
+                descr=rs.getString(DESCR.toString());
+                //receipt=rs.getString(RECEIPT.toString());
+                author=rs.getInt(AUTHOR.toString());
+                resolver=rs.getInt(RESOLVER.toString());
+                type=rs.getInt(TYPE.toString());
+                status=rs.getInt(STATUS.toString());
+
+            }catch(SQLException e){
+                logger.trace(e);
+                // throw new SQLException("No found reimbursement matching those parameters.");
+            }
+
+            reims.add(new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type));
+
+        }
+
+
+        return reims;
     }
 
     @Override

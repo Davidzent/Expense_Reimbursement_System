@@ -5,23 +5,30 @@ import io.javalin.http.Handler;
 import revature.Models.Users;
 import revature.services.UserService;
 
-import static revature.util.Log.logger;
-
 import java.sql.SQLException;
 
-
+import static revature.Models.UsersxRoles.*;
+import static revature.util.Log.logger;
 
 public class UserController {
     
     public UserController(){}
 
-    public Handler getAll = (ctx) ->{
-        try{
-            ctx.json(UserService.get());
-        }catch(SQLException e){
-            log(e,ctx);
-            ctx.result("Incorrect credentials");
-        }   
+    public Handler getAllEmployees = (ctx) ->{
+        int[] user=isLoggedIn(ctx);
+
+        if(user[0]==Manager.type()){
+            try{
+                ctx.json(UserService.getAllByRole(Employee.type()));
+            }catch(SQLException e){
+                log(e,ctx);
+                ctx.result("Incorrect credentials");
+            } 
+        }else{
+            ctx.result("Please log in as admin");
+            ctx.status(403);
+        }
+          
     };
 
     public Handler getById = (ctx) ->{
@@ -39,26 +46,41 @@ public class UserController {
     };
 
     public Handler create = (ctx) ->{
-        Users u = Users.fillUsers(ctx.formParamMap()).get(0);
-        try{
-            UserService.create(u);
-        }catch(SQLException e){
-            log(e,ctx);
-            ctx.result("Error Creating the new user");
+        String option= ctx.attribute("jetty-target");
+        int type=-1;
+        switch (option) {
+            case "/register/employee":type=Employee.type();break;
+            case "/register/manager":type=Manager.type();break;
         }
+        if(type!=-1){
+            Users u = Users.fillUsers(ctx.formParamMap()).get(0);
+            u.setRole_ID(type);
+            
+            try{
+                UserService.create(u);
+            }catch(SQLException e){
+                log(e,ctx);
+                ctx.result("Error Creating the new user");
+            }
+        }else{
+            ctx.status(403);
+            ctx.result("This is not allowed");
+            logger.warn(ctx.body()+ctx.pathParamMap());
+        }
+        
     };
     
     public Handler login = (ctx) ->{
         String option= ctx.attribute("jetty-target");
         int type=-1;
         switch (option) {
-            case "/login/employee":type=1;break;
-            case "/login/manager":type=2;break;
+            case "/login/employee":type=Employee.type();break;
+            case "/login/manager":type=Manager.type();break;
         }
         if(type==-1){
             ctx.result("This is not allowed");
             logger.warn(ctx.body()+ctx.pathParamMap());
-            ctx.status(400);
+            ctx.status(403);
         }else{
             try{
                 String username=ctx.formParam("username");
@@ -66,7 +88,7 @@ public class UserController {
                 Users u=UserService.login(username,pas,type);
                 String t = (type==1?"EMPLOYEE":"MANAGER");
                 //data
-                ctx.jsonStream(u);
+                ctx.json(u);
 
                 ctx.req.getSession().setAttribute("id",u.getUsers_ID());
                 ctx.req.getSession().setAttribute("loggedIn", t);
@@ -87,6 +109,16 @@ public class UserController {
         ctx.result("User logged out");
     };
 
+    private int[] isLoggedIn (Context ctx){
+        ctx.header("Access-Control-Expose-Headers","*");
+        String type=(String) ctx.req.getSession().getAttribute("loggedIn");
+        if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
+        if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
+        ctx.status(403);
+        ctx.result("Please log in");
+        return null;
+    };
+    
     private static void log(Exception e,Context ctx){
         logger.warn(e);
         logger.warn(ctx.body());

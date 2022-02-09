@@ -101,15 +101,13 @@ public class Users {
 
         for(int i = 0; i < size; i++){
             try{user.setUsers_ID(Integer.parseInt(map.get("userid").get(i)));}catch(NullPointerException e){}
+            try{user.setUserName(map.get("username").get(i));}catch(NullPointerException e){}
+            try{user.setPassword(map.get("password").get(i));}catch(NullPointerException e){}
+            try{user.setfName(map.get("fname").get(i));}catch(NullPointerException e){}
+            try{user.setlName(map.get("lname").get(i));}catch(NullPointerException e){}
+            try{user.setEmail(map.get("email").get(i));}catch(NullPointerException e){}
+            try{user.setRole_ID(Integer.parseInt(map.get("roleid").get(i)));}catch(NullPointerException e){}
             
-            try{
-                user.setUserName(map.get("username").get(i));
-                user.setPassword(map.get("password").get(i));
-                user.setfName(map.get("fname").get(i));
-                user.setlName(map.get("lname").get(i));
-                user.setEmail(map.get("email").get(i));
-                user.setRole_ID(Integer.parseInt(map.get("roleid").get(i)));
-            }catch(NullPointerException e){}
 
             users.add(user);
         }

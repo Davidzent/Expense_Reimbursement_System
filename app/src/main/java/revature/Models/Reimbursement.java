@@ -120,22 +120,16 @@ public class Reimbursement {
 
 
         for(int i = 0; i < size; i++){
-            try{reimbursement.setAmount(Double.parseDouble(map.get("reimid").get(i)));}catch(NullPointerException e){}
-            
-            try{
-                reimbursement.setAmount(Double.parseDouble(map.get("amount").get(i)));
-                reimbursement.setDescription(map.get("description").get(i));
-                reimbursement.setAuthor(Integer.parseInt(map.get("author").get(i)));
-                reimbursement.setType_ID(Integer.parseInt(map.get("typeid").get(i)));
-            }catch(NullPointerException e){}
-
-            try{
-                reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid").get(i)));
-                reimbursement.setResolver(Integer.parseInt(map.get("resolver").get(i)));
-                //reimbursement.setResolved(map.get("submitted").get(i));
-                //reimbursement.setResolved(map.get("resolved").get(i));
-            }catch(NullPointerException e){}
-
+            try{reimbursement.setreimid(Integer.parseInt(map.get("reimid").get(i)));}catch(NullPointerException e){}
+            try{reimbursement.setAmount(Double.parseDouble(map.get("amount").get(i)));}catch(NullPointerException e){}
+            // try{reimbursement.setSubmitted(map.get("submitted").get(i));}catch(NullPointerException e){}
+            // try{reimbursement.setResolved(map.get("resolved").get(i));}catch(NullPointerException e){}
+            try{reimbursement.setDescription(map.get("description").get(i));}catch(NullPointerException e){}
+            try{reimbursement.setDescription(map.get("description").get(i));}catch(NullPointerException e){}
+            try{reimbursement.setAuthor(Integer.parseInt(map.get("author").get(i)));}catch(NullPointerException e){}
+            try{reimbursement.setResolver(Integer.parseInt(map.get("resolver").get(i)));}catch(NullPointerException e){}
+            try{reimbursement.setStatus_ID(Integer.parseInt(map.get("statusid").get(i)));}catch(NullPointerException e){}
+            try{reimbursement.setType_ID(Integer.parseInt(map.get("typeid").get(i)));}catch(NullPointerException e){}    
 
             reimbursements.add(reimbursement);
         }
