@@ -1,0 +1,164 @@
+
+body#createData .filters input{
+  width: 8%;
+  min-width: 8%;
+  max-width: 15%;
+}
+
+body#createData .filters select{
+  width: 10%;
+  background-color: transparent;
+  border: 1px solid #000;
+  font-family: inherit;
+  font-size: inherit;
+  min-width: 10%;
+  max-width: 15%;
+  padding: 0.57em 0.5em;
+  cursor: pointer;
+}
+
+body#createData select {
+  width: 10%;
+  background-color: transparent;
+  border: 1px solid #000;
+  font-family: inherit;
+  font-size: inherit;
+  min-width: 10%;
+  max-width: 15%;
+  padding: 0.57em 0.5em;
+  cursor: pointer;
+}
+
+body#createData .adminphase2 input[type="text"].small {
+  width: 150px;
+}
+
+body#createData .adminphase2 input[type="datetime-local"]{
+  width: 300px;
+}
+
+body#createData .adminphase2 table{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+}
+
+body#createData .adminphase2 table th
+body#createData .adminphase2 table td,
+body#createData .adminphase2 table tr{
+  border: 1px solid black;
+}
+
+body#createData .adminphase2 table input[type=submit]
+body#createData .adminphase2 table input[type=button]{
+  margin: 5px;
+}
+
+body#createData .adminphase2 table thead {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+body#createData .adminphase2 table thead th,
+body#createData .adminphase2 table thead td{
+  padding: 10px 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+body#createData .adminphase2 table thead th .sort
+body#createData .adminphase2 table thead td .sort{
+  /* Transparent background */
+  /* Center the content */
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  /* Spacing */
+  padding: 4px;
+  background: transparent;
+  /* Size */
+  height: 12px;
+  width: 12px;
+}
+
+body#createData .adminphase2 table thead tr {
+  background-color: #404040;
+  color: #ffffff;
+}
+
+body#createData .adminphase2 table tbody{
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+body#createData .adminphase2 table tbody tr td{
+  border-top: 1px solid #555;
+}
+
+body#createData .adminphase2 table tbody td,
+body#createData .adminphase2 table tbody th{
+  padding: 8px 10px;
+  text-align: left;
+}
+body#createData .adminphase2 table tbody tr:first-child{
+  border-top: none;
+}
+body#createData .adminphase2 table tbody tr:nth-child(even) {
+  background: #cacaca;
+}
+body#createData .adminphase2 table tfoot tr,
+body#createData .adminphase2 table tfoot td,
+body#createData .adminphase2 table tfoot th {
+  border: none;
+}
+body#createData .adminphase2 .wide{
+  height: 50px;
+  width: 230px;
+}
+
+body#createData .adminphase2 .wide input {
+  width: 230px;
+}
+
+body#createData .adminphase2 .vcenter {
+  vertical-align: middle;
+}
+body#createData .adminphase2 .center{
+  border: 1px solid black;
+  border-top: 1px solid #555;
+  align-self: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+button,
+input[type=submit],
+input[type=button] {
+  cursor: pointer;
+  margin: 16px 0 5px 0;
+  background-color: #555;
+  background: linear-gradient(black, black);
+  border: 1px solid #555;
+  color: white;
+  min-height: 34px;
+  line-height: normal;
+  border-radius: 3px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+input[type=text]:focus,
+input[type=search]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+input[type=date]:focus,
+input[type=datetime-local]:focus,
+textarea:focus,
+input[type=file]:focus {
+  box-shadow: #2f6b9a 0px -4px inset;
+}
