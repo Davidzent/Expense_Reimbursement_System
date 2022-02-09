@@ -74,8 +74,8 @@ public class UserController {
         String option= ctx.attribute("jetty-target");
         int type=-1;
         switch (option) {
-            case "/register/employee":type=Employee.type();break;
-            case "/register/manager":type=Manager.type();break;
+            case "/login/employee":type=Employee.type();break;
+            case "/login/manager":type=Manager.type();break;
         }
         if(type==-1){
             ctx.result("This is not allowed");
@@ -88,7 +88,7 @@ public class UserController {
                 Users u=UserService.login(username,pas,type);
                 String t = (type==1?"EMPLOYEE":"MANAGER");
                 //data
-                ctx.jsonStream(u);
+                ctx.json(u);
 
                 ctx.req.getSession().setAttribute("id",u.getUsers_ID());
                 ctx.req.getSession().setAttribute("loggedIn", t);

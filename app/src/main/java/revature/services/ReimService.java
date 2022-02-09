@@ -38,7 +38,6 @@ public class ReimService {
         StringBuilder errors = new StringBuilder("");
         int x;
         int y;
-        int z;
         for(int i=0;i<id.size();i++){
             x=Integer.parseInt(id.get(i));
             y=Integer.parseInt(status.get(i));

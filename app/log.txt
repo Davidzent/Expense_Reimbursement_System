@@ -130,3 +130,15 @@ java.sql.SQLException: No found account matching those parameters.
 2022-02-08 11:12:50 WARN  Log:107 - java.lang.NumberFormatException: null
 2022-02-08 11:12:50 WARN  Log:108 - 
 2022-02-08 11:12:50 WARN  Log:109 - {}
+2022-02-08 17:33:16 WARN  Log:123 - java.sql.SQLException: No found account matching those parameters.
+2022-02-08 17:33:16 WARN  Log:124 - 
+2022-02-08 17:33:16 WARN  Log:125 - {}
+2022-02-08 17:34:09 WARN  Log:123 - java.sql.SQLException: No found account matching those parameters.
+2022-02-08 17:34:09 WARN  Log:124 - 
+2022-02-08 17:34:09 WARN  Log:125 - {}
+2022-02-08 17:34:13 WARN  Log:123 - java.sql.SQLException: No found account matching those parameters.
+2022-02-08 17:34:13 WARN  Log:124 - 
+2022-02-08 17:34:13 WARN  Log:125 - {}
+2022-02-08 17:34:56 WARN  Log:123 - java.sql.SQLException: No found account matching those parameters.
+2022-02-08 17:34:56 WARN  Log:124 - 
+2022-02-08 17:34:56 WARN  Log:125 - {}
