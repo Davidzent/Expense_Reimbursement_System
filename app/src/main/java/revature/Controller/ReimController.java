@@ -44,9 +44,10 @@ public class ReimController {
     public Handler create = (ctx) ->{
         int[] user = isLoggedIn(ctx);
         if(user==null){}
-        if(user[0]==Employee.type()){
+        else if(user[0]==Employee.type()){
             Reimbursement u = Reimbursement.fillReimbursments(ctx.formParamMap()).get(0);
             try{
+                u.setAuthor(user[1]);
                 ReimService.create(u);
             }catch(SQLException e){
                 log(e,ctx);
@@ -104,9 +105,15 @@ public class ReimController {
 
     private int[] isLoggedIn (Context ctx){
         ctx.header("Access-Control-Expose-Headers","*");
-        String type=(String) ctx.req.getSession().getAttribute("loggedIn");
-        if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
-        if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
+        Object temp=ctx.req.getSession().getAttribute("loggedIn");
+        if(temp!=null){
+
+            String type=(String) ctx.req.getSession().getAttribute("loggedIn");
+
+            if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
+            if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
+        }
+
         ctx.status(403);
         ctx.result("Please log in");
         return null;

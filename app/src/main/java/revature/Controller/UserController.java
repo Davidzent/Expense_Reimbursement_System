@@ -7,6 +7,8 @@ import revature.services.UserService;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
+
 import static revature.Models.UsersxRoles.*;
 import static revature.util.Log.logger;
 
@@ -15,19 +17,19 @@ public class UserController {
     public UserController(){}
 
     public Handler getAllEmployees = (ctx) ->{
-        int[] user=isLoggedIn(ctx);
+        // int[] user=isLoggedIn(ctx);
 
-        if(user[0]==Manager.type()){
+        // if(user[0]==Manager.type()){
             try{
                 ctx.json(UserService.getAllByRole(Employee.type()));
             }catch(SQLException e){
                 log(e,ctx);
                 ctx.result("Incorrect credentials");
             } 
-        }else{
-            ctx.result("Please log in as admin");
-            ctx.status(403);
-        }
+        // }else{
+            // ctx.result("Please log in as admin");
+            // ctx.status(403);
+        // }
           
     };
 
@@ -83,22 +85,29 @@ public class UserController {
             ctx.status(403);
         }else{
             try{
+                // ctx.header("Access-Control-Allow-Origin", "*");
                 String username=ctx.formParam("username");
                 String pas=ctx.formParam("password");
                 Users u=UserService.login(username,pas,type);
                 String t = (type==1?"EMPLOYEE":"MANAGER");
                 //data
+                
                 ctx.json(u);
 
                 ctx.req.getSession().setAttribute("id",u.getUsers_ID());
                 ctx.req.getSession().setAttribute("loggedIn", t);
-                ctx.header("uid",""+u.getUsers_ID());
+                
+                ctx.header("id",""+u.getUsers_ID());
                 ctx.header("loggedIn",t);
+                System.out.println(ctx.req.getSession().getAttribute("id"));
+                System.out.println(ctx.req.getSession().getAttribute("loggedIn"));
+                //isLoggedIn(ctx);
 
             }catch(SQLException e){
                 log(e,ctx);
                 ctx.result("Incorrect credentials");
             }
+            
             
         }
     };
@@ -109,11 +118,21 @@ public class UserController {
         ctx.result("User logged out");
     };
 
+    public Handler isLoggedIn  = (ctx)->{
+        ctx.header("Access-Control-Expose-Headers","*");
+        System.out.println(ctx.req.getSession().getAttribute("id"));
+        System.out.println(ctx.req.getSession().getAttribute("loggedIn"));
+    };
+
     private int[] isLoggedIn (Context ctx){
         ctx.header("Access-Control-Expose-Headers","*");
-        String type=(String) ctx.req.getSession().getAttribute("loggedIn");
-        if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
-        if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
+        Object temp=ctx.req.getSession().getAttribute("loggedIn");
+        if(temp!=null){
+            String type=(String) ctx.req.getSession().getAttribute("loggedIn");
+            if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
+            if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
+        }
+
         ctx.status(403);
         ctx.result("Please log in");
         return null;
