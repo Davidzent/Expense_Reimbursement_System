@@ -16,7 +16,7 @@ public class Controller {
             config.addStaticFiles("/static",Location.CLASSPATH);
         }
 
-    ).start();
+    );
 
     private static UserController uc = new UserController();
     private static Route user = new UserRoute(uc);
@@ -24,8 +24,14 @@ public class Controller {
     private static Route reim = new ReimRoute(rc);
 
     public Controller(){
-        app.before(ctx -> ctx.header("Access-Control-Allow-Credentials", "true"));
         Route.establishRoutes(app,user,reim);
+
+        app.error(403, (ctx) -> {
+            ctx.result("The request you submitted is invalid");
+        });
+
+        app.start(7000);
+
     }
     
 

@@ -1,15 +1,16 @@
 package revature.Controller;
 
-import io.javalin.http.Context;
+//System
 import io.javalin.http.Handler;
+import java.sql.SQLException;
+
+//User
 import revature.Models.Users;
 import revature.services.UserService;
 
-import java.sql.SQLException;
-
-import javax.servlet.http.HttpSession;
-
+//Static
 import static revature.Models.UsersxRoles.*;
+import static revature.util.ControllerUtil.*;
 import static revature.util.Log.logger;
 
 public class UserController {
@@ -17,20 +18,19 @@ public class UserController {
     public UserController(){}
 
     public Handler getAllEmployees = (ctx) ->{
-         int[] user=isLoggedIn(ctx);
-
-         if(user[0]==Manager.type()){
+        int[] user=isLoggedIn(ctx);
+        if(user[0]==Manager.type()){
             try{
                 ctx.json(UserService.getAllByRole(Employee.type()));
             }catch(SQLException e){
                 log(e,ctx);
                 ctx.result("Incorrect credentials");
             } 
-         }else{
-             ctx.result("Please log in as admin");
-             ctx.status(403);
-         }
-          
+        }else{
+            ctx.result("Please log in as admin");
+            ctx.status(403);
+        }
+
     };
 
     public Handler getById = (ctx) ->{
@@ -99,9 +99,6 @@ public class UserController {
                 
                 ctx.header("id",""+u.getUsers_ID());
                 ctx.header("loggedIn",t);
-                System.out.println(ctx.req.getSession().getAttribute("id"));
-                System.out.println(ctx.req.getSession().getAttribute("loggedIn"));
-                //isLoggedIn(ctx);
 
             }catch(SQLException e){
                 log(e,ctx);
@@ -124,25 +121,6 @@ public class UserController {
         System.out.println(ctx.req.getSession().getAttribute("loggedIn"));
     };
 
-    private int[] isLoggedIn (Context ctx){
-        ctx.header("Access-Control-Expose-Headers","*");
-        Object temp=ctx.req.getSession().getAttribute("loggedIn");
-        if(temp!=null){
-            String type=(String) ctx.req.getSession().getAttribute("loggedIn");
-            if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
-            if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
-        }
 
-        ctx.status(403);
-        ctx.result("Please log in");
-        return null;
-    };
-    
-    private static void log(Exception e,Context ctx){
-        logger.warn(e);
-        logger.warn(ctx.body());
-        logger.warn(ctx.pathParamMap());
-        ctx.status(400);
-    }
     
 }

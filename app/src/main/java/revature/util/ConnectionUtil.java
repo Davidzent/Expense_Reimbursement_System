@@ -10,21 +10,12 @@ public class ConnectionUtil {
     public static Connection con;
     static{
 
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        try {Class.forName("org.postgresql.Driver");} catch (ClassNotFoundException e) {}
         String host=System.getenv("DB_HOST");
         String url = "jdbc:postgresql://"+host+"/postgres";
         String username = System.getenv("DB_USER");
         String password = System.getenv("DB_PASS");
-        try {
-            con = DriverManager.getConnection(url,username, password);
-        } catch (SQLException e) {
-            
-            e.printStackTrace();
-        }
+        try {con = DriverManager.getConnection(url,username, password);} catch (SQLException e) {}
     }
 
 

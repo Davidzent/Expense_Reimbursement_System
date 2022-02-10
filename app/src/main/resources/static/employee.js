@@ -17,25 +17,34 @@ form.addEventListener('submit', submitform);
 
     const formData = new FormData(this);
     
+
     await fetch(`${URL}/login/employee`, {
 
         method: 'post',
+
         body: formData
     }).then(function (response){
         
         return response.text();
     }).then(function (text) {
-        if(text === 'Incorrect credentials'){
-            console.log('entered wrong information');
-            errMess.innerText = 'Wrong login information';
-        }else{
-            
-        localStorage.setItem('employeeInfo', text);
-        window.location.href = `${URL}/employeehub.html`;
-        }
-        
+        console.log(text);
     })
 }
 
+function submitrequest(event){
+    event.preventDefault();
 
+    const formData2 = new FormData(this);
+
+    fetch(URL+"/reim/request", {
+        // mode:'no-cors',
+        method: 'post',
+        // credentials: "include",
+        body: formData2
+    }).then(function (response){
+        return response.text();
+    }).then(function(text2){
+        console.log(text2);
+    })
+}
 
