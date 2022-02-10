@@ -17,19 +17,19 @@ public class UserController {
     public UserController(){}
 
     public Handler getAllEmployees = (ctx) ->{
-        // int[] user=isLoggedIn(ctx);
+         int[] user=isLoggedIn(ctx);
 
-        // if(user[0]==Manager.type()){
+         if(user[0]==Manager.type()){
             try{
                 ctx.json(UserService.getAllByRole(Employee.type()));
             }catch(SQLException e){
                 log(e,ctx);
                 ctx.result("Incorrect credentials");
             } 
-        // }else{
-            // ctx.result("Please log in as admin");
-            // ctx.status(403);
-        // }
+         }else{
+             ctx.result("Please log in as admin");
+             ctx.status(403);
+         }
           
     };
 
