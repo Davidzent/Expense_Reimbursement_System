@@ -1,18 +1,20 @@
 package revature.Controller;
 
-import io.javalin.http.Context;
+//External
 import io.javalin.http.Handler;
-import revature.Models.Reimbursement;
 
-import revature.services.ReimService;
 
-import static revature.util.Log.logger;
-// import static revature.Models.ReimbursementxType.*;
-// import static revature.Models.ReimbursementxStatus.*;
-import static revature.Models.UsersxRoles.*;
-
+//System
 import java.sql.SQLException;
 import java.util.List;
+
+//User
+import revature.Models.Reimbursement;
+import revature.services.ReimService;
+
+//Static
+import static revature.Models.UsersxRoles.*;
+import static revature.util.ControllerUtil.*;
 
 public class ReimController {
     
@@ -102,28 +104,4 @@ public class ReimController {
         }
 
     };
-
-    private int[] isLoggedIn (Context ctx){
-        ctx.header("Access-Control-Expose-Headers","*");
-        Object temp=ctx.req.getSession().getAttribute("loggedIn");
-        if(temp!=null){
-
-            String type=(String) ctx.req.getSession().getAttribute("loggedIn");
-
-            if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
-            if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
-        }
-
-        ctx.status(403);
-        ctx.result("Please log in");
-        return null;
-    };
-
-    private static void log(Exception e,Context ctx){
-        logger.warn(e);
-        logger.warn(ctx.body());
-        logger.warn(ctx.pathParamMap());
-        ctx.status(400);
-    }
-    
 }
