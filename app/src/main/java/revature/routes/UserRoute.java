@@ -17,10 +17,14 @@ public class UserRoute extends Route{
         app.get("/user/{id}", uc.getById);
         app.get("/verify", uc.isLoggedIn);
         
-        app.post("/login/*", uc.login);
-        app.post("/register/*", uc.create);
-        app.post("/logout", uc.logout);
-        
+        app.post("/employee/register", uc.create);
+        app.post("/employee/login", uc.login);
+        app.post("/employee/logout", uc.logout);
+
+        app.post("/manager/login", uc.login);
+        app.post("/manager/register", uc.create);
+        app.post("/manager/logout", uc.logout);
+
     }
     
 }

@@ -1,7 +1,7 @@
+const URL = window.location.href.replace(".html",""); 
+//let URL = 'http://localhost:8080/login/employee';
 
-let URL = 'http://localhost:8080/login/employee';
-
-let URL2 = 'http://localhost:8080/employee/reim/request';
+//let URL2 = 'http://localhost:8080/employee/reim/request';
 
 console.log('test');
 
@@ -28,7 +28,7 @@ function submitform(event){
 
     const formData = new FormData(this);
     
-    fetch(URL, {
+    fetch((URL+"/login"), {
         // mode:'no-cors',
         // origin:'hey',
         method: 'post',
@@ -50,7 +50,7 @@ function submitrequest(event){
 
     const formData2 = new FormData(this);
 
-    fetch(URL2, {
+    fetch(URL+"/reim/request", {
         // mode:'no-cors',
         method: 'post',
         // credentials: "include",

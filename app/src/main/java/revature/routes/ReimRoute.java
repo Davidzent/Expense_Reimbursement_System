@@ -15,10 +15,13 @@ public class ReimRoute extends Route{
     public void registerLocalRoutes(Javalin app) {
         app.get("/reim", rc.getAll);
         app.get("/reim/{id}", rc.getById);
+        
+        //employee
         app.get("/employee/reim/list", rc.list);
-        app.get("/manager/reim/list", rc.list);
-
         app.post("/employee/reim/request", rc.create);
+
+        //manage
+        app.get("/manager/reim/list", rc.list);
         app.post("/manager/reim/update", rc.update);
         app.post("/manager/reim/validate", rc.validate);
         

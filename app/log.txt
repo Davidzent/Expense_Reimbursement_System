@@ -142,3 +142,23 @@ java.sql.SQLException: No found account matching those parameters.
 2022-02-08 17:34:56 WARN  Log:123 - java.sql.SQLException: No found account matching those parameters.
 2022-02-08 17:34:56 WARN  Log:124 - 
 2022-02-08 17:34:56 WARN  Log:125 - {}
+2022-02-10 14:59:58 WARN  Log:84 - ------WebKitFormBoundary61wVbc06pdA74AWm
+Content-Disposition: form-data; name="username"
+
+Zent
+------WebKitFormBoundary61wVbc06pdA74AWm
+Content-Disposition: form-data; name="password"
+
+12345
+------WebKitFormBoundary61wVbc06pdA74AWm--
+{}
+2022-02-10 15:00:46 WARN  Log:84 - ------WebKitFormBoundary6bZgqpynBTWKrpt2
+Content-Disposition: form-data; name="username"
+
+Zent
+------WebKitFormBoundary6bZgqpynBTWKrpt2
+Content-Disposition: form-data; name="password"
+
+12345
+------WebKitFormBoundary6bZgqpynBTWKrpt2--
+{}
