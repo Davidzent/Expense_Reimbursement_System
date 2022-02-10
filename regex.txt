@@ -4,6 +4,3 @@ regex['email'] = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)
 regex['name'] = /^[^0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]{2,50}$/;
 
 String.match(regex['type']);
-
-https://dmv.verificient.com/
-https://dmv.verificient.com/614e76646a472c210d255003/tests/test/2bd71b9c597948bfa32c785fbca10f75/best_practices/form/?plugin_installed=true
