@@ -19,10 +19,12 @@ public class ConnectionUtil {
         String url = "jdbc:postgresql://"+host+"/postgres";
         String username = System.getenv("DB_USER");
         String password = System.getenv("DB_PASS");
+        System.out.println("hey");
         try {
             con = DriverManager.getConnection(url,username, password);
+            System.out.println("Here2123123123131");
         } catch (SQLException e) {
-            
+            System.out.println("Here");
             e.printStackTrace();
         }
     }
