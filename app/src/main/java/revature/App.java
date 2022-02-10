@@ -14,12 +14,6 @@ public class App {
 
     static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        try {
-            con.createStatement();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         Controller conect = new Controller();
     }
 }
