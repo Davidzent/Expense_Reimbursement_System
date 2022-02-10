@@ -1,10 +1,13 @@
 let URL = 'http://localhost:8080/login/employee';
 
-console.log('test');
 
-let form = document.getElementById('form');
 
-form.addEventListener('submit', submitform);
+
+console.log(window.location.href);
+
+//let form = document.getElementById('form');
+
+//form.addEventListener('submit', submitform);
 
 function submitform(event){
     event.preventDefault();

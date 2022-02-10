@@ -1,41 +1,27 @@
-const URL = window.location.href.replace(".html",""); 
-//let URL = 'http://localhost:8080/login/employee';
 
-//let URL2 = 'http://localhost:8080/employee/reim/request';
+const URL = 'http://localhost:8080';
 
-console.log('test');
+let URL2 = 'http://localhost:8080/employee/reim/request';
 
-let form = document.getElementById('form');
-let form2 = document.getElementById('form2');
-let form3 = document.getElementById('form3');
+
+
+let form = document.getElementById('loginform');
+let errMess = document.getElementById('incorrectLogin');
+
 
 form.addEventListener('submit', submitform);
-form2.addEventListener('submit', submitrequest);
-form3.addEventListener('submit', verify);
 
-
-function verify(event){
-    event.preventDefault();
-
-    fetch('http://localhost:8080/verify',{
-        method:'get'
-    });
-}
-
-function submitform(event){
+ async function submitform(event){
     event.preventDefault();
 
 
     const formData = new FormData(this);
     
-    fetch((URL+"/login"), {
-        // mode:'no-cors',
-        // origin:'hey',
+
+    await fetch(`${URL}/login/employee`, {
+
         method: 'post',
-        // credentials: "include",
-        // headers:{
-        //     "Access-Control-Allow-Origin":"*"
-        // },
+
         body: formData
     }).then(function (response){
         

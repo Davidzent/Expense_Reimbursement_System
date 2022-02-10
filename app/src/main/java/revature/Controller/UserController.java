@@ -30,7 +30,7 @@ public class UserController {
             ctx.result("Please log in as admin");
             ctx.status(403);
         }
-          
+
     };
 
     public Handler getById = (ctx) ->{
