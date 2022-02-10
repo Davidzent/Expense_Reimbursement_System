@@ -10,6 +10,7 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'java'
     id 'application'
+    id "org.sonarqube" version "3.3"
 }
 
 repositories {
@@ -51,4 +52,12 @@ jar {
 application {
     // Define the main class for the application.
     mainClass = 'revature.App'
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "Ben-Paser_Project_1"
+    property "sonar.organization", "ben-paser"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
