@@ -1,4 +1,4 @@
-const URL = 'http://localhost:8080';
+const URL = "http://localhost:7000";
 
 let form2 = document.getElementById('submitform');
 let form3 = document.getElementById('logoutform');

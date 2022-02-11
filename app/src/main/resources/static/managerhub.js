@@ -1,4 +1,4 @@
-const URL = 'http://localhost:8080';
+const URL = 'http://localhost:7000';
 var welcomeMessage = document.getElementById('welcomemessage');
 var manInfo = JSON.parse(localStorage.getItem('managerinfo'));
 

@@ -15,15 +15,15 @@ public class UserRoute extends Route{
     public void registerLocalRoutes(Javalin app) {
         app.get("/manager/list/employee", uc.getAllEmployees);
         app.get("/user/{id}", uc.getById);
-        app.get("/verify", uc.isLoggedIn);
+        app.post("/logout", uc.logout);
         
+        app.get("/employee/verify", uc.isLoggedIn);
         app.post("/employee/register", uc.create);
         app.post("/employee/login", uc.login);
-        app.post("/employee/logout", uc.logout);
+
 
         app.post("/manager/login", uc.login);
         app.post("/manager/register", uc.create);
-        app.post("/manager/logout", uc.logout);
 
     }
     

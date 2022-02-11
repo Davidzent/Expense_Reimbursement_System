@@ -51,8 +51,8 @@ public class UserController {
         String option= ctx.attribute("jetty-target");
         int type=-1;
         switch (option) {
-            case "/register/employee":type=Employee.type();break;
-            case "/register/manager":type=Manager.type();break;
+            case "/employee/register":type=Employee.type();break;
+            case "/manager/register":type=Manager.type();break;
         }
         if(type!=-1){
             Users u = Users.fillUsers(ctx.formParamMap()).get(0);
@@ -76,8 +76,8 @@ public class UserController {
         String option= ctx.attribute("jetty-target");
         int type=-1;
         switch (option) {
-            case "/login/employee":type=Employee.type();break;
-            case "/login/manager":type=Manager.type();break;
+            case "/employee/login":type=Employee.type();break;
+            case "/manager/login":type=Manager.type();break;
         }
         if(type==-1){
             ctx.result("This is not allowed");
@@ -117,6 +117,8 @@ public class UserController {
 
     public Handler isLoggedIn  = (ctx)->{
         ctx.header("Access-Control-Expose-Headers","*");
+        ctx.json(ctx.req.getSession().getAttribute("id"));
+        ctx.json(ctx.req.getSession().getAttribute("loggedIn"));
         System.out.println(ctx.req.getSession().getAttribute("id"));
         System.out.println(ctx.req.getSession().getAttribute("loggedIn"));
     };
