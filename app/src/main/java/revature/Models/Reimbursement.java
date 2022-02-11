@@ -1,7 +1,7 @@
 package revature.Models;
 
 import java.sql.Date;
-
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +9,8 @@ import java.util.Map;
 public class Reimbursement {
     private int reimid;
     private double amount;
-    private Date submitted;
-    private Date resolved;
+    private Timestamp submitted;
+    private Timestamp resolved;
     private String description;
     //private Receipt
     private int author;
@@ -21,7 +21,7 @@ public class Reimbursement {
     public Reimbursement() {
     }
 
-    public Reimbursement(int reimid, double amount, Date submitted, Date resolved, String description, int author, int resolver, int status_ID, int type_ID) {
+    public Reimbursement(int reimid, double amount, Timestamp submitted, Timestamp resolved, String description, int author, int resolver, int status_ID, int type_ID) {
         this.reimid = reimid;
         this.amount = amount;
         this.submitted = submitted;
@@ -41,11 +41,11 @@ public class Reimbursement {
         return amount;
     }
 
-    public Date getSubmitted() {
+    public Timestamp getSubmitted() {
         return submitted;
     }
 
-    public Date getResolved() {
+    public Timestamp getResolved() {
         return resolved;
     }
 
@@ -77,11 +77,11 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public void setSubmitted(Date submitted) {
+    public void setSubmitted(Timestamp submitted) {
         this.submitted = submitted;
     }
 
-    public void setResolved(Date resolved) {
+    public void setResolved(Timestamp resolved) {
         this.resolved = resolved;
     }
 

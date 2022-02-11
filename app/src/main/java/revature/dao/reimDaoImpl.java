@@ -1,6 +1,5 @@
 package revature.dao;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,7 +49,7 @@ public class reimDaoImpl implements reimDao {
         ps.setDouble(1, reim.getAmount());
         ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
         ps.setString(3, reim.getDescription());
-        // ps.setDate(8, reim.getResolved());
+        // ps.setTimestamp(8, reim.getResolved());
         ps.setInt(4, reim.getAuthor());
         // ps.setInt(5, reim.getResolver());
         ps.setInt(5, 1);
@@ -74,8 +73,8 @@ public class reimDaoImpl implements reimDao {
         List<Reimbursement> reims = new ArrayList<>();
         int id=-1;
         double amount=-1;
-        Date subm=new Date(0);
-        Date resolved=new Date(0);
+        Timestamp subm=new Timestamp(0);
+        Timestamp resolved=new Timestamp(0);
         int resolver=-1;
         int author=-1;
         int type=-1;
@@ -85,8 +84,8 @@ public class reimDaoImpl implements reimDao {
         while(rs.next()) {
             id=-1;
             amount=-1;
-            subm=new Date(0);
-            resolved=new Date(0);
+            subm=new Timestamp(0);
+            resolved=new Timestamp(0);
             resolver=-1;
             author=-1;
             type=-1;
@@ -96,8 +95,8 @@ public class reimDaoImpl implements reimDao {
             try{
                 id = rs.getInt(RID.toString());
                 amount=rs.getDouble(AMOUNT.toString());
-                subm=rs.getDate(SUBM.toString());
-                resolved=rs.getDate(RESOLV.toString());
+                subm=rs.getTimestamp(SUBM.toString());
+                resolved=rs.getTimestamp(RESOLV.toString());
                 descr=rs.getString(DESCR.toString());
                 //receipt=rs.getString(RECEIPT.toString());
                 author=rs.getInt(AUTHOR.toString());
@@ -127,8 +126,8 @@ public class reimDaoImpl implements reimDao {
         ResultSet rs = s.executeQuery();
         
         double amount=-1;
-        Date subm=new Date(0);
-        Date resolved=new Date(0);
+        Timestamp subm=new Timestamp(0);
+        Timestamp resolved=new Timestamp(0);
         int resolver=-1;
         int author=-1;
         int type=-1;
@@ -140,8 +139,8 @@ public class reimDaoImpl implements reimDao {
         try{
             // id = rs.getInt(RID.toString());
             amount=rs.getDouble(AMOUNT.toString());
-            subm=rs.getDate(SUBM.toString());
-            resolved=rs.getDate(RESOLV.toString());
+            subm=rs.getTimestamp(SUBM.toString());
+            resolved=rs.getTimestamp(RESOLV.toString());
             descr=rs.getString(DESCR.toString());
             //receipt=rs.getString(RECEIPT.toString());
             author=rs.getInt(AUTHOR.toString());
@@ -185,8 +184,8 @@ public class reimDaoImpl implements reimDao {
 
         int id=-1;
         double amount=-1;
-        Date subm=new Date(0);
-        Date resolved=new Date(0);
+        Timestamp subm=new Timestamp(0);
+        Timestamp resolved=new Timestamp(0);
         int resolver=-1;
         int type=-1;
         String descr="";
@@ -194,8 +193,8 @@ public class reimDaoImpl implements reimDao {
         while(rs.next()) {
             id=-1;
             amount=-1;
-            subm=new Date(0);
-            resolved=new Date(0);
+            subm=new Timestamp(0);
+            resolved=new Timestamp(0);
             resolver=-1;
             author=-1;
             type=-1;
@@ -205,8 +204,8 @@ public class reimDaoImpl implements reimDao {
             try{
                 id = rs.getInt(RID.toString());
                 amount=rs.getDouble(AMOUNT.toString());
-                subm=rs.getDate(SUBM.toString());
-                resolved=rs.getDate(RESOLV.toString());
+                subm=rs.getTimestamp(SUBM.toString());
+                resolved=rs.getTimestamp(RESOLV.toString());
                 descr=rs.getString(DESCR.toString());
                 //receipt=rs.getString(RECEIPT.toString());
                 author=rs.getInt(AUTHOR.toString());
@@ -235,8 +234,8 @@ public class reimDaoImpl implements reimDao {
 
 
         ps.setDouble(1, reim.getAmount());
-        ps.setDate(2, reim.getSubmitted());
-        ps.setDate(3, reim.getResolved());
+        ps.setTimestamp(2, reim.getSubmitted());
+        ps.setTimestamp(3, reim.getResolved());
         ps.setString(4, reim.getDescription());
         // ps.setString(5, reim.getr());
         ps.setInt(5, reim.getAuthor());
