@@ -1,7 +1,4 @@
-
-const URL = 'http://localhost:8080';
-
-let URL2 = 'http://localhost:8080/employee/reim/request';
+const URL = "http://localhost:7000";
 
 
 
@@ -18,16 +15,16 @@ form.addEventListener('submit', submitform);
     const formData = new FormData(this);
     
 
-    await fetch(`${URL}/login/employee`, {
+    await fetch(`${URL}/employee/login`, {
 
         method: 'post',
 
         body: formData
     }).then(function (response){
-        
         return response.text();
     }).then(function (text) {
-        console.log(text);
+        localStorage.setItem('employeeInfo',text);
+        window.location.replace(`${URL}/employeehub.html`);
     })
 }
 
@@ -36,7 +33,7 @@ function submitrequest(event){
 
     const formData2 = new FormData(this);
 
-    fetch(URL+"/reim/request", {
+    fetch(`${URL}/employee/reim/request`, {
         // mode:'no-cors',
         method: 'post',
         // credentials: "include",
@@ -45,6 +42,7 @@ function submitrequest(event){
         return response.text();
     }).then(function(text2){
         console.log(text2);
+        window.location.replace(`${URL}/employeehub.html`);
     })
 }
 

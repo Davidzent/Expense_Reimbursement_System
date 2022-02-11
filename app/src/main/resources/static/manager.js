@@ -1,30 +1,29 @@
-let URL = 'http://localhost:8080';
+const URL = "http://localhost:7000";
+
 
 let form = document.getElementById('loginform');
-let logoutform = document.getElementById('logoutform');
+let errMess = document.getElementById('incorrectLogin');
+
 
 form.addEventListener('submit', submitform);
-logoutform.addEventListener('submit', logout);
 
-
-async function submitform(event){
+ async function submitform(event){
     event.preventDefault();
 
 
     const formData = new FormData(this);
     
-    await fetch(`${URL}/login/manager`, {
+
+    await fetch(`${URL}/manager/login`, {
 
         method: 'post',
+
         body: formData
     }).then(function (response){
-        
         return response.text();
     }).then(function (text) {
-        console.log(text);
-        localStorage.setItem('managerinfo', text);
+        localStorage.setItem('managerinfo',text);
         window.location.replace(`${URL}/managerhub.html`);
     })
 }
-
 
