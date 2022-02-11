@@ -4,6 +4,7 @@ const results=document.getElementById('result');
 const filters=document.getElementById('filters');
 const adminphase2=document.getElementById('adminphase2');
 const adminphase2pages=document.getElementById('adminphase2pages');
+document.getElementById("welcomeMessage").innerHTML=`Welcome ${JSON.parse(localStorage.getItem('employeeInfo')).fName}`
 
 
 document.getElementById('UserAction').addEventListener('click',submitHandler);
