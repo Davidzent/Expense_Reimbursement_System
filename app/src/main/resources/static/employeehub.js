@@ -1,19 +1,48 @@
 import {createtable,type,status,URL,ajax} from './utils/utils.js';
 
+const results=document.getElementById('result');
+const filters=document.getElementById('filters');
+const adminphase2=document.getElementById('adminphase2');
+const adminphase2pages=document.getElementById('adminphase2pages');
 
+
+document.getElementById('UserAction').addEventListener('click',submitHandler);
+document.getElementById('reimRequest').addEventListener('click',reimRequest);
 document.getElementById('logout').addEventListener('click', logout);
 document.getElementById('ViewPending').addEventListener('click',viewPending);
-document.getElementById('reimRequest').addEventListener('click',reimRequest);
+
+
+async function submitHandler(e){
+    if(e.target.value=="request"){
+        reimRequest(e,this);
+    }
+}
+
+
+async function reimRequest(event,form){
+    
+    event.preventDefault();
+    if(event.target.type=='button'){
+        clear();
+        results.innerHTML=`<label for='amount'>Amount</label>
+        <input id = 'amount' name = 'amount' type = 'number' required/>
+        <label for='description'>description</label>
+        <input id = 'description' name = 'description' type = 'text' required/>
+        <label for ='typeid'>type</label>
+        <input id = 'typeid' name = 'typeid' type = 'number' required/>
+        <input type='submit' value='request'/>`
+    }
+    else{
+        const formData = new FormData(form);
+        ajax("post","/employee/reim/request",formData);
+
+    }
+    
+}
 
 async function logout(event){
     event.preventDefault();
     ajax("post","/logout",null);
-}
-
-async function reimRequest(event){
-    event.preventDefault();
-    const formData = new FormData(this);
-    ajax("post","/employee/reim/request",formData);
 }
 
 async function viewPending(event){
@@ -27,7 +56,7 @@ async function viewPending(event){
     });
 
 
-
+    clear();
     //Table options
     let th=['Amount','Description','Submitted','Type','Status']; //headers of the table
     let checkbox=[];                                             //checkbox and primary value
@@ -48,4 +77,11 @@ async function viewPending(event){
     let max=-1;
     let filters=4;
     createtable('FileTable',th,checkbox,info,data,submitvals,display,max,filters);
+}
+
+async function clear(){
+    results.innerHTML="";
+    filters.innerHTML="";
+    adminphase2.innerHTML="";
+    adminphase2pages.innerHTML="";
 }

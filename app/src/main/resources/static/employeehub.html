@@ -7,23 +7,18 @@
     <body id="createData">
         <div class="aligncenter">
             <div id="adminFormArea">
-                <form id="ReportsAction" method="post" action="reports/report">
-                    <input type="hidden" name="option" value="0"/>
-                    <input type="hidden" name="phase" value="1"/>
+                <form id="UserAction" method="post" action="reports/report">
                     <div class="errors"></div>
                     <div class="adminphase1">
                         <label>
                             <input id="ViewPending" type="button" value="View Pending" />
                             <input id="reimRequest" type="button" value="Request Reimbursement" />
-                            <!-- <input id="StudentReportDetails" type="button" value="By Student (Details)" />
-                            <input id="DateReport" type="button" value="By Date Range" />
-                            <input id="SectionReport" type="button" value="By Class Section" /> -->
                         </label>
                     </div>
-                    <div class="result"></div>
-                    <div class="filters"></div>
-                    <div class="adminphase2 none"></div>
-                    <div class="adminphase2pages"></div>
+                    <div id= "result" class="result"></div>
+                    <div id= "filters" class="filters"></div>
+                    <div id= "adminphase2" class="adminphase2 none"></div>
+                    <div id= "adminphase2pages" class="adminphase2pages"></div>
                 </form>
 
                 
