@@ -1,42 +1,51 @@
-const URL = "http://localhost:7000";
+import {createtable,type,status,URL,ajax} from './utils/utils.js';
 
-let form2 = document.getElementById('submitform');
-let form3 = document.getElementById('logoutform');
 
-form2.addEventListener('submit', submitrequest);
-form3.addEventListener('submit', logout);
-
-var welcomeHeader = document.getElementById('welcomeMessage');
-
-var employeeInfo = JSON.parse(localStorage.getItem('employeeInfo'));
-
-welcomeHeader.innerText = `Welcome ${employeeInfo['userName']}`;
-
-async function submitrequest(event){
-    event.preventDefault();
-
-    const formData2 = new FormData(this);
-
-   await fetch(`${URL}/employee/reim/request`, {
-        method: 'post',
-        body: formData2
-    }).then(function (response){
-        return response.text();
-    }).then(function(text2){
-        console.log(text2);
-    })
-}
+document.getElementById('logout').addEventListener('click', logout);
+document.getElementById('ViewPending').addEventListener('click',viewPending);
+document.getElementById('reimRequest').addEventListener('click',reimRequest);
 
 async function logout(event){
     event.preventDefault();
+    ajax("post","/logout",null);
+}
 
-    await fetch(`${URL}/logout`, {
-        method: 'post',
+async function reimRequest(event){
+    event.preventDefault();
+    const formData = new FormData(this);
+    ajax("post","/employee/reim/request",formData);
+}
 
-    }).then(function (response){
-        return response.text();
-    }).then(function (text){
-        console.log(text);
-        window.location.replace(`${URL}/home.html`);
-    })
+async function viewPending(event){
+    event.preventDefault();
+    let data = await ajax("get","/employee/reim/list?statusid=1",null);
+
+    data.forEach((e)=>{
+        e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
+        e.type_ID=type(e.type_ID);
+        e.status_ID=status(e.status_ID);
+    });
+
+
+
+    //Table options
+    let th=['Amount','Description','Submitted','Type','Status']; //headers of the table
+    let checkbox=[];                                             //checkbox and primary value
+    
+    let info=[
+        //value     class
+        ['amount','Amount'],
+        ['description','Description'],
+        ['submitted','Submitted'],
+        ['type_ID','Type'],
+        ['status_ID','Status'],
+
+    ];
+    let submitvals={
+        length:0,
+    };
+    let display='adminphase2';
+    let max=-1;
+    let filters=4;
+    createtable('FileTable',th,checkbox,info,data,submitvals,display,max,filters);
 }

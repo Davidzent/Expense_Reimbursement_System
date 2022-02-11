@@ -1,66 +1,49 @@
-let URL = 'http://localhost:8080/manager/list/employee';
+export const URL = "http://localhost:7000";
 
-
-let form = document.getElementById('form');
-
-form.addEventListener('submit', submitform);
-
-async function submitform(event){
-    event.preventDefault();
-
-
-    //const formData = new FormData(this);
-
-    let req = await fetch(URL, {
-        method: 'get',
-        // body: formData
-    });
-    let res2 = JSON.parse(await req.text());
-    //Table options
-    let th=['Edit','Username','First Name','Last Name','Role']; //headers of the table
-    let index=res2;                             //data to be placed in the table
-    let checkbox=[                                      //checkbox and primary value
-        ['edit','users_ID','users_ID']
-    ];
-    let info=[
-        //type , class       name       value
-        ['text','userName','username','userName'],          //
-        ['text','firstname','fname','fName'],
-        ['text','lastname','lname','lName'],
-        //value     class
-        ['role_ID','role'],
-
-    ];
-    let submitvals={
-        length:1,
-        0:{
-            id: 'CreateFromtable',
-            value: "Upload to Database",
-            type: 'submit'
-        }
-    };
-    let checkboxmains = ["edit"];
-    let checkboxothers = [];
-    let pclass = ["userName","firstname",'lastname'];
-    let display='adminphase2';
-    max=-1;
-    filters=3;
-    results=document.getElementsByClassName(display);
-
-
-    createtable('FileTable',th,checkbox,info,res2,submitvals,display,max,filters);
-    //Only one checkbox is possible at a time
-    onlyonecheckbox();
-    ptoanyinput(checkboxmains,checkboxothers,pclass,"text");
-
-    document.getElementById('CreateFromtable').addEventListener('click',function (e) {
-        submitfile.call(this, e);
-    });
-    console.log(res2);
-    
+export function status(status_ID){
+    switch(status_ID){
+        case 1:return "Pending";
+        case 2:return "Accepted";
+        case 3:return "Denied";
+        default: return "Not Found";
+    }
 }
 
- 
+export function type(type_ID){
+    switch(type_ID){
+        case 1:return "Lodging";
+        case 2:return "Travel";
+        case 3:return "Food";
+        case 4:return "Other";
+        default: return "Not Found";
+    }
+}
+
+export async function ajax(method,u,data){
+    let req;
+    if(data){
+        req = await fetch((URL+u), {
+            method: method,
+            body: data
+        });
+    }else{
+        req = await fetch((URL+u), {
+            method: method
+        });
+    }
+    
+    return req.json();
+}
+
+
+
+
+
+
+
+
+
+
 
 // regex['password'] = /.*(?=.{10,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[&"'(\-_)=~#{[|`\\^@\]}^document.getElementById(*???%,;:!?./?+]).*/;
 // regex['strongPassword'] = /^(?!.*(.)\1{1})(?=(.*[\d]){2,})(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*[@#document.getElementById(%!]){2,})(?:[\da-zA-Z@#document.getElementById(%!]){15,100}document.getElementById(/;
@@ -95,7 +78,7 @@ max: Maximum number of values in table
 filters: Number of filters in tables (will be put in filters class div)
 Note: the class needs to be the same as the column headert text value for the filters without spaces
 */
-function createtable(id,th,checkbox,info,data,submitvals,display,max,filters,extraBtn){
+export function createtable(id,th,checkbox,info,data,submitvals,display,max,filters,extraBtn){
     extraBtn = false;
     let results = document.getElementsByClassName(display)[0];
     let pageresults = document.getElementsByClassName(display+"pages")[0];

@@ -1,10 +1,3 @@
-
-body#createData .filters input{
-  width: 8%;
-  min-width: 8%;
-  max-width: 15%;
-}
-
 body#createData .filters select{
   width: 10%;
   background-color: transparent;
@@ -52,6 +45,7 @@ body#createData .adminphase2 table th
 body#createData .adminphase2 table td,
 body#createData .adminphase2 table tr{
   border: 1px solid black;
+  text-align: center;
 }
 
 body#createData .adminphase2 table input[type=submit]
@@ -101,7 +95,8 @@ body#createData .adminphase2 table tbody tr td{
 body#createData .adminphase2 table tbody td,
 body#createData .adminphase2 table tbody th{
   padding: 8px 10px;
-  text-align: left;
+  text-align: center;
+  border: 1px solid black;
 }
 body#createData .adminphase2 table tbody tr:first-child{
   border-top: none;
