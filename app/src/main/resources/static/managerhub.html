@@ -2,8 +2,9 @@
 <html>
     <head>
         <title>Manager Hub</title>
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body>
+    <body id='createData'>
 
         <h1 id='welcomemessage'></h1>
 
@@ -12,7 +13,18 @@
                 <input type='submit' value='logout'/>
             </div>
         </form>
+        <form id = 'getriems'>
+            <div>
+                <input type='submit' value='get riembursments'/>
+            </div>
+        </form>
 
-        <script src='managerhub.js'></script>
+        <div id = 'reimbursments'></div>
+        <div id= "result" class="result"></div>
+        <div id= "filters" class="filters"></div>
+        <div id= "adminphase2" class="adminphase2 none"></div>
+        <div id= "adminphase2pages" class="adminphase2pages"></div>
+
+        <script src='managerhub.js' type ='module'></script>
     </body>
 </html>
