@@ -26,7 +26,12 @@ public class reimDaoImpl implements reimDao {
         AUTHOR("author"),
         RESOLVER("resolver"),
         STATUS("statusid"),
-        TYPE("typeid");
+        TYPE("typeid"),
+        FNAME("fname"),
+        LNAME("lname"),
+        EMAIL("email"),
+        UNAME("username");
+
   
         private final String text;
 
@@ -65,7 +70,7 @@ public class reimDaoImpl implements reimDao {
 
     @Override
     public List<Reimbursement> getAllReim() throws SQLException {
-        String sql = "select * from project01.reimbursement";
+        String sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid";
         
         Statement  s = con.createStatement();
         ResultSet rs = s.executeQuery(sql);
@@ -80,6 +85,10 @@ public class reimDaoImpl implements reimDao {
         int type=-1;
         int status=-1;
         String descr="";
+        String authorFname="";
+        String authorLname="";
+        String authorUname="";
+        String authoremail="";
         //String receipt="";
         while(rs.next()) {
             id=-1;
@@ -91,6 +100,10 @@ public class reimDaoImpl implements reimDao {
             type=-1;
             status=-1;
             descr="";
+            authorFname="";
+            authorLname="";
+            authorUname="";
+            authoremail="";
 
             try{
                 id = rs.getInt(RID.toString());
@@ -103,12 +116,16 @@ public class reimDaoImpl implements reimDao {
                 resolver=rs.getInt(RESOLVER.toString());
                 status=rs.getInt(STATUS.toString());
                 type=rs.getInt(TYPE.toString());
+                authorFname=rs.getString(FNAME.toString());
+                authorLname=rs.getString(LNAME.toString());
+                authorUname=rs.getString(UNAME.toString());
+                authoremail=rs.getString(EMAIL.toString());
             }catch(SQLException e){
                 logger.trace(e);
                 // throw new SQLException("No found reimbursement matching those parameters.");
             }
 
-            reims.add(new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type));
+            reims.add(new Reimbursement(id, amount,subm,resolved,descr,authorFname,authorLname,authorUname,authoremail,author,resolver,status,type));
 
         }
 
@@ -118,7 +135,7 @@ public class reimDaoImpl implements reimDao {
 
     @Override
     public Reimbursement getReimById(int id) throws SQLException {
-        String sql = "select * from project01.reimbursement WHERE reimid = ? LIMIT 1";
+        String sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid WHERE reimid = ? LIMIT 1";
         
         PreparedStatement s = con.prepareStatement(sql);
         s.setInt(1, id);
@@ -133,6 +150,10 @@ public class reimDaoImpl implements reimDao {
         int type=-1;
         int status=-1;
         String descr="";
+        String authorFname="";
+        String authorLname="";
+        String authorUname="";
+        String authoremail="";
         //String receipt="";
         rs.next();
 
@@ -147,12 +168,17 @@ public class reimDaoImpl implements reimDao {
             resolver=rs.getInt(RESOLVER.toString());
             status=rs.getInt(STATUS.toString());
             type=rs.getInt(TYPE.toString());
+            authorFname=rs.getString(FNAME.toString());
+            authorLname=rs.getString(LNAME.toString());
+            authorUname=rs.getString(UNAME.toString());
+            authoremail=rs.getString(EMAIL.toString());
         }catch(SQLException e){
             logger.trace(e);
             throw new SQLException("No found reimbursement matching those parameters.");
         }
 
-        Reimbursement reim = new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type);
+        Reimbursement reim = new Reimbursement(id, amount,subm,resolved,descr,authorFname,authorLname,authorUname,authoremail,author,resolver,status,type);
+
 
         return reim;
     }
@@ -162,17 +188,17 @@ public class reimDaoImpl implements reimDao {
         String sql;
         PreparedStatement s;
         if(author!=-1&&status==-1){
-            sql = "select * from project01.reimbursement WHERE author = ?";
+            sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid WHERE author = ?";
             s = con.prepareStatement(sql);
             s.setInt(1, author);
         }
         else if (author==-1&&status!=-1){
-            sql = "select * from project01.reimbursement WHERE statusid = ?";
+            sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid WHERE statusid = ?";
             s = con.prepareStatement(sql);
             s.setInt(1, status);
         }
         else {
-            sql = "select * from project01.reimbursement WHERE statusid = ? AND  author = ?";
+            sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid WHERE statusid = ? AND  author = ?";
             s = con.prepareStatement(sql);
             s.setInt(1, status);
             s.setInt(2, author);
@@ -189,6 +215,10 @@ public class reimDaoImpl implements reimDao {
         int resolver=-1;
         int type=-1;
         String descr="";
+        String authorFname="";
+        String authorLname="";
+        String authorUname="";
+        String authoremail="";
         //String receipt="";
         while(rs.next()) {
             id=-1;
@@ -200,6 +230,11 @@ public class reimDaoImpl implements reimDao {
             type=-1;
             status=-1;
             descr="";
+            authorFname="";
+            authorLname="";
+            authorUname="";
+            authoremail="";
+
 
             try{
                 id = rs.getInt(RID.toString());
@@ -212,13 +247,16 @@ public class reimDaoImpl implements reimDao {
                 resolver=rs.getInt(RESOLVER.toString());
                 type=rs.getInt(TYPE.toString());
                 status=rs.getInt(STATUS.toString());
+                authorFname=rs.getString(FNAME.toString());
+                authorLname=rs.getString(LNAME.toString());
+                authorUname=rs.getString(UNAME.toString());
+                authoremail=rs.getString(EMAIL.toString());
 
             }catch(SQLException e){
                 logger.trace(e);
                 // throw new SQLException("No found reimbursement matching those parameters.");
             }
-
-            reims.add(new Reimbursement(id,amount,subm,resolved,descr,author,resolver,status,type));
+            reims.add(new Reimbursement(id, amount,subm,resolved,descr,authorFname,authorLname,authorUname,authoremail,author,resolver,status,type));
 
         }
 

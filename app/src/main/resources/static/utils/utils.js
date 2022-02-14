@@ -32,7 +32,7 @@ export async function ajax(method,u,data){
         });
     }
     
-    return req.json() || '1';
+    return req.json().catch((e)=>"");
 }
 
 
@@ -371,7 +371,7 @@ function addfilter(tableid,defaultfilter,filters){
         //get all the th text into an array
         let cols = document.getElementById(tableid).rows[0].innerText.split('\t')
         //remove the edit and remove column
-        cols = cols.filter( s => s !== 'Edit' && s !== 'Remove'&& s !== 'validate' && s!=='Deny');
+        cols = cols.filter( s => s !== 'Edit' && s !== 'Remove'&& s !== 'Validate' && s!=='Deny');
         let temp=0;
         for ( let i = 0; i < cols.length; i++ ) {
             temp = cols[i];

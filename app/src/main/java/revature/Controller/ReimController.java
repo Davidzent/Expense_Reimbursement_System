@@ -98,7 +98,7 @@ public class ReimController {
         }
         else if(user[0]==Manager.type()){
             try{author = Integer.parseInt(ctx.queryParam("author"));}catch(NumberFormatException e){}
-
+            
             ctx.json(ReimService.getByStatus(status,author));
 
         }

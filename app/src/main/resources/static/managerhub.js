@@ -95,8 +95,8 @@ async function validate(event){
     let formData = new FormData;
     formData.append('reimid', this.value);
     formData.append('statusid', 2);
-    let x = await ajax("post","/manager/reim/validate",formData);
-    await getReims(event);
+    await ajax("post","/manager/reim/validate",formData);
+    getReims(event);
 }
 
 async function deny(event){
@@ -104,8 +104,8 @@ async function deny(event){
     let formData = new FormData;
     formData.append('reimid', this.value);
     formData.append('statusid', 3);
-    let y = await ajax("post","/manager/reim/validate",formData);
-    await getReims(event);
+    await ajax("post","/manager/reim/validate",formData);
+    getReims(event);
 }
 
 async function clear(){
