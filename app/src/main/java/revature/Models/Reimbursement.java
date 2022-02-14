@@ -1,9 +1,12 @@
 package revature.Models;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import revature.services.UserService;
 
 public class Reimbursement {
     private int reimid;
@@ -12,12 +15,34 @@ public class Reimbursement {
     private Timestamp resolved;
     private String description;
     //private Receipt
+    private String authorfName;
+    private String authorLName;
+    private String authorUName;
+    private String authorEmail;
     private int author;
     private int resolver;
     private int status_ID;
     private int type_ID;
 
     public Reimbursement() {
+    }
+
+    public Reimbursement(int reimid, double amount, Timestamp submitted, Timestamp resolved, String description,
+            String authorfName, String authorLName, String authorUName, String authorEmail, int author, int resolver,
+            int status_ID, int type_ID) {
+        this.reimid = reimid;
+        this.amount = amount;
+        this.submitted = submitted;
+        this.resolved = resolved;
+        this.description = description;
+        this.authorfName = authorfName;
+        this.authorLName = authorLName;
+        this.authorUName = authorUName;
+        this.authorEmail = authorEmail;
+        this.author = author;
+        this.resolver = resolver;
+        this.status_ID = status_ID;
+        this.type_ID = type_ID;
     }
 
     public Reimbursement(int reimid, double amount, Timestamp submitted, Timestamp resolved, String description, int author, int resolver, int status_ID, int type_ID) {
@@ -30,10 +55,6 @@ public class Reimbursement {
         this.resolver = resolver;
         this.status_ID = status_ID;
         this.type_ID = type_ID;
-    }
-
-    public int getreimid() {
-        return reimid;
     }
 
     public double getAmount() {
@@ -58,6 +79,46 @@ public class Reimbursement {
 
     public int getResolver() {
         return resolver;
+    }
+
+    public int getReimid() {
+        return reimid;
+    }
+
+    public void setReimid(int reimid) {
+        this.reimid = reimid;
+    }
+
+    public String getAuthorfName() {
+        return authorfName;
+    }
+
+    public void setAuthorfName(String authorfName) {
+        this.authorfName = authorfName;
+    }
+
+    public String getAuthorLName() {
+        return authorLName;
+    }
+
+    public void setAuthorLName(String authorLName) {
+        this.authorLName = authorLName;
+    }
+
+    public String getAuthorUName() {
+        return authorUName;
+    }
+
+    public void setAuthorUName(String authorUName) {
+        this.authorUName = authorUName;
+    }
+
+    public String getAuthorEmail() {
+        return authorEmail;
+    }
+
+    public void setAuthorEmail(String authorEmail) {
+        this.authorEmail = authorEmail;
     }
 
     public int getStatus_ID() {
