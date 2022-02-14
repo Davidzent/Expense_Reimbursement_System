@@ -1,20 +1,24 @@
 import {createtable,type,status,URL,ajax} from './utils/utils.js';
 
+
+
 const results=document.getElementById('result');
 const filters=document.getElementById('filters');
 const adminphase2=document.getElementById('adminphase2');
 const adminphase2pages=document.getElementById('adminphase2pages');
+
 document.getElementById("welcomeMessage").innerHTML=`Welcome ${JSON.parse(localStorage.getItem('employeeInfo')).fName}`
 
 
-document.getElementById('UserAction').addEventListener('click',submitHandler);
+document.getElementById('UserAction').addEventListener('submit',submitHandler);
+
 document.getElementById('reimRequest').addEventListener('click',reimRequest);
 document.getElementById('logout').addEventListener('click', logout);
 document.getElementById('ViewPending').addEventListener('click',viewPending);
 
 
 async function submitHandler(e){
-    if(e.target.value=="request"){
+    if(e.submitter.defaultValue=="request"){
         reimRequest(e,this);
     }
 }
@@ -26,7 +30,7 @@ async function reimRequest(event,form){
     if(event.target.type=='button'){
         clear();
         results.innerHTML=`<label for='amount'>Amount</label>
-        <input id = 'amount' name = 'amount' type = 'number' required/>
+        <input id = 'amount' name = 'amount' type = 'number' step="any" required/>
         <label for='description'>description</label>
         <input id = 'description' name = 'description' type = 'text' required/>
         <label for ='typeid'>type</label>
@@ -36,7 +40,6 @@ async function reimRequest(event,form){
     else{
         const formData = new FormData(form);
         ajax("post","/employee/reim/request",formData);
-
     }
     
 }
@@ -44,6 +47,8 @@ async function reimRequest(event,form){
 async function logout(event){
     event.preventDefault();
     ajax("post","/logout",null);
+    localStorage.clear();
+    window.location.replace(`${URL}/home.html`);
 }
 
 async function viewPending(event){
@@ -76,7 +81,7 @@ async function viewPending(event){
     };
     let display='adminphase2';
     let max=-1;
-    let filters=4;
+    let filters=-1;
     createtable('FileTable',th,checkbox,info,data,submitvals,display,max,filters);
 }
 
