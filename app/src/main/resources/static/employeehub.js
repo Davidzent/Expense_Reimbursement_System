@@ -1,20 +1,26 @@
 import {createtable,type,status,URL,ajax} from './utils/utils.js';
 
+
+
 const results=document.getElementById('result');
 const filters=document.getElementById('filters');
 const adminphase2=document.getElementById('adminphase2');
 const adminphase2pages=document.getElementById('adminphase2pages');
+
 document.getElementById("welcomeMessage").innerHTML=`Welcome ${JSON.parse(localStorage.getItem('employeeInfo')).fName}`
 
 
-document.getElementById('UserAction').addEventListener('click',submitHandler);
+document.getElementById('UserAction').addEventListener('submit',submitHandler);
+
 document.getElementById('reimRequest').addEventListener('click',reimRequest);
 document.getElementById('logout').addEventListener('click', logout);
 document.getElementById('ViewPending').addEventListener('click',viewPending);
+document.getElementById('ViewApprove').addEventListener('click',viewApprove);
+document.getElementById('ViewDeny').addEventListener('click',viewDeny);
 
 
 async function submitHandler(e){
-    if(e.target.value=="request"){
+    if(e.submitter.defaultValue=="request"){
         reimRequest(e,this);
     }
 }
@@ -26,7 +32,7 @@ async function reimRequest(event,form){
     if(event.target.type=='button'){
         clear();
         results.innerHTML=`<label for='amount'>Amount</label>
-        <input id = 'amount' name = 'amount' type = 'number' required/>
+        <input id = 'amount' name = 'amount' type = 'number' step="any" required/>
         <label for='description'>description</label>
         <input id = 'description' name = 'description' type = 'text' required/>
         <label for ='typeid'>type</label>
@@ -36,7 +42,6 @@ async function reimRequest(event,form){
     else{
         const formData = new FormData(form);
         ajax("post","/employee/reim/request",formData);
-
     }
     
 }
@@ -44,6 +49,8 @@ async function reimRequest(event,form){
 async function logout(event){
     event.preventDefault();
     ajax("post","/logout",null);
+    localStorage.clear();
+    window.location.replace(`${URL}/home.html`);
 }
 
 async function viewPending(event){
@@ -56,7 +63,34 @@ async function viewPending(event){
         e.status_ID=status(e.status_ID);
     });
 
+    basicFormat(data);
+}
+async function viewApprove(event){
+    event.preventDefault();
+    let data = await ajax("get","/employee/reim/list?statusid=2",null);
 
+    data.forEach((e)=>{
+        e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
+        e.type_ID=type(e.type_ID);
+        e.status_ID=status(e.status_ID);
+    });
+
+    basicFormat(data);
+}
+async function viewDeny(event){
+    event.preventDefault();
+    let data = await ajax("get","/employee/reim/list?statusid=3",null);
+
+    data.forEach((e)=>{
+        e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
+        e.type_ID=type(e.type_ID);
+        e.status_ID=status(e.status_ID);
+    });
+
+    basicFormat(data);
+}
+
+function basicFormat(data){
     clear();
     //Table options
     let th=['Amount','Description','Submitted','Type','Status']; //headers of the table
@@ -76,7 +110,7 @@ async function viewPending(event){
     };
     let display='adminphase2';
     let max=-1;
-    let filters=4;
+    let filters=-1;
     createtable('FileTable',th,checkbox,info,data,submitvals,display,max,filters);
 }
 

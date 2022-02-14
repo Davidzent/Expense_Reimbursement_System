@@ -7,12 +7,15 @@
     <body id="createData">
         <div class="aligncenter">
             <h1 id= 'welcomeMessage'></h1>
+            <input id="logout" type='button' value='logout'/>
             <div id="adminFormArea">
                 <form id="UserAction" method="post" action="reports/report">
                     <div class="errors"></div>
                     <div class="adminphase1">
                         <label>
                             <input id="ViewPending" type="button" value="View Pending" />
+                            <input id="ViewApprove" type="button" value="View Approved" />
+                            <input id="ViewDeny" type="button" value="View Denied" />
                             <input id="reimRequest" type="button" value="Request Reimbursement" />
                         </label>
                     </div>
@@ -21,15 +24,9 @@
                     <div id= "adminphase2" class="adminphase2 none"></div>
                     <div id= "adminphase2pages" class="adminphase2pages"></div>
                 </form>
-
-                
-
             </div>
-            
         </div>
-        <div>
-            <input id="logout" type='button' value='logout'/>
-        </div>
+        
         <script src ='employeehub.js' type = 'module'></script>
     </body>
 </html>
