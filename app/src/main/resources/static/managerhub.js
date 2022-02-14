@@ -1,6 +1,7 @@
 import {createtable,type,status,URL,ajax} from './utils/utils.js';
 
 const URL2 = 'http://localhost:7000';
+var locationURL;
 var welcomeMessage = document.getElementById('welcomemessage');
 var manInfo = JSON.parse(localStorage.getItem('managerinfo'));
 var reimbursments = document.getElementById('reimbursments');
@@ -11,10 +12,13 @@ const adminphase2=document.getElementById('adminphase2');
 const adminphase2pages=document.getElementById('adminphase2pages');
 
 let riemform = document.getElementById('getriems');
+let resolvedform = document.getElementById('getresolved');
 let form3 = document.getElementById('logoutform');
 
 riemform.addEventListener('submit', getReims);
 form3.addEventListener('submit', logout);
+resolvedform.addEventListener('submit', getReims);
+
 
 
 
@@ -51,7 +55,16 @@ async function getReims(event){
 
 async function getReims(event){
     event.preventDefault();
-    let data = await ajax("get","/manager/reim/list?statusid=1",null);
+    if(event.target.id === 'getriems'){
+        locationURL = "/manager/reim/list?statusid=1";
+    }
+    else if(event.target.id === 'getresolved'){
+        locationURL = '/manager/reim/list?statusid=2';
+    }
+    
+    let data = await ajax("get",`${locationURL}`,null);
+
+    console.log(data);
 
     data.forEach((e)=>{
         e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
@@ -59,10 +72,12 @@ async function getReims(event){
         e.status_ID=status(e.status_ID);
     });
 
+    
+
 
     clear();
     //Table options
-    let th=['Validate','Deny','Amount','Description','Submitted','Type','Status']; //headers of the table
+    let th=['Validate','Deny','Amount', 'first','last','Description','Submitted','Type','Status']; //headers of the table
     let checkbox=[
         ['Validate','reimid','reimid'],  
 
@@ -73,6 +88,8 @@ async function getReims(event){
     let info=[
         //value     class
         ['amount','Amount'],
+        ['authorfName','first'],
+        ['authorLName','last'],
         ['description','Description'],
         ['submitted','Submitted'],
         ['type_ID','Type'],
@@ -89,6 +106,10 @@ async function getReims(event){
     Array.from(document.getElementsByClassName('Validate')).forEach((e)=>e.addEventListener('change',validate));
     Array.from(document.getElementsByClassName('Deny')).forEach((e)=>e.addEventListener('change',deny));
 }
+
+
+
+
 
 async function validate(event){
     event.preventDefault();
