@@ -32,7 +32,7 @@ export async function ajax(method,u,data){
         });
     }
     
-    return req.json();
+    return req.json() || '1';
 }
 
 
@@ -89,7 +89,7 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
     let asc=[];
     let cnt=0;
     for(let i=0;i<th.length;i++){
-        if(th[i]=='Edit'||th[i]=='Remove'||th[i]=='Verify'||th[i]=='Logout'){
+        if(th[i]=='Edit'||th[i]=='Remove'||th[i]=='Validate'||th[i]=='Deny'){
             html +='<th>'+th[i]+'<i class="fas fa-sort sort smallest" value="checkbox '+i+'"></th>';
             cnt++;
         }
@@ -266,13 +266,17 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
             currentpage--;
         } else {
             //this fixes a bug that the pages have when you input a value in the filters and not in the first page
-            updatepages = true;
-            page = document.getElementsByClassName('newpage');
+            if(max !== -1){
+                updatepages = true;
+            let page = document.getElementsByClassName('newpage');
             for ( let i = 1; i < page.length - 1; i++ ) {
                 page[i].value = i;
             }
             page[0].style.display = '';
             currentpage = 0;
+            }
+            
+            
         }
 
         //the table
@@ -309,7 +313,7 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
                 for(let k=0;k<filters;k++){
                     td = tr[i].getElementsByTagName("td")[index[k]];
                     if(td){
-                        txtValue = td.textContent || td.innerText;
+                        let txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(keywords[k]) == -1) check=false;
                     }else{
                         check=false;
@@ -337,8 +341,8 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
                 }
             }
             if((updatepages||e.type!='click')&&max!=-1){
-                page = document.getElementsByClassName('newpage');
-                newpages=(x/max)+1;
+                let page = document.getElementsByClassName('newpage');
+                let newpages=(x/max)+1;
                 for(let i=0;i<page.length;i++){
                     if(i<=newpages&&i<=11){
                         page[i].style.display = "";
@@ -367,7 +371,7 @@ function addfilter(tableid,defaultfilter,filters){
         //get all the th text into an array
         let cols = document.getElementById(tableid).rows[0].innerText.split('\t')
         //remove the edit and remove column
-        cols = cols.filter( s => s !== 'Edit' && s !== 'Remove'&& s !== 'Logout' && s!=='Verify');
+        cols = cols.filter( s => s !== 'Edit' && s !== 'Remove'&& s !== 'validate' && s!=='Deny');
         let temp=0;
         for ( let i = 0; i < cols.length; i++ ) {
             temp = cols[i];

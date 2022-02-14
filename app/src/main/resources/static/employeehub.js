@@ -42,6 +42,8 @@ async function reimRequest(event,form){
     else{
         const formData = new FormData(form);
         ajax("post","/employee/reim/request",formData);
+        
+
     }
     
 }
@@ -51,6 +53,8 @@ async function logout(event){
     ajax("post","/logout",null);
     localStorage.clear();
     window.location.replace(`${URL}/home.html`);
+
+
 }
 
 async function viewPending(event){
@@ -109,8 +113,8 @@ function basicFormat(data){
         length:0,
     };
     let display='adminphase2';
-    let max=-1;
-    let filters=-1;
+    let max= -1;
+    let filters=4;
     createtable('FileTable',th,checkbox,info,data,submitvals,display,max,filters);
 }
 
