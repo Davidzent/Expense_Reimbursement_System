@@ -1,7 +1,30 @@
 const emmpinfo = JSON.parse(localStorage.getItem('employeeInfo'));
 console.log(emmpinfo);
 var tbl = document.getElementById('accountinfo');
+var accounteditor = document.getElementById('editaccount');
+var accountform = document.getElementById('newinfo');
 
+
+
+
+
+accounteditor.addEventListener('click', editAccount);
+
+async function editAccount(event,form){
+    
+    event.preventDefault();
+    if(event.target.type=='button'){
+        accountform.innerHTML=`<label for='changeusername'>changeusername</label>`
+        
+    }
+    else{
+        const formData = new FormData(form);
+        ajax("post","/employee/reim/request",formData);
+        
+
+    }
+    
+}
 
 
 var acctNCell = document.createElement('tr')
