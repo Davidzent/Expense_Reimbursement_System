@@ -6,6 +6,7 @@ const results=document.getElementById('result');
 const filters=document.getElementById('filters');
 const adminphase2=document.getElementById('adminphase2');
 const adminphase2pages=document.getElementById('adminphase2pages');
+const accountportal=document.getElementById('getaccount');
 
 document.getElementById("welcomeMessage").innerHTML=`Welcome ${JSON.parse(localStorage.getItem('employeeInfo')).fName}`
 
@@ -17,6 +18,7 @@ document.getElementById('logout').addEventListener('click', logout);
 document.getElementById('ViewPending').addEventListener('click',viewPending);
 document.getElementById('ViewApprove').addEventListener('click',viewApprove);
 document.getElementById('ViewDeny').addEventListener('click',viewDeny);
+accountportal.addEventListener('click', redirctAccount);
 
 
 async function submitHandler(e){
@@ -60,6 +62,10 @@ async function logout(event){
     window.location.replace(`${URL}/home.html`);
 
 
+}
+async function redirctAccount(event){
+    event.preventDefault();
+    window.location.href = `${URL}/employeeAcct.html`;
 }
 
 async function viewPending(event){
