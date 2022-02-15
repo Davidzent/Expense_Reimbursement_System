@@ -22,10 +22,11 @@ public class UserController {
         if(user[0]==Manager.type()){
             try{
                 ctx.json(UserService.getAllByRole(Employee.type()));
+                ctx.status(202);
             }catch(SQLException e){
                 log(e,ctx);
                 ctx.result("Incorrect credentials");
-            } 
+            }
         }else{
             ctx.result("Please log in as admin");
             ctx.status(403);
@@ -97,8 +98,8 @@ public class UserController {
                 ctx.req.getSession().setAttribute("id",u.getUsers_ID());
                 ctx.req.getSession().setAttribute("loggedIn", t);
                 
-                ctx.header("id",""+u.getUsers_ID());
-                ctx.header("loggedIn",t);
+                // ctx.header("id",""+u.getUsers_ID());
+                // ctx.header("loggedIn",t);
 
             }catch(SQLException e){
                 log(e,ctx);
