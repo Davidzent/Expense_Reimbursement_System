@@ -60,6 +60,7 @@ async function getReims(event){
 
 async function getReims(event){
     event.preventDefault();
+    let locationURL="";
     if(event.target.id === 'getriems'){
         locationURL = "/manager/reim/list?statusid=1";
     }
@@ -141,4 +142,4 @@ async function clear(){
     adminphase2pages.innerHTML="";
 }
 
-welcomeMessage.innerText= `welcome ${manInfo['userName']}`;
+welcomeMessage.innerText= `welcome ${manInfo['fName']} ${manInfo['lName']}`;
