@@ -1,4 +1,4 @@
-import {createtable,type,status,URL,REDIRURL,ajax} from './utils/utils.js';
+import {createtable,type,status,URL,REDIRURL,ajax,formatMoney} from './utils/utils.js';
 
 
 
@@ -71,41 +71,26 @@ async function redirctAccount(event){
 async function viewPending(event){
     event.preventDefault();
     let data = await ajax("get","/employee/reim/list?statusid=1",null);
-
-    data.forEach((e)=>{
-        e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
-        e.type_ID=type(e.type_ID);
-        e.status_ID=status(e.status_ID);
-    });
-
     basicFormat(data);
 }
 async function viewApprove(event){
     event.preventDefault();
     let data = await ajax("get","/employee/reim/list?statusid=2",null);
-
-    data.forEach((e)=>{
-        e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
-        e.type_ID=type(e.type_ID);
-        e.status_ID=status(e.status_ID);
-    });
-
     basicFormat(data);
 }
 async function viewDeny(event){
     event.preventDefault();
     let data = await ajax("get","/employee/reim/list?statusid=3",null);
-
-    data.forEach((e)=>{
-        e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
-        e.type_ID=type(e.type_ID);
-        e.status_ID=status(e.status_ID);
-    });
-
     basicFormat(data);
 }
 
-function basicFormat(data){
+async function basicFormat(data){
+    for (const e of data) {
+        e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
+        e.type_ID=type(e.type_ID);
+        e.status_ID=status(e.status_ID);
+        e.amount=await formatMoney(e.amount);
+    }
     clear();
     //Table options
     let th=['Amount','Description','Submitted','Type','Status']; //headers of the table

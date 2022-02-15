@@ -1,4 +1,4 @@
-import {createtable,type,status,URL,REDIRURL,ajax} from './utils/utils.js';
+import {createtable,type,status,URL,REDIRURL,ajax,formatMoney} from './utils/utils.js';
 
 var welcomeMessage = document.getElementById('welcomemessage');
 var manInfo = JSON.parse(localStorage.getItem('managerinfo'));
@@ -55,7 +55,6 @@ async function logout(event){
     }).then(function (response){
         return response.text();
     }).then(function (text){
-        console.log(text);
         localStorage.clear();
         window.location.replace(`${REDIRURL}/home.html`);
     })
@@ -94,13 +93,12 @@ async function getReims(event){
     
     let data = await ajax("get",`${locationURL}`,null);
 
-    console.log(data);
-
-    data.forEach((e)=>{
+    for (const e of data) {
         e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
         e.type_ID=type(e.type_ID);
         e.status_ID=status(e.status_ID);
-    });
+        e.amount=await formatMoney(e.amount);
+    }
 
 
     clear();
