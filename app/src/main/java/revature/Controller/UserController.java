@@ -72,6 +72,25 @@ public class UserController {
         }
         
     };
+
+    public Handler update = (ctx) ->{
+        String option= ctx.attribute("jetty-target");
+        int[] user=isLoggedIn(ctx);
+        if(user!=null){
+            Users u = Users.fillUsers(ctx.formParamMap()).get(0);
+            u.setRole_ID(user[0]);
+            u.setUsers_ID(user[1]);
+            
+            try{
+                UserService.update(u);
+            }catch(SQLException e){
+                log(e,ctx);
+                ctx.result("Error updating the new user");
+            }
+        }
+    };
+
+
     
     public Handler login = (ctx) ->{
         String option= ctx.attribute("jetty-target");
