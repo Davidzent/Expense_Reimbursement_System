@@ -32,16 +32,6 @@ public class AppTest {
     private static userDaoImpl ud=new userDaoImpl();
     private static reimDaoImpl rd= new reimDaoImpl();
 
-    @Before
-    public void TestConnection(){
-        try {
-            con.getMetaData();
-            System.out.println(con.getMetaData());
-        } catch (SQLException e) {
-            
-        }
-    }
-
     @Test
     public void TestGetAllByRole() throws SQLException {
         List<Users> u=UserService.getAllByRole(1);
@@ -160,6 +150,25 @@ public class AppTest {
         assertEquals(u.size(), u2.size());
         assertEquals(true,checkAllReim(u, u2));
 
+    }
+
+    @Test
+    public void TestCreateReim() throws SQLException{
+        Reimbursement u=new Reimbursement(-1, 456.99, new Timestamp(0), new Timestamp(0), "From Test Create Reim", "authorfName", "authorfName", "authorfName", "authorfName", 2, -1, -1, 3);
+
+        boolean test=ReimService.create(u);
+ 
+        assertEquals(true, test);
+    }
+
+    @Test
+    public void TestValidateReim() throws SQLException{
+        List<String> ids = Arrays.asList("92","91");
+        List<String> status = Arrays.asList("2","3");
+
+        String test=ReimService.validate(ids,status,2);
+ 
+        assertEquals("", test);
     }
 
     public boolean checkAllReim(List<Reimbursement> u,List<Reimbursement>u2){

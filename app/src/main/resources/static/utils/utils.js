@@ -1,4 +1,5 @@
 export const URL = "http://localhost:7000";
+//http://35.193.86.50:7000/
 
 export function status(status_ID){
     switch(status_ID){

@@ -59,16 +59,6 @@ public class ReimController {
         
     };
 
-    public Handler update = (ctx) ->{
-        List<Reimbursement> r = Reimbursement.fillReimbursments(ctx.formParamMap());
-        try{
-            ReimService.update(r);
-        }catch(SQLException e){
-            log(e,ctx);
-            ctx.result("Error updating reimbursments");
-        }
-    };
-
     public Handler validate = (ctx) ->{
         int[] user = isLoggedIn(ctx);
         if(user==null){}

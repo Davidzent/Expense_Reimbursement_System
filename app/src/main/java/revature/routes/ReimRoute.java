@@ -22,7 +22,6 @@ public class ReimRoute extends Route{
 
         //manage
         app.get("/manager/reim/list", rc.list);
-        app.post("/manager/reim/update", rc.update);
         app.post("/manager/reim/validate", rc.validate);
         
         

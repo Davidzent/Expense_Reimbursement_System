@@ -1,6 +1,5 @@
 import {createtable,type,status,URL,ajax} from './utils/utils.js';
 
-const URL2 = 'http://localhost:7000';
 var welcomeMessage = document.getElementById('welcomemessage');
 var manInfo = JSON.parse(localStorage.getItem('managerinfo'));
 var reimbursments = document.getElementById('reimbursments');
@@ -21,7 +20,7 @@ form3.addEventListener('submit', logout);
 async function logout(event){
     event.preventDefault();
 
-    await fetch(`${URL2}/logout`, {
+    await fetch(`${URL}/logout`, {
         method: 'post',
 
     }).then(function (response){
@@ -29,7 +28,7 @@ async function logout(event){
     }).then(function (text){
         console.log(text);
         localStorage.clear();
-        window.location.replace(`${URL2}/home.html`);
+        window.location.replace(`${URL}/home.html`);
     })
    
 }
