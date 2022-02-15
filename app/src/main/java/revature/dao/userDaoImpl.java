@@ -43,7 +43,15 @@ public class  userDaoImpl implements userDao{
     public boolean createUser(Users user) throws SQLException {
         String sql = "insert into project01.users (username, password, fname, lname, email,roleid) values (?, ?, ?, ?, ?,?)";
 
-        PreparedStatement ps = con.prepareStatement(sql);
+        PreparedStatement ps;
+
+        try{
+            ps = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return false;
+        }
+
         ps.setString(1, user.getUserName());
         ps.setString(2, encrypt(user.getPassword()));
         ps.setString(3, user.getfName());
@@ -64,7 +72,16 @@ public class  userDaoImpl implements userDao{
         String sql = "select * from project01.users";
         List<Users> Users = new ArrayList<>();
         
-        Statement  s = con.createStatement();
+        Statement  s;
+
+        try{
+            s = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return Users;
+        }
+
+
         ResultSet rs = s.executeQuery(sql);
 
 
@@ -107,7 +124,15 @@ public class  userDaoImpl implements userDao{
         String sql = "select * from project01.users WHERE roleid=?";
         List<Users> Users = new ArrayList<>();
         
-        PreparedStatement  s = con.prepareStatement(sql);
+        PreparedStatement  s;
+
+        try{
+            s = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return Users;
+        }
+
         s.setInt(1, roleid);
         ResultSet rs = s.executeQuery();
        
@@ -151,6 +176,16 @@ public class  userDaoImpl implements userDao{
         String sql = "select * from project01.users WHERE userid = ? LIMIT 1";
         
         PreparedStatement s = con.prepareStatement(sql);
+
+        try{
+            s = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return new Users();
+        }
+
+
+
         s.setInt(1, id);
         
         ResultSet rs = s.executeQuery();
@@ -184,6 +219,14 @@ public class  userDaoImpl implements userDao{
         String sql = "select * from project01.users WHERE username = ? AND password = ? AND roleid = ? LIMIT 1";
         
         PreparedStatement s = con.prepareStatement(sql);
+
+        try{
+            s = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return new Users();
+        }
+
         s.setString(1, username);
         s.setString(2, encrypt(password));
         s.setInt(3, type);
@@ -219,6 +262,12 @@ public class  userDaoImpl implements userDao{
         // automatically closed at the end of the try block
         PreparedStatement ps = con.prepareStatement(sql);
 
+        try{
+            ps = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return false;
+        }
 
         ps.setString(1, user.getUserName());
         ps.setString(2, encrypt(user.getPassword()));

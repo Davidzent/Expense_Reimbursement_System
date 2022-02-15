@@ -16,6 +16,7 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import revature.Models.Reimbursement;
@@ -25,9 +26,21 @@ import revature.dao.userDaoImpl;
 import revature.services.ReimService;
 import revature.services.UserService;
 
+import static revature.util.ConnectionUtil.con;
+
 public class AppTest {
     private static userDaoImpl ud=new userDaoImpl();
     private static reimDaoImpl rd= new reimDaoImpl();
+
+    @Before
+    public void TestConnection(){
+        try {
+            con.getMetaData();
+            System.out.println(con.getMetaData());
+        } catch (SQLException e) {
+            
+        }
+    }
 
     @Test
     public void TestGetAllByRole() throws SQLException {
