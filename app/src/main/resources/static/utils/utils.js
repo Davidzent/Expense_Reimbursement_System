@@ -172,28 +172,26 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
     addfilter(id,"",filters);
     document.addEventListener('keyup',(e) => updatetable.call(this, e));
     document.addEventListener('change',(e) => updatetable.call(this, e));
+    Array.from(document.getElementsByTagName('th')).forEach((t)=>{
+        t.addEventListener('click',(e)=> sort.call(this, e));
+    });
     //document.addEventListener('click',(e) => sort.call(this, e));
-    //".filtertag").on('change',(e) => updatetable.call(this, e));
+    //$(".filtertag").on('change',(e) => updatetable.call(this, e));
     // $(".sort").on('click',(e) => sort.call(this, e));
 
     //sort
     function sort(e){
-        if(!e.target.className.includes("sort"))return;
         let table,
             index,          //the position to be sort on
-            type,           //the type to be sort on (date,checkbox,text/number)
             arrow,
-            th,
             tr;
-        index = $( e.currentTarget ).attr( 'value' ).split(' ');
-        // index = e.currentTarget.defaultValue.split(' ');
-        type=index[0];
-        index=parseInt(index[1]);
+
+        index = th.indexOf(e.target.innerText);
         table = document.getElementById(id);
 
         //the type of sort decending(smallest) or ascending (biggest)
-        th=table.rows[0].getElementsByTagName("TH")[index];
-        arrow=th.childNodes[1];
+        let ths=table.rows[0].getElementsByTagName("TH")[index];
+        arrow=ths.childNodes[1];
         tr = table.rows;
 
         //This shit took me almost an hour
@@ -201,11 +199,11 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
         const getCellValue = (tr, index) => tr.children[index].innerText || tr.children[index].textContent || tr.children[index].childNodes[0].checked;
 
         //simple swap arrow function
-        let jArrow = $( arrow );
+        // let jArrow = $( arrow );
         //change all current up and downs to neutrual
-        $( '.sort.fa-sort-up' ).removeClass( 'fa-sort-up' ).addClass( 'fa-sort');
-        $( '.sort.fa-sort-down' ).removeClass( 'fa-sort-down' ).addClass( 'fa-sort');
-        const swaparrow = (asc) => asc ? $( arrow ).attr( 'class', 'fas fa-sort-up sort biggest boldup') : $( arrow ).attr( 'class', 'fas fa-sort-down sort smallest bolddown');
+        // $( '.sort.fa-sort-up' ).removeClass( 'fa-sort-up' ).addClass( 'fa-sort');
+        // $( '.sort.fa-sort-down' ).removeClass( 'fa-sort-down' ).addClass( 'fa-sort');
+        const swaparrow = (asc) => asc ? arrow.className = 'fas fa-sort-up sort biggest boldup':arrow.className='fas fa-sort-down sort smallest bolddown';
 
         // unbold one if it is not the same index as the one clicked
         const bold = (arrow , indx) => index!=indx?arrow.className = arrow.className.replace(/smallest bolddown|biggest boldup/gi,"smallest"):asc;
@@ -252,7 +250,7 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
 
     //general updatetable
     function updatetable(e){
-        if(!e.target.className.includes("filter")&&!e.target.className.includes("filtertag")){return}
+        if(e&&!e.target.className.includes("filter")&&!e.target.className.includes("filtertag")){return}
         let updatepages=false;
         if ( e.type == 'click' ) {
             currentpage = ( e.currentTarget.defaultValue );
