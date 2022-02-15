@@ -15,8 +15,8 @@ public class ControllerUtil {
         Object temp=ctx.req.getSession().getAttribute("loggedIn");
         if(temp!=null){
             String type=(String) ctx.req.getSession().getAttribute("loggedIn");
-            if(type=="EMPLOYEE")return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
-            if(type=="MANAGER")return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
+            if(type.equals("EMPLOYEE"))return new int[]{Employee.type(),(int) ctx.req.getSession().getAttribute("id")};
+            if(type.equals("MANAGER"))return new int[]{Manager.type(),(int) ctx.req.getSession().getAttribute("id")};
         }
 
         ctx.status(403);

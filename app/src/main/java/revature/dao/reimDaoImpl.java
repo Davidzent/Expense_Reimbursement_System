@@ -49,8 +49,14 @@ public class reimDaoImpl implements reimDao {
     @Override
     public boolean createReim(Reimbursement reim) throws SQLException {
         String sql = "insert into project01.reimbursement (amount, submitted, description, author, statusid, typeid) values (?,?,?,?,?,?)";
+        PreparedStatement ps;
+        try{
+            ps = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return false;
+        }
         
-        PreparedStatement ps = con.prepareStatement(sql);
         ps.setDouble(1, reim.getAmount());
         ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
         ps.setString(3, reim.getDescription());
@@ -71,11 +77,17 @@ public class reimDaoImpl implements reimDao {
     @Override
     public List<Reimbursement> getAllReim() throws SQLException {
         String sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid";
-        
-        Statement  s = con.createStatement();
+        List<Reimbursement> reims = new ArrayList<>();
+        Statement  s;
+        try{
+            s= con.createStatement();
+        }catch(SQLException e){
+            logger.warn(e);
+            return reims;
+        }
         ResultSet rs = s.executeQuery(sql);
         
-        List<Reimbursement> reims = new ArrayList<>();
+        
         int id=-1;
         double amount=-1;
         Timestamp subm=new Timestamp(0);
@@ -137,7 +149,15 @@ public class reimDaoImpl implements reimDao {
     public Reimbursement getReimById(int id) throws SQLException {
         String sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid WHERE reimid = ? LIMIT 1";
         
-        PreparedStatement s = con.prepareStatement(sql);
+        PreparedStatement s;
+
+        try{
+            s = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return new Reimbursement();
+        }
+
         s.setInt(1, id);
         
         ResultSet rs = s.executeQuery();
@@ -187,26 +207,43 @@ public class reimDaoImpl implements reimDao {
     public List<Reimbursement> getReimByStatus(int status,int author) throws SQLException {
         String sql;
         PreparedStatement s;
+        List<Reimbursement> reims = new ArrayList<>();
+
         if(author!=-1&&status==-1){
             sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid WHERE author = ?";
-            s = con.prepareStatement(sql);
+            try{
+                s = con.prepareStatement(sql);
+            }catch(SQLException e){
+                logger.warn(e);
+                return reims;
+            }
             s.setInt(1, author);
         }
         else if (author==-1&&status!=-1){
             sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid WHERE statusid = ?";
-            s = con.prepareStatement(sql);
+            try{
+                s = con.prepareStatement(sql);
+            }catch(SQLException e){
+                logger.warn(e);
+                return reims;
+            }
             s.setInt(1, status);
         }
         else {
             sql = "select * from project01.reimbursement as s inner join project01.users as u on s.author=u.userid WHERE statusid = ? AND  author = ?";
-            s = con.prepareStatement(sql);
+            try{
+                s = con.prepareStatement(sql);
+            }catch(SQLException e){
+                logger.warn(e);
+                return reims;
+            }
             s.setInt(1, status);
             s.setInt(2, author);
         }
         
         ResultSet rs = s.executeQuery();
 
-        List<Reimbursement> reims = new ArrayList<>();
+        
 
         int id=-1;
         double amount=-1;
@@ -268,7 +305,14 @@ public class reimDaoImpl implements reimDao {
     public boolean updateReim(Reimbursement reim) throws SQLException {
         String sql = "UPDATE project01.reimbursement SET amount=?,submitted=?,resolved = ?,description=?,author = ?,resolver=?,statusid=?,typeid=? WHERE reimid = ?";
 
-        PreparedStatement ps = con.prepareStatement(sql);
+        PreparedStatement ps;
+
+        try{
+            ps = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return false;
+        }
 
 
         ps.setDouble(1, reim.getAmount());
@@ -294,7 +338,14 @@ public class reimDaoImpl implements reimDao {
         String sql = "UPDATE project01.reimbursement SET statusid = ? ,resolved = ? , resolver = ? WHERE reimid = ?";
 
 
-        PreparedStatement ps = con.prepareStatement(sql);
+        PreparedStatement ps;
+
+        try{
+            ps = con.prepareStatement(sql);
+        }catch(SQLException e){
+            logger.warn(e);
+            return false;
+        }
 
         ps.setInt(1,status);
         ps.setTimestamp(2,new Timestamp(System.currentTimeMillis()));
