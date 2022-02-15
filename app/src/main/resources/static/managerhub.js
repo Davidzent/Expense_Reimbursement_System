@@ -5,6 +5,7 @@ var locationURL;
 var welcomeMessage = document.getElementById('welcomemessage');
 var manInfo = JSON.parse(localStorage.getItem('managerinfo'));
 var reimbursments = document.getElementById('reimbursments');
+const accountportal=document.getElementById('getaccount');
 
 const results=document.getElementById('result');
 const filters=document.getElementById('filters');
@@ -18,6 +19,7 @@ let form3 = document.getElementById('logoutform');
 riemform.addEventListener('submit', getReims);
 form3.addEventListener('submit', logout);
 resolvedform.addEventListener('submit', getReims);
+accountportal.addEventListener('click', redirctAccount);
 
 
 
@@ -36,6 +38,11 @@ async function logout(event){
         window.location.replace(`${URL2}/home.html`);
     })
    
+}
+
+async function redirctAccount(event){
+    event.preventDefault();
+    window.location.href = `${URL}/managerAcct.html`;
 }
 
 /*
