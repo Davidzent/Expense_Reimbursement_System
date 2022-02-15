@@ -1,4 +1,4 @@
-import {createtable,type,status,URL,ajax} from './utils/utils.js';
+import {createtable,type,status,URL,REDIRURL,ajax} from './utils/utils.js';
 
 
 
@@ -59,13 +59,13 @@ async function logout(event){
     event.preventDefault();
     ajax("post","/logout",null);
     localStorage.clear();
-    window.location.replace(`${URL}/home.html`);
+    window.location.replace(`${REDIRURL}/home.html`);
 
 
 }
 async function redirctAccount(event){
     event.preventDefault();
-    window.location.href = `${URL}/employeeAcct.html`;
+    window.location.href = `${REDIRURL}/employeeAcct.html`;
 }
 
 async function viewPending(event){

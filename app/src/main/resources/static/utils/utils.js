@@ -1,5 +1,8 @@
-// export const URL = "http://localhost:7000";
-export const URL = "http://35.193.86.50:7000";
+// export const URL = "http://localhost:7000";          //user site
+// export const REDIRURL = URL;
+
+export const URL = "http://35.193.86.50:7000";                              //online
+export const REDIRURL = "https://storage.cloud.google.com/project01-html"   //online
 
 export function status(status_ID){
     switch(status_ID){

@@ -1,4 +1,4 @@
-import {URL} from './utils/utils.js';
+import {URL,REDIRURL} from './utils/utils.js';
 
 
 let form = document.getElementById('loginform');
@@ -23,7 +23,7 @@ form.addEventListener('submit', submitform);
         return response.text();
     }).then(function (text) {
         localStorage.setItem('managerinfo',text);
-        window.location.replace(`${URL}/managerhub.html`);
+        window.location.replace(`${REDIRURL}/managerhub.html`);
     })
 }
 
