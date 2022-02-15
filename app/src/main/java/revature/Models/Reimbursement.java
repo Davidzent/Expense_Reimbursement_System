@@ -45,18 +45,6 @@ public class Reimbursement {
         this.type_ID = type_ID;
     }
 
-    public Reimbursement(int reimid, double amount, Timestamp submitted, Timestamp resolved, String description, int author, int resolver, int status_ID, int type_ID) {
-        this.reimid = reimid;
-        this.amount = amount;
-        this.submitted = submitted;
-        this.resolved = resolved;
-        this.description = description;
-        this.author = author;
-        this.resolver = resolver;
-        this.status_ID = status_ID;
-        this.type_ID = type_ID;
-    }
-
     public double getAmount() {
         return amount;
     }
@@ -184,7 +172,7 @@ public class Reimbursement {
             try{reimbursement.setAmount(Double.parseDouble(map.get("amount").get(i)));}catch(NullPointerException e){}
             // try{reimbursement.setSubmitted(map.get("submitted").get(i));}catch(NullPointerException e){}
             // try{reimbursement.setResolved(map.get("resolved").get(i));}catch(NullPointerException e){}
-            try{reimbursement.setDescription(map.get("description").get(i));}catch(NullPointerException e){}
+            // try{reimbursement.setDescription(map.get("description").get(i));}catch(NullPointerException e){}
             try{reimbursement.setDescription(map.get("description").get(i));}catch(NullPointerException e){}
             try{reimbursement.setAuthor(Integer.parseInt(map.get("author").get(i)));}catch(NullPointerException e){}
             try{reimbursement.setResolver(Integer.parseInt(map.get("resolver").get(i)));}catch(NullPointerException e){}
@@ -196,4 +184,9 @@ public class Reimbursement {
 
         return reimbursements;
     }
+
+    public boolean equals(Reimbursement r) {
+        return reimid == r.reimid;
+    }
+    
 }

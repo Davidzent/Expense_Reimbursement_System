@@ -25,7 +25,6 @@ public class Controller {
 
     public Controller(){
         Route.establishRoutes(app,user,reim);
-
         app.error(403, (ctx) -> {
             ctx.result("The request you submitted is invalid");
         });

@@ -41,7 +41,12 @@ async function reimRequest(event,form){
     }
     else{
         const formData = new FormData(form);
-        ajax("post","/employee/reim/request",formData);
+        ajax("post","/employee/reim/request",formData).then(function (){
+            alert("The request was submitted");
+            document.getElementById('amount').value="";
+            document.getElementById('typeid').value="";
+            document.getElementById('description').value="";
+        });
         
 
     }

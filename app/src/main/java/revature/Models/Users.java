@@ -114,4 +114,16 @@ public class Users {
 
         return users;
     }
+
+    public boolean equals(Users u) {
+        return (users_ID == u.users_ID&&
+        userName.equals(u.userName)&&
+        password.equals(u.password)&&
+        fName.equals(u.fName)&&
+        lName.equals(u.lName)&&
+        email.equals(u.email)&&
+        role_ID == u.role_ID);
+
+    }
+    
 }
