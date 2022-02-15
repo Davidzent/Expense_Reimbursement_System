@@ -25,15 +25,6 @@ public class ReimService {
         return reim.createReim(r);
     }
 
-    public static int update(List<Reimbursement> r) throws SQLException{
-        int i=0;
-        for(Reimbursement s:r){
-            i+=reim.updateReim(s)?1:0;
-        }
-        
-        return i;
-    }
-
     public static String validate(List<String> id, List<String> status,int resolver) throws SQLException{
         StringBuilder errors = new StringBuilder("");
         int x;

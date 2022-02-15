@@ -1,5 +1,4 @@
-const URL = "http://localhost:7000";
-
+import {URL} from './utils/utils.js';
 
 
 let form = document.getElementById('loginform');

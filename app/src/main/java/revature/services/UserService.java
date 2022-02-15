@@ -14,10 +14,7 @@ public class UserService {
     final static userDaoImpl user = new userDaoImpl();
 
     public static Users login(String username, String pass, int type) throws SQLException, JsonMappingException, JsonProcessingException{
-        
-
-        return user.login(username,pass,type);
-        
+        return user.login(username,pass,type);     
     }
 
     public static List<Users> getAllByRole(int role) throws SQLException{
