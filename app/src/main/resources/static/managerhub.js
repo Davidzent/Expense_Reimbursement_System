@@ -1,4 +1,4 @@
-import {createtable,type,status,URL,ajax} from './utils/utils.js';
+import {createtable,type,status,URL,REDIRURL,ajax} from './utils/utils.js';
 
 var welcomeMessage = document.getElementById('welcomemessage');
 var manInfo = JSON.parse(localStorage.getItem('managerinfo'));
@@ -33,14 +33,14 @@ async function logout(event){
     }).then(function (text){
         console.log(text);
         localStorage.clear();
-        window.location.replace(`${URL}/home.html`);
+        window.location.replace(`${REDIRURL}/home.html`);
     })
    
 }
 
 async function redirctAccount(event){
     event.preventDefault();
-    window.location.href = `${URL}/managerAcct.html`;
+    window.location.href = `${REDIRURL}/managerAcct.html`;
 }
 
 /*
