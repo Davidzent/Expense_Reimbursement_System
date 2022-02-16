@@ -1,10 +1,10 @@
-export const URL = "http://localhost:7000";          //user site
-export const REDIRURL = URL;
+var URL = "http://localhost:7000";          //user site
+var REDIRURL = URL;
 
-// export const URL = "http://35.193.86.50:7000";                              //online
-// export const REDIRURL = "https://storage.cloud.google.com/project01-html"   //online
+// const URL = "http://35.193.86.50:7000";                              //online
+// const REDIRURL = "https://storage.cloud.google.com/project01-html"   //online
 
-export function status(status_ID){
+function status(status_ID){
     switch(status_ID){
         case 1:return "Pending";
         case 2:return "Accepted";
@@ -13,7 +13,7 @@ export function status(status_ID){
     }
 }
 
-export function type(type_ID){
+function type(type_ID){
     switch(type_ID){
         case 1:return "Lodging";
         case 2:return "Travel";
@@ -23,7 +23,7 @@ export function type(type_ID){
     }
 }
 
-export async function ajax(method,u,data){
+async function ajax(method,u,data){
     let req;
     if(data){
         req = await fetch((URL+u), {
@@ -39,7 +39,7 @@ export async function ajax(method,u,data){
     return req.json().catch((e)=>"");
 }
 
-export async function formatMoney(value){
+async function formatMoney(value){
     return await formatter.format(value);
 }
 
@@ -90,7 +90,7 @@ max: Maximum number of values in table
 filters: Number of filters in tables (will be put in filters class div)
 Note: the class needs to be the same as the column headert text value for the filters without spaces
 */
-export function createtable(id,th,checkbox,info,data,submitvals,display,max,filters,extraBtn){
+function createtable(id,th,checkbox,info,data,submitvals,display,max,filters,extraBtn){
     extraBtn = false;
     let results = document.getElementsByClassName(display)[0];
     let pageresults = document.getElementsByClassName(display+"pages")[0];

@@ -1,7 +1,3 @@
-import {createtable,type,status,URL,REDIRURL,ajax,formatMoney} from './utils/utils.js';
-
-
-
 const results=document.getElementById('result');
 const filters=document.getElementById('filters');
 const adminphase2=document.getElementById('adminphase2');
@@ -19,6 +15,7 @@ document.getElementById('ViewPending').addEventListener('click',viewPending);
 document.getElementById('ViewApprove').addEventListener('click',viewApprove);
 document.getElementById('ViewDeny').addEventListener('click',viewDeny);
 accountportal.addEventListener('click', redirctAccount);
+
 
 
 async function submitHandler(e){

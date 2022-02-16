@@ -1,5 +1,3 @@
-import {createtable,type,status,URL,REDIRURL,ajax,formatMoney} from './utils/utils.js';
-
 var welcomeMessage = document.getElementById('welcomemessage');
 var manInfo = JSON.parse(localStorage.getItem('managerinfo'));
 var reimbursments = document.getElementById('reimbursments');
@@ -20,6 +18,8 @@ form3.addEventListener('submit', logout);
 resolvedform.addEventListener('submit', getReims);
 accountportal.addEventListener('click', redirctAccount);
 ViewEmployees.addEventListener('click',ViewEmployee);
+
+welcomeMessage.innerText= `welcome ${manInfo['fName']} ${manInfo['lName']}`;
 
 
 async function ViewEmployee(event){
@@ -162,4 +162,3 @@ async function clear(){
     adminphase2pages.innerHTML="";
 }
 
-welcomeMessage.innerText= `welcome ${manInfo['fName']} ${manInfo['lName']}`;

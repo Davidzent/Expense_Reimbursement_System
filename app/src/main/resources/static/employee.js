@@ -1,13 +1,10 @@
-import {URL,REDIRURL} from './utils/utils.js';
-
 
 let form = document.getElementById('loginform');
 let errMess = document.getElementById('incorrectLogin');
-
-
 form.addEventListener('submit', submitform);
 
- async function submitform(event){
+
+async function submitform(event){
     event.preventDefault();
 
 
