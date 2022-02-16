@@ -1,10 +1,5 @@
-import {URL} from './utils/utils.js';
-
-
 let form = document.getElementById('loginform');
 let errMess = document.getElementById('incorrectLogin');
-
-
 form.addEventListener('submit', submitform);
 
  async function submitform(event){
@@ -23,7 +18,7 @@ form.addEventListener('submit', submitform);
         return response.text();
     }).then(function (text) {
         localStorage.setItem('managerinfo',text);
-        window.location.replace(`${URL}/managerhub.html`);
+        window.location.replace(`${REDIRURL}/managerhub.html`);
     })
 }
 

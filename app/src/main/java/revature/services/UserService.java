@@ -28,4 +28,7 @@ public class UserService {
     public static boolean create(Users u) throws SQLException{
         return user.createUser(u);
     }
+    public static boolean update(Users u) throws SQLException{
+        return user.updateUser(u);
+    }
 }

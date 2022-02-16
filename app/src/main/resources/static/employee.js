@@ -1,13 +1,10 @@
-import {URL} from './utils/utils.js';
-
 
 let form = document.getElementById('loginform');
 let errMess = document.getElementById('incorrectLogin');
-
-
 form.addEventListener('submit', submitform);
 
- async function submitform(event){
+
+async function submitform(event){
     event.preventDefault();
 
 
@@ -23,7 +20,7 @@ form.addEventListener('submit', submitform);
         return response.text();
     }).then(function (text) {
         localStorage.setItem('employeeInfo',text);
-        window.location.replace(`${URL}/employeehub.html`);
+        window.location.replace(`${REDIRURL}/employeehub.html`);
     })
 }
 
@@ -41,7 +38,7 @@ function submitrequest(event){
         return response.text();
     }).then(function(text2){
         console.log(text2);
-        window.location.replace(`${URL}/employeehub.html`);
+        window.location.replace(`${REDIRURL}/employeehub.html`);
     })
 }
 

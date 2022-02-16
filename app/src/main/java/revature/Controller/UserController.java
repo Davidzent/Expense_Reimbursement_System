@@ -72,6 +72,25 @@ public class UserController {
         }
         
     };
+
+    public Handler update = (ctx) ->{
+        String option= ctx.attribute("jetty-target");
+        int[] user=isLoggedIn(ctx);
+        if(user!=null){
+            Users u = Users.fillUsers(ctx.formParamMap()).get(0);
+            u.setRole_ID(user[0]);
+            u.setUsers_ID(user[1]);
+            
+            try{
+                UserService.update(u);
+            }catch(SQLException e){
+                log(e,ctx);
+                ctx.result("Error updating the new user");
+            }
+        }
+    };
+
+
     
     public Handler login = (ctx) ->{
         String option= ctx.attribute("jetty-target");
@@ -118,10 +137,14 @@ public class UserController {
 
     public Handler isLoggedIn  = (ctx)->{
         ctx.header("Access-Control-Expose-Headers","*");
-        ctx.json(ctx.req.getSession().getAttribute("id"));
-        ctx.json(ctx.req.getSession().getAttribute("loggedIn"));
-        System.out.println(ctx.req.getSession().getAttribute("id"));
-        System.out.println(ctx.req.getSession().getAttribute("loggedIn"));
+        String ids=(String) ctx.req.getSession().getAttribute("id");
+        
+        if(!ids.equals("")){
+            int id=Integer.parseInt(ids);
+            ctx.json(UserService.getById(id));
+        }else{
+            ctx.result("No user is logged in with this session");
+        }
     };
 
 
