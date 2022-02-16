@@ -12,12 +12,16 @@ const adminphase2pages=document.getElementById('adminphase2pages');
 
 let riemform = document.getElementById('getriems');
 let resolvedform = document.getElementById('getresolved');
+let deniedform = document.getElementById('getdenied');
 let form3 = document.getElementById('logoutform');
 
 riemform.addEventListener('submit', getReims);
 form3.addEventListener('submit', logout);
 resolvedform.addEventListener('submit', getReims);
+deniedform.addEventListener('submit', getReims);
 accountportal.addEventListener('click', redirctAccount);
+
+var locationURL;
 
 
 
@@ -62,9 +66,13 @@ async function getReims(event){
     event.preventDefault();
     if(event.target.id === 'getriems'){
         locationURL = "/manager/reim/list?statusid=1";
+        console.log(locationURL);
     }
     else if(event.target.id === 'getresolved'){
         locationURL = '/manager/reim/list?statusid=2';
+    }else{
+        locationURL = '/manager/reim/list?statusid=3';
+        console.log('true');
     }
     
     let data = await ajax("get",`${locationURL}`,null);
@@ -82,13 +90,24 @@ async function getReims(event){
 
     clear();
     //Table options
-    let th=['Validate','Deny','Amount', 'first','last','Description','Submitted','Type','Status']; //headers of the table
-    let checkbox=[
-        ['Validate','reimid','reimid'],  
+    let th;
+    let checkbox;
+    if(event.target.id === 'getriems'){
+        th=['Validate','Deny','Amount', 'first','last','Description','Submitted','Type','Status']; //headers of the table
+        checkbox=[
+       ['Validate','reimid','reimid'],  
 
-        ['Deny','reimid','reimid']       //['class','name',data[index]]
-    ];    
+       ['Deny','reimid','reimid']       //['class','name',data[index]]
+        ];         
+    
+    }else{
+        th=['Amount', 'first','last','Description','Submitted','Type','Status']; //headers of the table
+        checkbox=[];    
+                                           //checkbox and primary value             
+       
                                              //checkbox and primary value
+    }
+    
     
     let info=[
         //value     class
