@@ -1,4 +1,4 @@
-var URL = "http://localhost:7000";          //user site
+var URL = "http://35.193.86.50:7000";          //user site
 var REDIRURL = URL;
 
 // const URL = "http://35.193.86.50:7000";                              //online
