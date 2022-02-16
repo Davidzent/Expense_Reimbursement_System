@@ -1,9 +1,8 @@
-import {createtable,type,status,URL,REDIRURL,ajax} from './utils/utils.js';
-
 var welcomeMessage = document.getElementById('welcomemessage');
 var manInfo = JSON.parse(localStorage.getItem('managerinfo'));
 var reimbursments = document.getElementById('reimbursments');
 const accountportal=document.getElementById('getaccount');
+const ViewEmployees=document.getElementById('ViewEmployee');
 
 const results=document.getElementById('result');
 const filters=document.getElementById('filters');
@@ -18,9 +17,34 @@ riemform.addEventListener('submit', getReims);
 form3.addEventListener('submit', logout);
 resolvedform.addEventListener('submit', getReims);
 accountportal.addEventListener('click', redirctAccount);
+ViewEmployees.addEventListener('click',ViewEmployee);
+
+welcomeMessage.innerText= `welcome ${manInfo['fName']} ${manInfo['lName']}`;
 
 
+async function ViewEmployee(event){
+    let data = await ajax("get","/manager/list/employee",null);
+    clear();
+    //Table options
+    let th=['Username', 'First Name','Last Name','Email']; //headers of the table
+    let checkbox=[];
+    
+    let info=[
+        //value     class
+        ['userName','Username'],
+        ['fName','firstname'],
+        ['lName','lastname'],
+        ['email','email']
 
+    ];
+    let submitvals={
+        length:0,
+    };
+    let display='adminphase2';
+    let max= -1;
+    let filters=4;
+    createtable('FileTable',th,checkbox,info,data,submitvals,display,max,filters);
+}
 
 async function logout(event){
     event.preventDefault();
@@ -31,7 +55,6 @@ async function logout(event){
     }).then(function (response){
         return response.text();
     }).then(function (text){
-        console.log(text);
         localStorage.clear();
         window.location.replace(`${REDIRURL}/home.html`);
     })
@@ -70,15 +93,12 @@ async function getReims(event){
     
     let data = await ajax("get",`${locationURL}`,null);
 
-    console.log(data);
-
-    data.forEach((e)=>{
+    for (const e of data) {
         e.submitted = new Date(e.submitted).toLocaleString("en","UTC");
         e.type_ID=type(e.type_ID);
         e.status_ID=status(e.status_ID);
-    });
-
-    
+        e.amount=await formatMoney(e.amount);
+    }
 
 
     clear();
@@ -142,4 +162,3 @@ async function clear(){
     adminphase2pages.innerHTML="";
 }
 
-welcomeMessage.innerText= `welcome ${manInfo['fName']} ${manInfo['lName']}`;

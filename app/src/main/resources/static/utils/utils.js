@@ -1,10 +1,10 @@
-export const URL = "http://localhost:7000";          //user site
-export const REDIRURL = URL;
+var URL = "http://localhost:7000";          //user site
+var REDIRURL = URL;
 
-// export const URL = "http://35.193.86.50:7000";                              //online
-// export const REDIRURL = "https://storage.cloud.google.com/project01-html"   //online
+// const URL = "http://35.193.86.50:7000";                              //online
+// const REDIRURL = "https://storage.cloud.google.com/project01-html"   //online
 
-export function status(status_ID){
+function status(status_ID){
     switch(status_ID){
         case 1:return "Pending";
         case 2:return "Accepted";
@@ -13,7 +13,7 @@ export function status(status_ID){
     }
 }
 
-export function type(type_ID){
+function type(type_ID){
     switch(type_ID){
         case 1:return "Lodging";
         case 2:return "Travel";
@@ -23,7 +23,7 @@ export function type(type_ID){
     }
 }
 
-export async function ajax(method,u,data){
+async function ajax(method,u,data){
     let req;
     if(data){
         req = await fetch((URL+u), {
@@ -39,11 +39,19 @@ export async function ajax(method,u,data){
     return req.json().catch((e)=>"");
 }
 
+async function formatMoney(value){
+    return await formatter.format(value);
+}
 
 
 
-
-
+// Create our number formatter.
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
 
 
 
@@ -82,7 +90,7 @@ max: Maximum number of values in table
 filters: Number of filters in tables (will be put in filters class div)
 Note: the class needs to be the same as the column headert text value for the filters without spaces
 */
-export function createtable(id,th,checkbox,info,data,submitvals,display,max,filters,extraBtn){
+function createtable(id,th,checkbox,info,data,submitvals,display,max,filters,extraBtn){
     extraBtn = false;
     let results = document.getElementsByClassName(display)[0];
     let pageresults = document.getElementsByClassName(display+"pages")[0];
@@ -172,28 +180,26 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
     addfilter(id,"",filters);
     document.addEventListener('keyup',(e) => updatetable.call(this, e));
     document.addEventListener('change',(e) => updatetable.call(this, e));
+    Array.from(document.getElementsByTagName('th')).forEach((t)=>{
+        t.addEventListener('click',(e)=> sort.call(this, e));
+    });
     //document.addEventListener('click',(e) => sort.call(this, e));
-    //".filtertag").on('change',(e) => updatetable.call(this, e));
+    //$(".filtertag").on('change',(e) => updatetable.call(this, e));
     // $(".sort").on('click',(e) => sort.call(this, e));
 
     //sort
     function sort(e){
-        if(!e.target.className.includes("sort"))return;
         let table,
             index,          //the position to be sort on
-            type,           //the type to be sort on (date,checkbox,text/number)
             arrow,
-            th,
             tr;
-        index = $( e.currentTarget ).attr( 'value' ).split(' ');
-        // index = e.currentTarget.defaultValue.split(' ');
-        type=index[0];
-        index=parseInt(index[1]);
+
+        index = th.indexOf(e.target.innerText);
         table = document.getElementById(id);
 
         //the type of sort decending(smallest) or ascending (biggest)
-        th=table.rows[0].getElementsByTagName("TH")[index];
-        arrow=th.childNodes[1];
+        let ths=table.rows[0].getElementsByTagName("TH")[index];
+        arrow=ths.childNodes[1];
         tr = table.rows;
 
         //This shit took me almost an hour
@@ -201,11 +207,11 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
         const getCellValue = (tr, index) => tr.children[index].innerText || tr.children[index].textContent || tr.children[index].childNodes[0].checked;
 
         //simple swap arrow function
-        let jArrow = $( arrow );
+        // let jArrow = $( arrow );
         //change all current up and downs to neutrual
-        $( '.sort.fa-sort-up' ).removeClass( 'fa-sort-up' ).addClass( 'fa-sort');
-        $( '.sort.fa-sort-down' ).removeClass( 'fa-sort-down' ).addClass( 'fa-sort');
-        const swaparrow = (asc) => asc ? $( arrow ).attr( 'class', 'fas fa-sort-up sort biggest boldup') : $( arrow ).attr( 'class', 'fas fa-sort-down sort smallest bolddown');
+        // $( '.sort.fa-sort-up' ).removeClass( 'fa-sort-up' ).addClass( 'fa-sort');
+        // $( '.sort.fa-sort-down' ).removeClass( 'fa-sort-down' ).addClass( 'fa-sort');
+        const swaparrow = (asc) => asc ? arrow.className = 'fas fa-sort-up sort biggest boldup':arrow.className='fas fa-sort-down sort smallest bolddown';
 
         // unbold one if it is not the same index as the one clicked
         const bold = (arrow , indx) => index!=indx?arrow.className = arrow.className.replace(/smallest bolddown|biggest boldup/gi,"smallest"):asc;
@@ -252,7 +258,7 @@ export function createtable(id,th,checkbox,info,data,submitvals,display,max,filt
 
     //general updatetable
     function updatetable(e){
-        if(!e.target.className.includes("filter")&&!e.target.className.includes("filtertag")){return}
+        if(e&&!e.target.className.includes("filter")&&!e.target.className.includes("filtertag")){return}
         let updatepages=false;
         if ( e.type == 'click' ) {
             currentpage = ( e.currentTarget.defaultValue );

@@ -20,10 +20,12 @@ public class UserRoute extends Route{
         app.get("/employee/verify", uc.isLoggedIn);
         app.post("/employee/register", uc.create);
         app.post("/employee/login", uc.login);
+        app.post("/employee/update", uc.update);
 
 
         app.post("/manager/login", uc.login);
         app.post("/manager/register", uc.create);
+        app.post("/manager/update", uc.update);
 
     }
     
