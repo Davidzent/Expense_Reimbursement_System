@@ -63,6 +63,8 @@ body#createData .adminphase2 table thead {
 
 body#createData .adminphase2 table thead th,
 body#createData .adminphase2 table thead td{
+  /* cursor: crosshair; how funny would this be*/
+  cursor: pointer;
   padding: 10px 18px;
   font-weight: bold;
   text-align: center;
