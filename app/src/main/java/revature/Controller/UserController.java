@@ -137,10 +137,10 @@ public class UserController {
 
     public Handler isLoggedIn  = (ctx)->{
         ctx.header("Access-Control-Expose-Headers","*");
-        String ids=(String) ctx.req.getSession().getAttribute("id");
+        Object ids=ctx.req.getSession().getAttribute("id");
         
-        if(!ids.equals("")){
-            int id=Integer.parseInt(ids);
+        if(ids!=null){
+            int id=(int) ctx.req.getSession().getAttribute("id");
             ctx.json(UserService.getById(id));
         }else{
             ctx.result("No user is logged in with this session");
