@@ -1,4 +1,4 @@
-import {createtable,type,status,URL,ajax} from './utils/utils.js';
+//import {createtable,type,status,URL,ajax} from './utils/utils.js';
 
 document.getElementById('Registerempl').addEventListener('click',register);
 document.getElementById('Registerman').addEventListener('click',register);
