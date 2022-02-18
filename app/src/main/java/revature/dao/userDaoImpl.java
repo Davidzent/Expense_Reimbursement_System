@@ -256,7 +256,7 @@ public class  userDaoImpl implements userDao{
 
     @Override
     public boolean updateUser(Users user) throws SQLException {
-        String sql = "UPDATE project01.users SET username = ? , password = ?, fnane = ?, lname = ?, email = ?,roleid = ? WHERE userid = ?";
+        String sql = "UPDATE project01.users SET username = ? , password = ?, fname = ?, lname = ?, email = ?,roleid = ? WHERE userid = ?";
 
         // try with resources allows us to declare Autoclosable resources so that they are
         // automatically closed at the end of the try block
