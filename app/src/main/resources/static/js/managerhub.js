@@ -1,5 +1,3 @@
-/*
-
 var welcomeMessage = document.getElementById('welcomemessage');
 var manInfo = JSON.parse(localStorage.getItem('userinfo'));
 var reimbursments = document.getElementById('reimbursments');
@@ -14,7 +12,7 @@ const adminphase2pages=document.getElementById('adminphase2pages');
 let riemform = document.getElementById('getriems');
 let resolvedform = document.getElementById('getresolved');
 let deniedform = document.getElementById('getdenied');
-let form3 = document.getElementById('logoutform');
+let form3 = document.getElementById('logout');
 
 riemform.addEventListener('click', getReims);
 form3.addEventListener('click', logout);
@@ -22,29 +20,11 @@ resolvedform.addEventListener('click', getReims);
 deniedform.addEventListener('click', getReims);
 accountportal.addEventListener('click', redirctAccount);
 ViewEmployees.addEventListener('click',ViewEmployee);
-*/
 
-const results=document.getElementById('result');
-const filters=document.getElementById('filters');
-const adminphase2=document.getElementById('adminphase2');
-const adminphase2pages=document.getElementById('adminphase2pages');
-const accountportal=document.getElementById('getaccount');
-
-document.getElementById("welcomeMessage").innerHTML=`Welcome ${JSON.parse(localStorage.getItem('userinfo')).fName} ${JSON.parse(localStorage.getItem('userinfo')).lName}`
-
-
-//document.getElementById('UserAction').addEventListener('submit',submitHandler);
-
-//document.getElementById('reimRequest').addEventListener('click',reimRequest);
-document.getElementById('logout').addEventListener('click', logout);
-document.getElementById('ViewPending').addEventListener('click',getReims);
-document.getElementById('ViewApprove').addEventListener('click',getReims);
-document.getElementById('ViewDeny').addEventListener('click',getReims);
-//accountportal.addEventListener('click', redirctAccount);
 
 var locationURL;
 
-/*welcomeMessage.innerText= `welcome ${manInfo['fName']} ${manInfo['lName']}`;*/
+welcomeMessage.innerText= `welcome ${manInfo['fName']} ${manInfo['lName']}`;
 
 
 
@@ -110,11 +90,11 @@ async function getReims(event){
 async function getReims(event){
     event.preventDefault();
     let locationURL="";
-    if(event.target.id === 'ViewDeny'){
+    if(event.target.id === 'getdenied'){
         locationURL = '/manager/reim/list?statusid=3';
         ('true');
     }
-    else if(event.target.id === 'ViewApprove'){
+    else if(event.target.id === 'getresolved'){
         locationURL = '/manager/reim/list?statusid=2';
     }else{
         locationURL = "/manager/reim/list?statusid=1";

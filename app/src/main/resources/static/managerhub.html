@@ -1,10 +1,42 @@
 
 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Manager Hub</title>
+        <link rel="stylesheet" href="/css/tableStyle.css">
+        <link href = 'css/homestyle.css' rel='stylesheet' type='text/css'>
+        <meta charset="utf-8">
+    </head>
+    <body id='createData'>
+        <header>
+            <h1 id= 'welcomeMessage'></h1>
+            <input id="getaccount" type='button' value ='myaccount'/>
+            <input id="logout" type='button' value='logout'/>
+        </header>
+        <div id="FormArea">
+            <div id="userInputs" class="centercontent">
+                <input id = 'getriems' type='button' value='view pending riembursments'/>
+                <input id = 'getresolved' type='button' value='view resolved riembursments'/>
+                <input id = 'getdenied' type='button' value='view denied riembursments'/>
+                <input id="ViewEmployee" type='button' value='View Employees'/>   
+            </div>
+            <div id = 'reimbursments'></div>
+            <div id= "result" class="result"></div>
+            <div id= "filters" class="filters"></div>
+            <div id= "adminphase2" class="adminphase2 none"></div>
+            <div id= "adminphase2pages" class="adminphase2pages"></div>
+        </div>
+        <script src='utils/utils.js'></script>
+        <script src='js/managerhub.js'></script>
+    </body>
+</html>
+<!-- 
 <!doctype html>
 <html lang="en">
     <head>
         <title>manager Hub</title>
-        <link rel="stylesheet" href="tableStyle.css">
+        <link rel="stylesheet" href="css/tableStyle.css">
         <link href = 'css/homestyle.css' rel='stylesheet' type='text/css'>
         <meta charset="utf-8">
     </head>
@@ -15,28 +47,25 @@
                 <input id="getaccount" type='button' value ='myaccount'/>
                 <input id="logout" type='button' value='logout'/>
             </header>
-            <div id="adminFormArea">
-                <form id="UserAction" method="post" action="reports/report">
-                    <div class="errors"></div>
-                    <div class="adminphase1">
-                        <label>
-                            <input id="ViewPending" type="button" value="View Pending" />
-                            <input id="ViewApprove" type="button" value="View Approved" />
-                            <input id="ViewDeny" type="button" value="View Denied" />
-                        </label>
-                    </div>
-                    <div id= "result" class="result"></div>
-                    <div id= "filters" class="filters"></div>
-                    <div id= "adminphase2" class="adminphase2 none"></div>
-                    <div id= "adminphase2pages" class="adminphase2pages"></div>
-                </form>
+            <div id="FormArea">
+                <div class="centercontent">
+                    <label>
+                        <input id="ViewPending" type="button" value="View Pending" />
+                        <input id="ViewApprove" type="button" value="View Approved" />
+                        <input id="ViewDeny" type="button" value="View Denied" />
+                    </label>
+                </div>
+                <div id= "result" class="result"></div>
+                <div id= "filters" class="filters"></div>
+                <div id= "adminphase2" class="adminphase2 none"></div>
+                <div id= "adminphase2pages" class="adminphase2pages"></div>
             </div>
 
         </div>
         <script src='utils/utils.js'></script>
         <script src='managerhub.js'></script>
     </body>
-</html>
+</html> -->
 
 <!--
 
