@@ -2,43 +2,27 @@
 <html>
     <head>
         <title>Manager Hub</title>
-        <link rel="stylesheet" href="tableStyle.css">
+        <link rel="stylesheet" href="/css/tableStyle.css">
         <meta charset="utf-8">
     </head>
     <body id='createData'>
-
         <h1 id='welcomemessage'></h1>
         <input id="getaccount" type='button' value ='myaccount'/>
-
-        <form id = 'logoutform'>
-            <div>
-                <input type='submit' value='logout'/>
+        <input id = 'logoutform' type='button' value='logout'/>
+        <div id="FormArea">
+            <div id="userInputs" class="centercontent">
+                <input id = 'getriems' type='button' value='view pending riembursments'/>
+                <input id = 'getresolved' type='button' value='view resolved riembursments'/>
+                <input id = 'getdenied' type='button' value='view denied riembursments'/>
+                <input id="ViewEmployee" type='button' value='View Employees'/>   
             </div>
-        </form>
-        <form id = 'getriems'>
-            <div>
-                <input type='submit' value='view pending riembursments'/>
-            </div>
-        </form>
-        <form id = 'getresolved'>
-            <div>
-                <input type='submit' value='view resolved riembursments'/>
-            </div>
-        </form>
-
-        <form id = 'getdenied'>
-            <div>
-                <input type='submit' value='view denied riembursments'/>
-            </div>
-        </form>
-        <input id="ViewEmployee" type='button' value='View Employees'/>
-
-        <div id = 'reimbursments'></div>
-        <div id= "result" class="result"></div>
-        <div id= "filters" class="filters"></div>
-        <div id= "adminphase2" class="adminphase2 none"></div>
-        <div id= "adminphase2pages" class="adminphase2pages"></div>
+            <div id = 'reimbursments'></div>
+            <div id= "result" class="result"></div>
+            <div id= "filters" class="filters"></div>
+            <div id= "adminphase2" class="adminphase2 none"></div>
+            <div id= "adminphase2pages" class="adminphase2pages"></div>
+        </div>
         <script src='utils/utils.js'></script>
-        <script src='managerhub.js'></script>
+        <script src='js/managerhub.js'></script>
     </body>
 </html>

@@ -64,8 +64,8 @@ async function login(e){
     let option=e.currentTarget.id.replace("login","").toLowerCase();
     let formParams={
         inputs:[
-            {name:"username",title:"Username",id:"username",options:"required",type:"text"},
-            {name:"password",title:"Password",id:"password",options:"required",type:"password"},
+            {name:"username",title:"Username: ",id:"username",options:"required",type:"text"},
+            {name:"password",title:"Password: ",id:"password",options:"required",type:"password"},
         ],
         selects:[]
     }
@@ -105,11 +105,11 @@ async function register(e){
     let option=e.currentTarget.id.replace("register","").toLowerCase();
     let formParams={
         inputs:[
-            {name:"username",title:"Username",id:"username",options:"required",type:"text"},
-            {name:"password",title:"Password",id:"password",options:"required",type:"password"},
-            {name:"fname",title:"First Name",id:"fname",options:"fname",type:"text"},
-            {name:"lname",title:"Last Name",id:"lname",options:"lname",type:"text"},
-            {name:"email",title:"Email",id:"email",options:"required",type:"text"},
+            {name:"username",title:"Username: ",id:"username",options:"required",type:"text"},
+            {name:"password",title:"Password: ",id:"password",options:"required",type:"password"},
+            {name:"fname",title:"First Name: ",id:"fname",options:"fname",type:"text"},
+            {name:"lname",title:"Last Name: ",id:"lname",options:"lname",type:"text"},
+            {name:"email",title:"Email: ",id:"email",options:"required",type:"text"},
         ],
         selects:[]
     }
@@ -181,7 +181,8 @@ function CreateModal(title,id,formParams,footer,display){
                     }
                     for(let select of formParams.selects){
                         html+=
-                        `<select name="${select.name}" id="${select.id}">`
+                        `<label for='${select.name}'>${select.title}</label>
+                        <select name="${select.name}" id="${select.id}">`
                         for(let option of select.options){
                             html+=`<option value="${option.value}">${option.title}</option>`
                         }  

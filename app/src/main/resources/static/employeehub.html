@@ -2,8 +2,8 @@
 <html lang="en">
     <head>
         <title>employee Hub</title>
-        <link rel="stylesheet" href="tableStyle.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/css/tableStyle.css">
+        <link rel="stylesheet" href="/css/style.css">
         <meta charset="utf-8">
     </head>
     <body id="createData">
@@ -11,18 +11,20 @@
             <h1 id= 'welcomeMessage'></h1>
             <input id="getaccount" type='button' value ='myaccount'/>
             <input id="logout" type='button' value='logout'/>
-            <div id="adminFormArea">
+            <div id="FormArea">
+                <div class="centercontent">
                     <input id="ViewPending" type="button" value="View Pending" />
                     <input id="ViewApprove" type="button" value="View Approved" />
                     <input id="ViewDeny" type="button" value="View Denied" />
                     <input id="reimRequest" type="button" value="Request Reimbursement" />
-                    <div id= "result" class="result"></div>
-                    <div id= "filters" class="filters"></div>
-                    <div id= "adminphase2" class="adminphase2 none"></div>
-                    <div id= "adminphase2pages" class="adminphase2pages"></div>
+                </div>
+                <div id= "result" class="result"></div>
+                <div id= "filters" class="filters"></div>
+                <div id= "adminphase2" class="adminphase2 none"></div>
+                <div id= "adminphase2pages" class="adminphase2pages"></div>
             </div>
         </div>
         <script src='utils/utils.js'></script>
-        <script src='employeehub.js'></script>
+        <script src='js/employeehub.js'></script>
     </body>
 </html>

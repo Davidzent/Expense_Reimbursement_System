@@ -15,17 +15,18 @@ document.getElementById('ViewDeny').addEventListener('click',viewDeny);
 accountportal.addEventListener('click', redirctAccount);
 
 
-async function reimRequest(event,form){
+async function reimRequest(event){
     event.preventDefault();
     clear();
     let formParams={
         inputs:[
-            {name:"amount",title:"Amount",id:"amount",options:`step="any" required`,type:"number"},
-            {name:"description",title:"Description",id:"description",options:"required",type:"text"}
+            {name:"amount",title:"Amount: ",id:"amount",options:`step="any" required`,type:"number"},
+            {name:"description",title:"Description: ",id:"description",options:"required",type:"text"}
         ],
         selects:[
             {
                 name:"typeid",
+                title:"Type: ",
                 id:"typeid",
                 options:[
                     {value:1,title:"Lodging"},
@@ -44,6 +45,7 @@ async function reimRequest(event,form){
 }
 
 async function reimRequestSubmit(event){
+    event.preventDefault();
     const formData = new FormData(this);
     ajax("post","/employee/reim/request",formData).then(function (){
         alert("The request was submitted");

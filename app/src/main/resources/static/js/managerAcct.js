@@ -1,6 +1,6 @@
-const emmpinfo = JSON.parse(localStorage.getItem('userinfo'));
-(emmpinfo);
+const maninfo = JSON.parse(localStorage.getItem('userinfo'));
 var tbl = document.getElementById('accountinfo');
+
 var editor = document.getElementById('accountEditor');
 var editbutton = document.getElementById('showEditor');
 
@@ -14,11 +14,11 @@ var lnameCell = document.createElement('tr');
 var emailCell = document.createElement('tr');
 var passCell = document.createElement('tr');
 
-acctNCell.innerHTML = `${emmpinfo.userName}`;
-nameCell.innerHTML =  `${emmpinfo.fName}`;
-lnameCell.innerHTML = `${emmpinfo.lName}`;
-emailCell.innerHTML = `${emmpinfo.email}`;
-passCell.innerHTML = `${emmpinfo.password}`;
+acctNCell.innerHTML = `${maninfo.userName}`;
+nameCell.innerHTML =  `${maninfo.fName}`;
+lnameCell.innerHTML = `${maninfo.lName}`;
+emailCell.innerHTML = `${maninfo.email}`;
+passCell.innerHTML = `${maninfo.password}`;
 
 
 tbl.appendChild(acctNCell);
@@ -49,7 +49,7 @@ async function submitInfo(event){
     event.preventDefault();
     const formData = new FormData(this);
         
-        ajax("post","/employee/update",formData).then(function (){
+        ajax("post","/manager/update",formData).then(function (){
             alert("you've updated");
             document.getElementById('username').value="";
             document.getElementById('password').value="";
