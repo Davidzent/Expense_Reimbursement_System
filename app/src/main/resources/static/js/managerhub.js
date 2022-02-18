@@ -24,7 +24,8 @@ ViewEmployees.addEventListener('click',ViewEmployee);
 
 var locationURL;
 
-welcomeMessage.innerText= `welcome ${manInfo['fName']} ${manInfo['lName']}`;
+//welcomeMessage.innerText= `welcome ${manInfo['fName']} ${manInfo['lName']}`;
+document.getElementById("welcomeMessage").innerHTML=`Welcome ${JSON.parse(localStorage.getItem('userinfo')).fName} ${JSON.parse(localStorage.getItem('userinfo')).lName}`
 
 
 
