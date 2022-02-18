@@ -1,6 +1,9 @@
 
 let form = document.getElementById('loginform');
-let errMess = document.getElementById('incorrectLogin');
+let errMess = document.getElementById('error');
+let usrn = document.getElementById("username");
+let psw = document.getElementById("password");
+
 form.addEventListener('submit', submitform);
 
 
@@ -19,8 +22,13 @@ async function submitform(event){
     }).then(function (response){
         return response.text();
     }).then(function (text) {
-        localStorage.setItem('employeeInfo',text);
-        window.location.replace(`${REDIRURL}/employeehub.html`);
+        if(!text||text==='Incorrect credentials'){
+            psw.value="";
+            errMess.innerText=text;
+        }else{
+            localStorage.setItem('employeeInfo',text);
+            window.location.replace(`${REDIRURL}/employeehub.html`);
+        }
     })
 }
 
@@ -37,7 +45,7 @@ function submitrequest(event){
     }).then(function (response){
         return response.text();
     }).then(function(text2){
-        console.log(text2);
+        (text2);
         window.location.replace(`${REDIRURL}/employeehub.html`);
     })
 }
