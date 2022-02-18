@@ -98,6 +98,47 @@ async function loginSubmit(form,event,option){
     })
 }
 
+//update account
+
+async function updateAcct(e){
+    e.preventDefault();
+    let option=e.currentTarget.id.replace("update","").toLowerCase();
+    let formParams={
+        inputs:[
+            {name:"username",title:"Username: ",id:"username",options:"required",type:"text"},
+            {name:"password",title:"Password: ",id:"password",options:"required",type:"password"},
+            {name:"fname",title:"First Name: ",id:"fname",options:"fname",type:"text"},
+            {name:"lname",title:"Last Name: ",id:"lname",options:"lname",type:"text"},
+            {name:"email",title:"Email: ",id:"email",options:"required",type:"text"},
+        ],
+        selects:[]
+    }
+    let footer=`Update`;
+    let display = 'displayModal';
+    await CreateModal("Update","Updateform",formParams,footer,display)
+
+    document.getElementById("Updateform").addEventListener('submit',function (e){
+        updateSubmit(this,e,option)
+    });
+}
+
+async function updateSubmit(form,event,option){
+    event.preventDefault();
+    const formData = new FormData(form);
+    ajax("post",`/${option}/update`,formData).then(function (e){
+        alert("Your account is updated");
+        user={
+            userName:document.getElementById('username').value,
+            password:document.getElementById('password').value,
+            fName:document.getElementById('fname').value,
+            lName:document.getElementById('lname').value,
+            email:document.getElementById('email').value
+        }
+        localStorage.setItem('userinfo',JSON.stringify(user));
+        window.location.replace(`${REDIRURL}/${option}Acct.html`);
+    });
+}
+
 //register
 
 async function register(e){

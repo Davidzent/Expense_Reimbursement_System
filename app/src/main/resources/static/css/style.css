@@ -5,6 +5,10 @@
   width: 80%;
 }
 
+.margint10{
+  margin-top: 10%;
+}
+
 .centercontent{
   display: block;
   margin-left: auto;
