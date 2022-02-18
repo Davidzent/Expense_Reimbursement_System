@@ -1,6 +1,22 @@
 .error{
     color: red;
 }
+.width80{
+  width: 80%;
+}
+
+.centercontent{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.circle{
+  width:300px;
+  height: 300px;
+  border-radius: 50%;
+}
 
 /* Modal */
 .modalShadow {
@@ -97,10 +113,14 @@
   .modal .modalWrapper .modalContentWrapper .modalContent input[type=email],
   .modal .modalWrapper .modalContentWrapper .modalContent input[type=search],
   .modal .modalWrapper .modalContentWrapper .modalContent textarea,
-  .modal .modalWrapper .modalContentWrapper .modalContent input[type=datetime-local],
-  .modal .modalWrapper .modalContentWrapper .modalContent select {
+  .modal .modalWrapper .modalContentWrapper .modalContent input[type=datetime-local] {
     width: 440px;
   }
+
+  .modal .modalWrapper .modalContentWrapper .modalContent select {
+    width: 447px;
+  }
+
   .modal .modalWrapper .modalContentWrapper .modalContent .ui-copyinput input {
     width: 384px;
   }

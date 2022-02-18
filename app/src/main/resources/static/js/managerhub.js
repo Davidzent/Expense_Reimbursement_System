@@ -14,10 +14,10 @@ let resolvedform = document.getElementById('getresolved');
 let deniedform = document.getElementById('getdenied');
 let form3 = document.getElementById('logoutform');
 
-riemform.addEventListener('submit', getReims);
-form3.addEventListener('submit', logout);
-resolvedform.addEventListener('submit', getReims);
-deniedform.addEventListener('submit', getReims);
+riemform.addEventListener('click', getReims);
+form3.addEventListener('click', logout);
+resolvedform.addEventListener('click', getReims);
+deniedform.addEventListener('click', getReims);
 accountportal.addEventListener('click', redirctAccount);
 ViewEmployees.addEventListener('click',ViewEmployee);
 
@@ -117,11 +117,11 @@ async function getReims(event){
     let th;
     let checkbox;
     if(event.target.id === 'getresolved' || event.target.id==="getdenied"){
-        th=['Amount', 'first','last','Description','Submitted','Type','Status']; //headers of the table
+        th=['Amount', 'First Name','Last Name','Description','Submitted','Type','Status']; //headers of the table
         checkbox=[]; 
 
     }else{
-        th=['Validate','Deny','Amount', 'first','last','Description','Submitted','Type','Status']; //headers of the table
+        th=['Validate','Deny','Amount', 'First Name','Last Name','Description','Submitted','Type','Status']; //headers of the table
         checkbox=[
             ['Validate','reimid','reimid'],  
             ['Deny','reimid','reimid']       //['class','name',data[index]]
@@ -132,8 +132,8 @@ async function getReims(event){
     let info=[
         //value     class
         ['amount','Amount'],
-        ['authorfName','first'],
-        ['authorLName','last'],
+        ['authorfName','firstname'],
+        ['authorLName','lastname'],
         ['description','Description'],
         ['submitted','Submitted'],
         ['type_ID','Type'],

@@ -62,14 +62,17 @@ var formatter = new Intl.NumberFormat('en-US', {
 async function login(e){
     e.preventDefault();
     let option=e.currentTarget.id.replace("login","").toLowerCase();
-    let formParams=[
-        {name:"username",title:"Username",id:"username",options:"required",type:"text"},
-        {name:"password",title:"Password",id:"password",options:"required",type:"password"},
-    ]
+    let formParams={
+        inputs:[
+            {name:"username",title:"Username: ",id:"username",options:"required",type:"text"},
+            {name:"password",title:"Password: ",id:"password",options:"required",type:"password"},
+        ],
+        selects:[]
+    }
     let footer=`login`;
     let display = 'displayModal';
 
-    await CreateModal("Login",formParams,footer,display)
+    await CreateModal("Login","Loginform",formParams,footer,display)
 
     document.getElementById("Loginform").addEventListener('submit',function (e){
         loginSubmit(this,e,option)
@@ -100,17 +103,20 @@ async function loginSubmit(form,event,option){
 async function register(e){
     e.preventDefault();
     let option=e.currentTarget.id.replace("register","").toLowerCase();
-    let formParams=[
-        {name:"username",title:"Username",id:"username",options:"required",type:"text"},
-        {name:"password",title:"Password",id:"password",options:"required",type:"password"},
-        {name:"fname",title:"First Name",id:"fname",options:"fname",type:"text"},
-        {name:"lname",title:"Last Name",id:"lname",options:"lname",type:"text"},
-        {name:"email",title:"Email",id:"email",options:"required",type:"text"},
-    ]
+    let formParams={
+        inputs:[
+            {name:"username",title:"Username: ",id:"username",options:"required",type:"text"},
+            {name:"password",title:"Password: ",id:"password",options:"required",type:"password"},
+            {name:"fname",title:"First Name: ",id:"fname",options:"fname",type:"text"},
+            {name:"lname",title:"Last Name: ",id:"lname",options:"lname",type:"text"},
+            {name:"email",title:"Email: ",id:"email",options:"required",type:"text"},
+        ],
+        selects:[]
+    }
     let footer=`Register`;
     let display = 'displayModal';
 
-    await CreateModal("Register",formParams,footer,display)
+    await CreateModal("Register","Registerform",formParams,footer,display)
 
     document.getElementById("Registerform").addEventListener('submit',function (e){
         registerSubmit(this,e,option)
@@ -154,9 +160,9 @@ function ModalErrors(ParamsE,gError){
  * @param {{name,title,type,id,options}[]} formParams
  * @param {string} footer 
  */
-function CreateModal(title,formParams,footer,display){
+function CreateModal(title,id,formParams,footer,display){
     let html=
-    `<form id ='${title}form'>
+    `<form id ='${id}'>
     <div id="modalShadow" class="modalShadow">
         <div id="modal" class="modal">
             <div id="modalWrapper" class="modalWrapper">
@@ -165,13 +171,22 @@ function CreateModal(title,formParams,footer,display){
                 </div>
                 <div id = "modalContentWrapper" class="modalContentWrapper">
                     <div id="modalContent" class="modalContent">`;                   
-                    for(let param of formParams){
+                    for(let input of formParams.inputs){
                         html+=
                         `<div>
-                            <label for='${param.name}'>${param.title}</label>
-                            <input id='${param.id}' name='${param.name}' type='${param.type}' ${param.options}/>
-                            <p id = "${param.id}error" class="error" ></p>
+                            <label for='${input.name}'>${input.title}</label>
+                            <input id='${input.id}' name='${input.name}' type='${input.type}' ${input.options}/>
+                            <p id = "${input.id}error" class="error" ></p>
                         </div>`;
+                    }
+                    for(let select of formParams.selects){
+                        html+=
+                        `<label for='${select.name}'>${select.title}</label>
+                        <select name="${select.name}" id="${select.id}">`
+                        for(let option of select.options){
+                            html+=`<option value="${option.value}">${option.title}</option>`
+                        }  
+                        html+=`</select>`
                     }
                 html +=
                     `</div>
