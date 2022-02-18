@@ -14,11 +14,11 @@ var lnameCell = document.createElement('tr');
 var emailCell = document.createElement('tr');
 var passCell = document.createElement('tr');
 
-acctNCell.innerHTML = `${emmpinfo.userName}`;
-nameCell.innerHTML =  `${emmpinfo.fName}`;
-lnameCell.innerHTML = `${emmpinfo.lName}`;
-emailCell.innerHTML = `${emmpinfo.email}`;
-passCell.innerHTML = `${emmpinfo.password}`;
+acctNCell.innerHTML = `Username: ${emmpinfo.userName}`;
+nameCell.innerHTML =  `Firstname: ${emmpinfo.fName}`;
+lnameCell.innerHTML = `lastname: ${emmpinfo.lName}`;
+emailCell.innerHTML = `email: ${emmpinfo.email}`;
+passCell.innerHTML = `password: ${emmpinfo.password}`;
 
 
 tbl.appendChild(acctNCell);
