@@ -1,10 +1,12 @@
 const emmpinfo = JSON.parse(localStorage.getItem('employeeInfo'));
 console.log(emmpinfo);
 var tbl = document.getElementById('accountinfo');
-var accounteditor = document.getElementById('editaccount');
-var accountform = document.getElementById('newinfo');
+var editor = document.getElementById('accountEditor');
+var editbutton = document.getElementById('showEditor');
 
-accounteditor.addEventListener('click', editAccount);
+
+editbutton.addEventListener('click', editAccount);
+editor.addEventListener('submit', submitInfo);
 
 var acctNCell = document.createElement('tr')
 var nameCell = document.createElement('tr');
@@ -25,18 +27,34 @@ tbl.appendChild(lnameCell);
 tbl.appendChild(emailCell);
 tbl.appendChild(passCell);
 
-async function editAccount(event,form){
+async function editAccount(event){
     
     event.preventDefault();
-    if(event.target.type=='button'){
-        accountform.innerHTML=`<label for='changeusername'>changeusername</label>`
-        
-    }
-    else{
-        const formData = new FormData(form);
-        ajax("post","/employee/reim/request",formData);
-        
-
-    }
+    editor.innerHTML=`<label for='<label for='username'>Username</label>
+    <input id = 'username' name = 'username' type = 'text'/>
+    <label for='password'>password</label>
+    <input id = 'password' name = 'password' type = 'text'/>
+    <label for ='fname'>first name</label>
+    <input id = 'fname' name = 'fname' type = 'text'/>
+    <label for = 'lname'>last name</label> 
+    <input id = 'lname' name = 'lname' type = 'text'/>
+    <label for = 'email'>email</label>
+    <input id = 'email' name = 'email' type = 'text'/>
+    <input type='submit' id='submission' value='register'/>`
     
+    
+}
+
+async function submitInfo(event){
+    event.preventDefault();
+    const formData = new FormData(this);
+        
+        ajax("post","/employee/update",formData).then(function (){
+            alert("you've updated");
+            document.getElementById('username').value="";
+            document.getElementById('password').value="";
+            document.getElementById('fname').value="";
+            document.getElementById('lname').value="";
+            document.getElementById('email').value="";
+        });
 }

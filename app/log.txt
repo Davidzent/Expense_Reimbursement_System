@@ -199,3 +199,7 @@ Content-Disposition: form-data; name="password"
 2022-02-15 15:15:26 WARN  Log:28 - java.sql.SQLException: No found account matching those parameters.
 2022-02-15 15:15:26 WARN  Log:29 - 
 2022-02-15 15:15:26 WARN  Log:30 - {}
+2022-02-16 18:33:56 WARN  Log:28 - org.postgresql.util.PSQLException: ERROR: column "fnane" of relation "users" does not exist
+  Position: 59
+2022-02-16 18:33:56 WARN  Log:29 - 
+2022-02-16 18:33:56 WARN  Log:30 - {}
