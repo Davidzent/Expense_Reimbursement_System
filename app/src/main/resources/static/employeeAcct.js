@@ -1,4 +1,4 @@
-const emmpinfo = JSON.parse(localStorage.getItem('employeeInfo'));
+const emmpinfo = JSON.parse(localStorage.getItem('userinfo'));
 (emmpinfo);
 var tbl = document.getElementById('accountinfo');
 var editor = document.getElementById('accountEditor');

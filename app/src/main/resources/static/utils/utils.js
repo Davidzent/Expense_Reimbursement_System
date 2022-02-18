@@ -60,6 +60,7 @@ var formatter = new Intl.NumberFormat('en-US', {
 
 //login 
 async function login(e){
+    e.preventDefault();
     let option=e.currentTarget.id.replace("login","").toLowerCase();
     let formParams=[
         {name:"username",title:"Username",id:"username",options:"required",type:"text"},
@@ -97,6 +98,7 @@ async function loginSubmit(form,event,option){
 //register
 
 async function register(e){
+    e.preventDefault();
     let option=e.currentTarget.id.replace("register","").toLowerCase();
     let formParams=[
         {name:"username",title:"Username",id:"username",options:"required",type:"text"},
