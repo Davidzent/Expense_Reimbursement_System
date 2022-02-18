@@ -1,4 +1,10 @@
-var URL = "http://35.193.86.50:7000";          //user site
+window.onload = async function (){
+    let text=await ajax("get","/employee/verify",null);
+    ("result: ",text);
+}
+
+
+var URL = "http://localhost:7000";          //user site
 var REDIRURL = URL;
 
 // const URL = "http://35.193.86.50:7000";                              //online
@@ -43,8 +49,6 @@ async function formatMoney(value){
     return await formatter.format(value);
 }
 
-
-
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -53,6 +57,140 @@ var formatter = new Intl.NumberFormat('en-US', {
   //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
 });
 
+
+//login 
+async function login(e){
+    let option=e.currentTarget.id.replace("login","").toLowerCase();
+    let formParams=[
+        {name:"username",title:"Username",id:"username",options:"required",type:"text"},
+        {name:"password",title:"Password",id:"password",options:"required",type:"password"},
+    ]
+    let footer=`login`;
+    let display = 'displayModal';
+
+    await CreateModal("Login",formParams,footer,display)
+
+    document.getElementById("Loginform").addEventListener('submit',function (e){
+        loginSubmit(this,e,option)
+    });
+}
+
+async function loginSubmit(form,event,option){
+    event.preventDefault();
+    
+    const formData = new FormData(form);
+    await fetch(`${URL}/${option}/login`, {
+        method: 'post',
+        body: formData
+    }).then(function (response){
+        return response.text();
+    }).then(function (text) {
+        if(!text||text==='Incorrect credentials'){
+            ModalErrors(null,`Incorrect Credentials`);
+        }else{
+            localStorage.setItem('userinfo',text);
+            window.location.replace(`${REDIRURL}/${option}hub.html`);
+        }
+    })
+}
+
+//register
+
+async function register(e){
+    let option=e.currentTarget.id.replace("register","").toLowerCase();
+    let formParams=[
+        {name:"username",title:"Username",id:"username",options:"required",type:"text"},
+        {name:"password",title:"Password",id:"password",options:"required",type:"password"},
+        {name:"fname",title:"First Name",id:"fname",options:"fname",type:"text"},
+        {name:"lname",title:"Last Name",id:"lname",options:"lname",type:"text"},
+        {name:"email",title:"Email",id:"email",options:"required",type:"text"},
+    ]
+    let footer=`Register`;
+    let display = 'displayModal';
+
+    await CreateModal("Register",formParams,footer,display)
+
+    document.getElementById("Registerform").addEventListener('submit',function (e){
+        registerSubmit(this,e,option)
+    });
+}
+
+async function registerSubmit(form,event,option){
+    event.preventDefault();
+    const formData = new FormData(form);
+    ajax("post",`/${option}/register`,formData).then(function (){
+        alert("you are registered");
+        document.getElementById('username').value="";
+        document.getElementById('password').value="";
+        document.getElementById('fname').value="";
+        document.getElementById('lname').value="";
+        document.getElementById('email').value="";
+    });
+}
+
+// Modal Stuff 
+
+/**
+ * 
+ * @param {{id,error}[]} ParamsE //parameters errors containing the error id and  
+ * @param {string}   gError  //general error
+ */
+
+function ModalErrors(ParamsE,gError){
+    if(ParamsE){
+        for(let param of ParamsE){
+            document.getElementById(`${param.id}error`).innerText=param.error;
+        }
+    }
+    
+    document.getElementById(`gError`).innerText=gError;
+}
+
+/**
+ * 
+ * @param {string} title 
+ * @param {{name,title,type,id,options}[]} formParams
+ * @param {string} footer 
+ */
+function CreateModal(title,formParams,footer,display){
+    let html=
+    `<form id ='${title}form'>
+    <div id="modalShadow" class="modalShadow">
+        <div id="modal" class="modal">
+            <div id="modalWrapper" class="modalWrapper">
+                <div id = "modalHeaderWrapper" class="modalHeaderWrapper">
+                    <span id='closeModal' class="close">&times;</span><p class="title">${title}</p>
+                </div>
+                <div id = "modalContentWrapper" class="modalContentWrapper">
+                    <div id="modalContent" class="modalContent">`;                   
+                    for(let param of formParams){
+                        html+=
+                        `<div>
+                            <label for='${param.name}'>${param.title}</label>
+                            <input id='${param.id}' name='${param.name}' type='${param.type}' ${param.options}/>
+                            <p id = "${param.id}error" class="error" ></p>
+                        </div>`;
+                    }
+                html +=
+                    `</div>
+                </div>
+                <div id="modalFooterWrapper" class="modalFooterWrapper">
+                    <div id="modalFooter" class="modalFooter">
+                        <p id="gError" class="error"></p>
+                        <input id="submitter" type='submit' value='${footer}'/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></form>`
+
+    document.getElementById(display).innerHTML=html;
+    // modal.style.display = "block";
+    document.getElementById("closeModal").onclick = function() {
+        document.getElementById(display).innerHTML="";
+    }
+
+}
 
 
 

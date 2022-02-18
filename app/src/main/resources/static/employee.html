@@ -3,6 +3,7 @@
     <head>
         <title>Employee Page</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
 
@@ -13,11 +14,13 @@
             </div>
             <div>
                 <label for='password'>password</label>
-                <input id= 'password' name='password' type = 'text' required/>
+                <input id= 'password' name='password' type = 'password' required/>
                 <input type='submit' value='login'/>
             </div>
         </form>
-        <div id = 'incorrectLogin'></div>
+        <div id = 'incorrectLogin'>
+            <p id = "error" ></p>
+        </div>
         <script src='utils/utils.js'></script>
         <script src='employee.js'></script>
     </body>

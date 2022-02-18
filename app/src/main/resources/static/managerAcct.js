@@ -1,5 +1,5 @@
 const maninfo = JSON.parse(localStorage.getItem('managerinfo'));
-console.log(maninfo);
+(maninfo);
 var tbl = document.getElementById('accountinfo');
 
 var editor = document.getElementById('accountEditor');
