@@ -1,8 +1,8 @@
+
 window.onload = async function (){
     let text=await ajax("get","/employee/verify",null);
     ("result: ",text);
 }
-
 
 var URL = "http://localhost:7000";          //user site
 var REDIRURL = URL;
