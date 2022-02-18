@@ -1,4 +1,4 @@
-const maninfo = JSON.parse(localStorage.getItem('managerinfo'));
+const maninfo = JSON.parse(localStorage.getItem('userinfo'));
 (maninfo);
 var tbl = document.getElementById('accountinfo');
 
