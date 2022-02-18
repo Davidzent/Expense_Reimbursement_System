@@ -4,11 +4,11 @@ window.onload = async function (){
     ("result: ",text);
 }
 
-var URL = "http://localhost:7000";          //user site
-var REDIRURL = URL;
+// var URL = "http://localhost:7000";          //user site
+const URL = "http://35.193.86.50:7000";                              //online
 
-// const URL = "http://35.193.86.50:7000";                              //online
 // const REDIRURL = "https://storage.cloud.google.com/project01-html"   //online
+var REDIRURL = URL;
 
 function status(status_ID){
     switch(status_ID){
