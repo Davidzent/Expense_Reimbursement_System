@@ -7,8 +7,6 @@ const accountportal=document.getElementById('getaccount');
 document.getElementById("welcomeMessage").innerHTML=`Welcome ${JSON.parse(localStorage.getItem('userinfo')).fName} ${JSON.parse(localStorage.getItem('userinfo')).lName}`
 
 
-document.getElementById('UserAction').addEventListener('submit',submitHandler);
-
 document.getElementById('reimRequest').addEventListener('click',reimRequest);
 document.getElementById('logout').addEventListener('click', logout);
 document.getElementById('ViewPending').addEventListener('click',viewPending);
@@ -17,39 +15,39 @@ document.getElementById('ViewDeny').addEventListener('click',viewDeny);
 accountportal.addEventListener('click', redirctAccount);
 
 
-
-async function submitHandler(e){
-    if(e.submitter.defaultValue=="request"){
-        reimRequest(e,this);
+async function reimRequest(event,form){
+    event.preventDefault();
+    clear();
+    let formParams={
+        inputs:[
+            {name:"amount",title:"Amount",id:"amount",options:`step="any" required`,type:"number"},
+            {name:"description",title:"Description",id:"description",options:"required",type:"text"}
+        ],
+        selects:[
+            {
+                name:"typeid",
+                id:"typeid",
+                options:[
+                    {value:1,title:"Lodging"},
+                    {value:1,title:"Travel"},
+                    {value:1,title:"Food"},
+                    {value:1,title:"Other"},
+                ]
+            }
+        ],
     }
+    let footer=`CrtReim`;
+    let display = 'result';
+
+    await CreateModal("Create Reimbursement","CrtReim",formParams,footer,display)
+    document.getElementById("CrtReim").addEventListener('submit',reimRequestSubmit);
 }
 
-
-async function reimRequest(event,form){
-    
-    event.preventDefault();
-    if(event.target.type=='button'){
-        clear();
-        results.innerHTML=`<label for='amount'>Amount</label>
-        <input id = 'amount' name = 'amount' type = 'number' step="any" required/>
-        <label for='description'>description</label>
-        <input id = 'description' name = 'description' type = 'text' required/>
-        <label for ='typeid'>type</label>
-        <input id = 'typeid' name = 'typeid' type = 'number' required/>
-        <input type='submit' value='request'/>`
-    }
-    else{
-        const formData = new FormData(form);
-        ajax("post","/employee/reim/request",formData).then(function (){
-            alert("The request was submitted");
-            document.getElementById('amount').value="";
-            document.getElementById('typeid').value="";
-            document.getElementById('description').value="";
-        });
-        
-
-    }
-    
+async function reimRequestSubmit(event){
+    const formData = new FormData(this);
+    ajax("post","/employee/reim/request",formData).then(function (){
+        alert("The request was submitted");
+    });
 }
 
 async function logout(event){

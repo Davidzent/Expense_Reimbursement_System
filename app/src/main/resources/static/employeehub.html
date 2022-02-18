@@ -3,6 +3,7 @@
     <head>
         <title>employee Hub</title>
         <link rel="stylesheet" href="tableStyle.css">
+        <link rel="stylesheet" href="style.css">
         <meta charset="utf-8">
     </head>
     <body id="createData">
@@ -11,23 +12,15 @@
             <input id="getaccount" type='button' value ='myaccount'/>
             <input id="logout" type='button' value='logout'/>
             <div id="adminFormArea">
-                <form id="UserAction" method="post" action="reports/report">
-                    <div class="errors"></div>
-                    <div class="adminphase1">
-                        <label>
-                            <input id="ViewPending" type="button" value="View Pending" />
-                            <input id="ViewApprove" type="button" value="View Approved" />
-                            <input id="ViewDeny" type="button" value="View Denied" />
-                            <input id="reimRequest" type="button" value="Request Reimbursement" />
-                        </label>
-                    </div>
+                    <input id="ViewPending" type="button" value="View Pending" />
+                    <input id="ViewApprove" type="button" value="View Approved" />
+                    <input id="ViewDeny" type="button" value="View Denied" />
+                    <input id="reimRequest" type="button" value="Request Reimbursement" />
                     <div id= "result" class="result"></div>
                     <div id= "filters" class="filters"></div>
                     <div id= "adminphase2" class="adminphase2 none"></div>
                     <div id= "adminphase2pages" class="adminphase2pages"></div>
-                </form>
             </div>
-            
         </div>
         <script src='utils/utils.js'></script>
         <script src='employeehub.js'></script>

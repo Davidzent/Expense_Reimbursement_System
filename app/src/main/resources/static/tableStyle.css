@@ -1,5 +1,15 @@
 /* Table Stuff */
+body#createData .filters{
+  width: 90%;
+  height: 100%;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+}
+
 body#createData .filters select{
+  margin-bottom: 1px;
   width: 10%;
   background-color: transparent;
   border: 1px solid #000;
@@ -9,6 +19,18 @@ body#createData .filters select{
   max-width: 15%;
   padding: 0.57em 0.5em;
   cursor: pointer;
+}
+body#createData .filters input[type="text"]{
+  margin-bottom: 1px;
+  width: 126px;
+  height: 20px;
+  background-color: transparent;
+  border: 1px solid #000;
+  font-family: inherit;
+  font-size: inherit;
+  min-width: 126px;
+  max-width: 198px;
+  padding: 0.57em 0.5em;
 }
 
 body#createData select {
