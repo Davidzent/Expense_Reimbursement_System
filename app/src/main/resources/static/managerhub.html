@@ -1,3 +1,45 @@
+
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>manager Hub</title>
+        <link rel="stylesheet" href="tableStyle.css">
+        <link href = 'css/homestyle.css' rel='stylesheet' type='text/css'>
+        <meta charset="utf-8">
+    </head>
+    <body id="createData">
+        <div class="aligncenter">
+            <header>
+                <h1 id= 'welcomeMessage'></h1>
+                <input id="getaccount" type='button' value ='myaccount'/>
+                <input id="logout" type='button' value='logout'/>
+            </header>
+            <div id="adminFormArea">
+                <form id="UserAction" method="post" action="reports/report">
+                    <div class="errors"></div>
+                    <div class="adminphase1">
+                        <label>
+                            <input id="ViewPending" type="button" value="View Pending" />
+                            <input id="ViewApprove" type="button" value="View Approved" />
+                            <input id="ViewDeny" type="button" value="View Denied" />
+                        </label>
+                    </div>
+                    <div id= "result" class="result"></div>
+                    <div id= "filters" class="filters"></div>
+                    <div id= "adminphase2" class="adminphase2 none"></div>
+                    <div id= "adminphase2pages" class="adminphase2pages"></div>
+                </form>
+            </div>
+
+        </div>
+        <script src='utils/utils.js'></script>
+        <script src='managerhub.js'></script>
+    </body>
+</html>
+
+<!--
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,3 +68,4 @@
         <script src='js/managerhub.js'></script>
     </body>
 </html>
+-->
