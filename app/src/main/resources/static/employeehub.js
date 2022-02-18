@@ -4,7 +4,7 @@ const adminphase2=document.getElementById('adminphase2');
 const adminphase2pages=document.getElementById('adminphase2pages');
 const accountportal=document.getElementById('getaccount');
 
-document.getElementById("welcomeMessage").innerHTML=`Welcome ${JSON.parse(localStorage.getItem('employeeInfo')).fName} ${JSON.parse(localStorage.getItem('employeeInfo')).lName}`
+document.getElementById("welcomeMessage").innerHTML=`Welcome ${JSON.parse(localStorage.getItem('userinfo')).fName} ${JSON.parse(localStorage.getItem('userinfo')).lName}`
 
 
 document.getElementById('UserAction').addEventListener('submit',submitHandler);

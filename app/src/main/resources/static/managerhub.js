@@ -1,5 +1,5 @@
 var welcomeMessage = document.getElementById('welcomemessage');
-var manInfo = JSON.parse(localStorage.getItem('managerinfo'));
+var manInfo = JSON.parse(localStorage.getItem('userinfo'));
 var reimbursments = document.getElementById('reimbursments');
 const accountportal=document.getElementById('getaccount');
 const ViewEmployees=document.getElementById('ViewEmployee');
@@ -81,7 +81,7 @@ async function getReims(event){
     }).then(function (response){
         return response.text();
     }).then(function (text){
-        console.log(text);
+        (text);
     })
 
 }
@@ -90,15 +90,16 @@ async function getReims(event){
 async function getReims(event){
     event.preventDefault();
     let locationURL="";
-    if(event.target.id === 'getriems'){
-        locationURL = "/manager/reim/list?statusid=1";
-        console.log(locationURL);
+    if(event.target.id === 'getdenied'){
+        locationURL = '/manager/reim/list?statusid=3';
+        ('true');
     }
     else if(event.target.id === 'getresolved'){
         locationURL = '/manager/reim/list?statusid=2';
     }else{
-        locationURL = '/manager/reim/list?statusid=3';
-        console.log('true');
+        locationURL = "/manager/reim/list?statusid=1";
+        (locationURL);
+
     }
     
     let data = await ajax("get",`${locationURL}`,null);
@@ -115,20 +116,16 @@ async function getReims(event){
     //Table options
     let th;
     let checkbox;
-    if(event.target.id === 'getriems'){
+    if(event.target.id === 'getresolved' || event.target.id==="getdenied"){
+        th=['Amount', 'first','last','Description','Submitted','Type','Status']; //headers of the table
+        checkbox=[]; 
+
+    }else{
         th=['Validate','Deny','Amount', 'first','last','Description','Submitted','Type','Status']; //headers of the table
         checkbox=[
-       ['Validate','reimid','reimid'],  
-
-       ['Deny','reimid','reimid']       //['class','name',data[index]]
-        ];         
-    
-    }else{
-        th=['Amount', 'first','last','Description','Submitted','Type','Status']; //headers of the table
-        checkbox=[];    
-                                           //checkbox and primary value             
-       
-                                             //checkbox and primary value
+            ['Validate','reimid','reimid'],  
+            ['Deny','reimid','reimid']       //['class','name',data[index]]
+        ];   
     }
     
     
