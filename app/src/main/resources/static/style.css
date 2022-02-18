@@ -38,7 +38,7 @@
     padding: 15px 20px 10px 20px;
     margin: auto;
     border-bottom: 1px solid #9c9c9c;
-    background: #fff;
+    background: rgb(255, 172, 63);
     color: #000;
   }
   .modal .modalWrapper .modalHeaderWrapper .modalHeader {
