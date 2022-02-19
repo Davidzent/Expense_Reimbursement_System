@@ -37,7 +37,7 @@ async function reimRequest(event){
             }
         ],
     }
-    let footer=`CrtReim`;
+    let footer=`Creat Reimbursement`;
     let display = 'result';
 
     await CreateModal("Create Reimbursement","CrtReim",formParams,footer,display)
