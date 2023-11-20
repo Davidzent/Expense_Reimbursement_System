@@ -1,4 +1,4 @@
-# Project 1: Expense Reimbursement System
+# Expense Reimbursement System
 
 ## Executive Summary
 
